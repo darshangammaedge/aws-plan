@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Zero to Hero - AI-Powered Learning</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --aws-orange: #FF9900;
+            --aws-dark: #232F3E;
+            --aws-blue: #1A73E8;
+            --aws-light-blue: #00A8E1;
+            --aws-green: #1ECB8B;
+            --aws-purple: #8B5CF6;
+            --aws-red: #EF4444;
+            --bg-dark: #0F172A;
+            --bg-card: #1E293B;
+            --bg-card2: #162032;
+            --bg-notebook: #1a2744;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--aws-orange); border-radius: 3px; }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(15,23,42,0.97);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-weight: 800; font-size: 1.1rem; color: var(--aws-orange);
+        }
+
+        .nav-links {
+            display: flex; gap: 0.3rem; list-style: none;
+            overflow-x: auto; max-width: 70vw;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none;
+            padding: 0.35rem 0.7rem; border-radius: 6px;
+            font-size: 0.8rem; white-space: nowrap; transition: all 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--aws-orange); background: rgba(255,153,0,0.1); }
+
+        .progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, #FF9900, #FFD700);
+            z-index: 9999; transition: width 0.1s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0F172A 0%, #1a2744 50%, #0F172A 100%);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center; padding: 2rem;
+            position: relative; overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(255,153,0,0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(0,168,225,0.12) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(255,153,0,0.15);
+            border: 1px solid rgba(255,153,0,0.3);
+            padding: 0.5rem 1.5rem; border-radius: 50px;
+            font-size: 0.85rem; color: var(--aws-orange);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% { box-shadow: 0 0 0 0 rgba(255,153,0,0.3); }
+            50% { box-shadow: 0 0 0 10px rgba(255,153,0,0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 4.5rem);
+            font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #FF9900, #FFD700, #FF6B35);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.1rem; color: var(--text-secondary);
+            max-width: 650px; margin: 0 auto 2rem; line-height: 1.8;
+        }
+
+        .ai-badge-hero {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(0,168,225,0.2));
+            border: 1px solid rgba(139,92,246,0.3);
+            padding: 0.8rem 1.5rem; border-radius: 50px;
+            font-size: 0.9rem; margin-bottom: 2rem;
+        }
+
+        .ai-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--aws-green); animation: blink 1s infinite; }
+        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+        .btn {
+            padding: 0.9rem 1.8rem; border-radius: 50px;
+            font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; border: none; transition: all 0.3s;
+            text-decoration: none; display: inline-flex;
+            align-items: center; gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FF9900, #FF6B35);
+            color: white; box-shadow: 0 4px 20px rgba(255,153,0,0.4);
+        }
+
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,153,0,0.6); }
+
+        .btn-secondary {
+            background: transparent; color: var(--aws-orange);
+            border: 2px solid var(--aws-orange);
+        }
+
+        .btn-secondary:hover { background: rgba(255,153,0,0.1); transform: translateY(-3px); }
+
+        /* ===== SECTIONS ===== */
+        .section-wrapper { max-width: 1300px; margin: 0 auto; padding: 4rem 1.5rem; }
+
+        .section-header { text-align: center; margin-bottom: 3rem; }
+
+        .section-tag {
+            display: inline-block; padding: 0.35rem 1rem;
+            border-radius: 50px; font-size: 0.75rem;
+            font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 1rem;
+        }
+
+        .tag-orange { background: rgba(255,153,0,0.15); color: var(--aws-orange); }
+        .tag-purple { background: rgba(139,92,246,0.15); color: var(--aws-purple); }
+        .tag-green { background: rgba(30,203,139,0.15); color: var(--aws-green); }
+        .tag-blue { background: rgba(0,168,225,0.15); color: var(--aws-light-blue); }
+
+        .section-header h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 800; margin-bottom: 0.8rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #FF9900, #FFD700);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-purple {
+            background: linear-gradient(135deg, #8B5CF6, #00A8E1);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== PHASE CARDS ===== */
+        .phase-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px; overflow: hidden;
+            margin-bottom: 2rem;
+            transition: box-shadow 0.3s;
+        }
+
+        .phase-card:hover { box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+
+        .phase-header {
+            padding: 1.5rem 2rem;
+            display: flex; align-items: center; gap: 1.2rem;
+            cursor: pointer; user-select: none;
+            transition: background 0.2s;
+        }
+
+        .phase-header:hover { background: rgba(255,255,255,0.02); }
+
+        .phase-icon {
+            width: 60px; height: 60px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; flex-shrink: 0;
+        }
+
+        .phase-info h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.4rem; }
+
+        .phase-meta { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+        .meta-tag {
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            padding: 0.2rem 0.7rem; border-radius: 50px;
+            font-size: 0.75rem; background: rgba(255,255,255,0.05);
+            color: var(--text-secondary);
+        }
+
+        .level-badge {
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            padding: 0.2rem 0.7rem; border-radius: 50px;
+            font-size: 0.75rem; font-weight: 700;
+        }
+
+        .level-beginner { background: rgba(30,203,139,0.15); color: var(--aws-green); }
+        .level-intermediate { background: rgba(255,153,0,0.15); color: var(--aws-orange); }
+        .level-advanced { background: rgba(239,68,68,0.15); color: var(--aws-red); }
+        .level-expert { background: rgba(139,92,246,0.15); color: var(--aws-purple); }
+
+        .phase-toggle {
+            margin-left: auto; color: var(--aws-orange);
+            font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0;
+        }
+
+        .phase-toggle.rotated { transform: rotate(180deg); }
+
+        .phase-body { display: none; padding: 0 2rem 2rem; }
+        .phase-body.open { display: block; }
+
+        .phase-desc {
+            color: var(--text-secondary); font-size: 0.9rem;
+            line-height: 1.7; margin-bottom: 1.5rem;
+            padding: 1rem; background: rgba(255,255,255,0.02);
+            border-radius: 10px; border-left: 3px solid var(--aws-orange);
+        }
+
+        /* ===== TOPIC ITEMS ===== */
+        .topics-list { display: flex; flex-direction: column; gap: 0.8rem; }
+
+        .topic-wrapper { position: relative; }
+
+        .topic-item {
+            display: flex; align-items: flex-start; gap: 1rem;
+            padding: 1rem 1.2rem;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s;
+            user-select: none;
+        }
+
+        .topic-item:hover {
+            background: rgba(255,153,0,0.05);
+            border-color: rgba(255,153,0,0.25);
+        }
+
+        .topic-item.active {
+            background: rgba(255,153,0,0.08);
+            border-color: rgba(255,153,0,0.4);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .topic-checkbox {
+            width: 22px; height: 22px; border-radius: 50%;
+            border: 2px solid var(--border); flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s; margin-top: 1px;
+        }
+
+        .topic-checkbox.checked {
+            background: var(--aws-green); border-color: var(--aws-green);
+            box-shadow: 0 0 0 3px rgba(30,203,139,0.2);
+        }
+
+        .topic-checkbox.checked::after { content: '✓'; color: white; font-size: 0.7rem; font-weight: 900; }
+
+        .topic-text-wrap { flex: 1; }
+
+        .topic-title {
+            font-weight: 700; font-size: 0.95rem; margin-bottom: 0.2rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        .topic-subtitle { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.4; }
+
+        .topic-arrow {
+            margin-left: auto; color: var(--aws-orange);
+            font-size: 0.9rem; transition: transform 0.25s; flex-shrink: 0;
+        }
+
+        .topic-item.active .topic-arrow { transform: rotate(90deg); }
+
+        /* ===== NOTEBOOK PANEL ===== */
+        .notebook-panel {
+            display: none;
+            background: var(--bg-notebook);
+            border: 1px solid rgba(255,153,0,0.25);
+            border-top: none;
+            border-radius: 0 0 14px 14px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .notebook-panel.open { display: block; }
+
+        .notebook-panel::before {
+            content: '';
+            position: absolute; left: 28px; top: 0; bottom: 0; width: 1px;
+            background: rgba(255,153,0,0.15);
+        }
+
+        .notebook-lines {
+            padding: 1.5rem 1.5rem 1.5rem 3.5rem;
+            position: relative;
+        }
+
+        /* Notebook tabs */
+        .notebook-tabs {
+            display: flex; gap: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0,0,0,0.2);
+            padding: 0 1.5rem 0 3.5rem;
+            overflow-x: auto;
+        }
+
+        .nb-tab {
+            padding: 0.7rem 1.2rem;
+            font-size: 0.78rem; font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer; border-bottom: 2px solid transparent;
+            white-space: nowrap; transition: all 0.2s;
+        }
+
+        .nb-tab:hover { color: var(--text-primary); }
+        .nb-tab.active { color: var(--aws-orange); border-bottom-color: var(--aws-orange); }
+
+        .nb-content { display: none; }
+        .nb-content.active { display: block; }
+
+        /* Service Details Styling */
+        .detail-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 1rem; margin: 1rem 0;
+        }
+
+        @media(max-width: 600px) { .detail-grid { grid-template-columns: 1fr; } }
+
+        .detail-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px; padding: 1rem;
+        }
+
+        .detail-box-label {
+            font-size: 0.7rem; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-box-value { font-size: 0.88rem; line-height: 1.6; }
+
+        .info-section { margin: 1.2rem 0; }
+
+        .info-label {
+            font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--aws-orange);
+            font-weight: 700; margin-bottom: 0.5rem;
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+
+        .info-content {
+            font-size: 0.88rem; color: var(--text-primary);
+            line-height: 1.75; padding: 0.8rem 1rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+        }
+
+        .info-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+        .info-list li { font-size: 0.87rem; display: flex; gap: 0.5rem; line-height: 1.5; }
+        .info-list li::before { content: '→'; color: var(--aws-orange); flex-shrink: 0; }
+
+        .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0; }
+
+        .service-tag {
+            padding: 0.25rem 0.7rem; border-radius: 5px;
+            font-size: 0.75rem; font-weight: 600;
+        }
+
+        .tag-blue { background: rgba(0,168,225,0.12); color: var(--aws-light-blue); }
+        .tag-green2 { background: rgba(30,203,139,0.12); color: var(--aws-green); }
+        .tag-orange2 { background: rgba(255,153,0,0.12); color: var(--aws-orange); }
+        .tag-purple2 { background: rgba(139,92,246,0.12); color: var(--aws-purple); }
+        .tag-red2 { background: rgba(239,68,68,0.12); color: var(--aws-red); }
+
+        .fun-fact-box {
+            background: linear-gradient(135deg, rgba(255,153,0,0.08), rgba(139,92,246,0.08));
+            border: 1px solid rgba(255,153,0,0.2);
+            border-radius: 10px; padding: 1rem; margin: 1rem 0;
+            font-size: 0.87rem; line-height: 1.6;
+        }
+
+        .fun-fact-box strong { color: var(--aws-orange); }
+
+        .code-block {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px; padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem; line-height: 1.7;
+            color: #a8e6cf; margin: 0.8rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-label {
+            position: absolute; top: 0.5rem; right: 0.8rem;
+            font-size: 0.65rem; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--text-secondary);
+        }
+
+        .cost-card {
+            background: rgba(30,203,139,0.06);
+            border: 1px solid rgba(30,203,139,0.2);
+            border-radius: 10px; padding: 1rem;
+        }
+
+        .security-card {
+            background: rgba(139,92,246,0.06);
+            border: 1px solid rgba(139,92,246,0.2);
+            border-radius: 10px; padding: 1rem;
+        }
+
+        /* ===== AI CHAT SECTION ===== */
+        .ai-chat-section {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 1.2rem 1.5rem 1.5rem 3.5rem;
+        }
+
+        .ai-chat-header {
+            display: flex; align-items: center; gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .ai-avatar {
+            width: 34px; height: 34px; border-radius: 50%;
+            background: linear-gradient(135deg, #8B5CF6, #00A8E1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; flex-shrink: 0;
+            box-shadow: 0 0 0 3px rgba(139,92,246,0.2);
+        }
+
+        .ai-name { font-weight: 700; font-size: 0.9rem; }
+        .ai-status { font-size: 0.75rem; color: var(--aws-green); }
+
+        .chat-history {
+            max-height: 350px; overflow-y: auto;
+            display: flex; flex-direction: column; gap: 0.8rem;
+            margin-bottom: 1rem; padding-right: 0.5rem;
+        }
+
+        .chat-history::-webkit-scrollbar { width: 4px; }
+        .chat-history::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+        .chat-bubble {
+            max-width: 90%;
+            padding: 0.9rem 1.1rem;
+            border-radius: 14px;
+            font-size: 0.87rem; line-height: 1.7;
+            position: relative;
+        }
+
+        .bubble-ai {
+            background: rgba(139,92,246,0.1);
+            border: 1px solid rgba(139,92,246,0.2);
+            border-radius: 4px 14px 14px 14px;
+            align-self: flex-start;
+        }
+
+        .bubble-user {
+            background: rgba(255,153,0,0.1);
+            border: 1px solid rgba(255,153,0,0.2);
+            border-radius: 14px 4px 14px 14px;
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        .bubble-sender {
+            font-size: 0.7rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            margin-bottom: 0.3rem;
+        }
+
+        .bubble-ai .bubble-sender { color: var(--aws-purple); }
+        .bubble-user .bubble-sender { color: var(--aws-orange); }
+
+        .chat-input-row {
+            display: flex; gap: 0.6rem; align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            color: var(--text-primary); font-size: 0.88rem;
+            resize: none; min-height: 44px; max-height: 120px;
+            font-family: inherit; outline: none;
+            transition: border-color 0.2s;
+            line-height: 1.5;
+        }
+
+        .chat-input:focus { border-color: rgba(139,92,246,0.4); }
+        .chat-input::placeholder { color: var(--text-secondary); }
+
+        .send-btn {
+            background: linear-gradient(135deg, #8B5CF6, #00A8E1);
+            border: none; border-radius: 10px;
+            padding: 0.7rem 1rem;
+            color: white; cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+            display: flex; align-items: center;
+            justify-content: center;
+            flex-shrink: 0; height: 44px;
+        }
+
+        .send-btn:hover { transform: scale(1.05); opacity: 0.9; }
+        .send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .quick-questions {
+            display: flex; flex-wrap: wrap; gap: 0.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .quick-q {
+            padding: 0.35rem 0.8rem;
+            background: rgba(139,92,246,0.08);
+            border: 1px solid rgba(139,92,246,0.2);
+            border-radius: 50px; font-size: 0.75rem;
+            color: var(--aws-purple); cursor: pointer;
+            transition: all 0.2s; white-space: nowrap;
+        }
+
+        .quick-q:hover {
+            background: rgba(139,92,246,0.2);
+            border-color: rgba(139,92,246,0.4);
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex; align-items: center; gap: 0.3rem;
+            padding: 0.8rem 1rem;
+            background: rgba(139,92,246,0.08);
+            border: 1px solid rgba(139,92,246,0.15);
+            border-radius: 4px 14px 14px 14px;
+            width: fit-content;
+        }
+
+        .typing-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--aws-purple);
+            animation: typingBounce 1.2s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingBounce {
+            0%,100% { transform: translateY(0); opacity: 0.4; }
+            50% { transform: translateY(-4px); opacity: 1; }
+        }
+
+        /* ===== AI RESPONSE FORMATTING ===== */
+        .ai-response h4 { color: var(--aws-orange); margin: 0.8rem 0 0.4rem; font-size: 0.9rem; }
+        .ai-response ul { list-style: none; margin: 0.4rem 0; }
+        .ai-response ul li { padding: 0.2rem 0; font-size: 0.87rem; }
+        .ai-response ul li::before { content: '→ '; color: var(--aws-purple); }
+        .ai-response p { margin: 0.4rem 0; }
+        .ai-response code {
+            background: rgba(0,0,0,0.3); padding: 0.1rem 0.4rem;
+            border-radius: 4px; font-family: monospace; font-size: 0.82rem;
+            color: #a8e6cf;
+        }
+        .ai-response strong { color: var(--aws-orange); }
+        .ai-response em { color: var(--aws-light-blue); font-style: italic; }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed; bottom: 2rem; right: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--aws-green);
+            border-radius: 12px; padding: 0.8rem 1.2rem;
+            color: var(--aws-green); font-weight: 600;
+            z-index: 9999; transform: translateX(200%);
+            transition: transform 0.3s;
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .toast.show { transform: translateX(0); }
+
+        /* ===== MISC ===== */
+        .divider { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
+
+        .progress-note {
+            font-size: 0.78rem; color: var(--text-secondary);
+            margin-top: 1rem; text-align: right;
+        }
+
+        .phase-progress-bar {
+            height: 4px; background: rgba(255,255,255,0.06);
+            border-radius: 2px; margin-top: 0.5rem; overflow: hidden;
+        }
+
+        .phase-progress-fill {
+            height: 100%; background: linear-gradient(90deg, var(--aws-green), var(--aws-orange));
+            border-radius: 2px; transition: width 0.4s ease;
+        }
+
+        /* Model selector */
+        .model-selector {
+            display: flex; gap: 0.4rem; margin-left: auto;
+        }
+
+        .model-opt {
+            padding: 0.2rem 0.6rem; border-radius: 4px;
+            font-size: 0.7rem; cursor: pointer;
+            border: 1px solid var(--border); color: var(--text-secondary);
+            background: transparent; transition: all 0.2s;
+        }
+
+        .model-opt.selected {
+            background: rgba(139,92,246,0.15);
+            border-color: rgba(139,92,246,0.4);
+            color: var(--aws-purple);
+        }
+
+        .notebook-footer {
+            padding: 0.6rem 1.5rem 0.8rem 3.5rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.75rem; color: var(--text-secondary);
+        }
+
+        /* Fade in animation */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.5s; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media(max-width: 768px) {
+            .nav-links { display: none; }
+            .phase-header { padding: 1rem 1.2rem; }
+            .phase-body { padding: 0 1rem 1.5rem; }
+            .notebook-lines, .ai-chat-section { padding-left: 1rem; }
+            .notebook-panel::before { display: none; }
+            .notebook-tabs { padding-left: 1rem; }
+            .notebook-footer { padding-left: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="toast" id="toast">✅ Copied!</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-logo">☁️ AWS Zero to Hero</div>
+    <ul class="nav-links">
+        <li><a href="#learning">Learning Path</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+    <div style="position:relative; z-index:1;">
+        <div class="hero-badge">🚀 AI-Powered AWS Learning • 2024 Edition</div>
+        <h1>AWS Zero to Hero<br>with AI-Powered Learning</h1>
+        <p>Click any topic in the learning plan to get a full deep-dive explanation + an AI notebook that answers all your questions about that AWS service.</p>
+
+        <div class="ai-badge-hero">
+            <div class="ai-dot"></div>
+            <span>🤖 AI Assistant Active — Ask anything about any AWS service</span>
+        </div>
+
+        <div class="hero-buttons">
+            <a href="#learning" class="btn btn-primary">🚀 Start Learning</a>
+            <a href="#about" class="btn btn-secondary">ℹ️ How It Works</div></a>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="about">
+    <div class="section-wrapper">
+        <div class="section-header fade-in">
+            <div class="section-tag tag-purple">✨ New Feature</div>
+            <h2>How the <span class="gradient-purple">AI Notebook</span> Works</h2>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.2rem;" class="fade-in">
+            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:1.5rem; text-align:center;">
+                <div style="font-size:2.5rem; margin-bottom:1rem;">📚</div>
+                <h3 style="margin-bottom:0.5rem;">1. Open a Topic</h3>
+                <p style="color:var(--text-secondary); font-size:0.88rem; line-height:1.6;">Click any topic in the learning plan to open its AI-powered notebook panel right below it.</p>
+            </div>
+            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:1.5rem; text-align:center;">
+                <div style="font-size:2.5rem; margin-bottom:1rem;">📖</div>
+                <h3 style="margin-bottom:0.5rem;">2. Read Full Details</h3>
+                <p style="color:var(--text-secondary); font-size:0.88rem; line-height:1.6;">Get complete service documentation: what it is, architecture, pricing, security, use cases, and code examples.</p>
+            </div>
+            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:1.5rem; text-align:center;">
+                <div style="font-size:2.5rem; margin-bottom:1rem;">🤖</div>
+                <h3 style="margin-bottom:0.5rem;">3. Ask the AI</h3>
+                <p style="color:var(--text-secondary); font-size:0.88rem; line-height:1.6;">Each topic has its own AI assistant that knows everything about that service. Ask any question you want!</p>
+            </div>
+            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:1.5rem; text-align:center;">
+                <div style="font-size:2.5rem; margin-bottom:1rem;">✅</div>
+                <h3 style="margin-bottom:0.5rem;">4. Track Progress</h3>
+                <p style="color:var(--text-secondary); font-size:0.88rem; line-height:1.6;">Check off topics as you complete them. Your progress is saved and shown per phase.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LEARNING PATH -->
+<section id="learning">
+    <div class="section-wrapper">
+        <div class="section-header fade-in">
+            <div class="section-tag tag-orange">📚 Complete Curriculum</div>
+            <h2>AI-Powered <span class="gradient-text">Learning Path</span></h2>
+            <p style="color:var(--text-secondary);">Click any topic → get full details + AI assistant opens right below</p>
+        </div>
+        <div id="phasesContainer"></div>
+    </div>
+</section>
+
+<footer style="background:var(--bg-card); border-top:1px solid var(--border); padding:2rem; text-align:center;">
+    <p style="color:var(--text-secondary); font-size:0.85rem;">☁️ AWS Zero to Hero • AI-Powered Learning • Not affiliated with Amazon Web Services</p>
+</footer>
+
+<script>
+// ===================================================
+// KNOWLEDGE BASE - Full details for every topic
+// ===================================================
+const serviceKnowledge = {
+    "What is Cloud Computing?": {
+        icon: "☁️",
+        overview: "Cloud computing is the on-demand delivery of IT resources — servers, storage, databases, networking, software, analytics — over the Internet with pay-as-you-go pricing. Instead of buying, owning, and maintaining physical data centers, you access technology services on an as-needed basis from a cloud provider like AWS.",
+        models: [
+            { name: "IaaS (Infrastructure as a Service)", desc: "You manage OS, middleware, runtime, data, applications. AWS provides virtualization, networking, storage. Example: EC2, EBS, VPC." },
+            { name: "PaaS (Platform as a Service)", desc: "AWS manages OS, middleware, runtime. You manage data and applications. Example: Elastic Beanstalk, RDS, Lambda." },
+            { name: "SaaS (Software as a Service)", desc: "Everything managed by AWS. You just use the software. Example: WorkMail, Chime, QuickSight." }
+        ],
+        benefits: ["Trade capital expense for variable expense", "Massive economies of scale", "Stop guessing capacity", "Increase speed and agility", "Go global in minutes", "Focus on business differentiators"],
+        architecture: "AWS Cloud = Regions → Availability Zones (AZs) → Edge Locations → Local Zones → Outposts",
+        pricing: "Pay-as-you-go: only pay for what you use. No upfront costs, no long-term contracts (unless you want discounts). Prices continuously decrease as AWS grows.",
+        funFact: "AWS started in 2006 with just S3 and EC2. Today it has 200+ services across 32 geographic regions! Netflix, Airbnb, NASA, and the CIA all run on AWS.",
+        useCases: ["Host websites and web apps", "Store and backup data", "Build and run applications", "Stream video and audio", "Train ML models", "Analyze big data", "Build IoT solutions"],
+        keyTerms: {
+            "Region": "Geographic area with 2+ AZs. Data stays within region unless you move it.",
+            "AZ (Availability Zone)": "One or more discrete data centers with redundant power, networking, and connectivity.",
+            "Edge Location": "Content delivery node for CloudFront CDN. 450+ worldwide.",
+            "VPC": "Virtual Private Cloud — your own isolated network in AWS.",
+            "IAM": "Identity and Access Management — who can do what in your AWS account."
+        },
+        codeExample: `# Install AWS CLI
+pip install awscli
+
+# Configure credentials
+aws configure
+# Enter: Access Key, Secret Key, Region, Output format
+
+# Your first AWS CLI command
+aws s3 ls                    # List all S3 buckets
+aws ec2 describe-instances  # List EC2 instances
+aws iam get-user            # Get current IAM user`,
+        quickActions: ["Explain IaaS vs PaaS vs SaaS", "What are AWS Regions?", "How does AWS pricing work?", "What is an AZ?", "AWS vs Azure vs GCP"]
+    },
+
+    "AWS Global Infrastructure": {
+        icon: "🌍",
+        overview: "AWS operates the most extensive global cloud infrastructure in the world. This infrastructure consists of Regions, Availability Zones, Edge Locations, Local Zones, and AWS Outposts — designed for fault tolerance, low latency, and data residency compliance.",
+        architecture: "32 Regions → 102 Availability Zones → 600+ Edge Locations → 32+ Local Zones → AWS Outposts (on-premises)",
+        keyComponents: {
+            "AWS Region": "A physical location around the world where AWS clusters data centers. Each Region is completely independent — choosing a Region determines where your data is stored (data sovereignty).",
+            "Availability Zone (AZ)": "One or more discrete data centers, each with redundant power, networking, and connectivity. AZs in a Region are connected via private, high-bandwidth, low-latency fiber links.",
+            "Edge Locations": "CloudFront CDN endpoints closer to end users than Regions. Caches content for sub-millisecond delivery. 600+ locations worldwide.",
+            "Local Zones": "AWS infrastructure placed closer to large population centers for ultra-low latency (single-digit ms). Example: Los Angeles, New York, Mumbai.",
+            "AWS Outposts": "Bring AWS services, infrastructure, and operating models to virtually any datacenter, co-location space, or on-premises facility."
+        },
+        regionSelection: ["Latency to end users", "Data sovereignty / compliance requirements", "Service availability (not all services in all regions)", "Disaster recovery strategy", "Cost differences between regions"],
+        funFact: "AWS has more global infrastructure than the next several cloud providers combined! The us-east-1 (N. Virginia) region is the oldest and largest, processing more internet traffic than most countries.",
+        codeExample: `# List all available AWS regions
+aws ec2 describe-regions --output table
+
+# List AZs in current region
+aws ec2 describe-availability-zones \
+    --filters "Name=state,Values=available"
+
+# Check service availability in a region
+aws ssm get-parameters-by-path \
+    --path "/aws/service/global-infrastructure/regions/us-east-1/services"`,
+        quickActions: ["How to choose an AWS Region?", "What is data residency?", "Explain Multi-AZ vs Multi-Region", "How many AZs are in us-east-1?", "What is AWS Outposts?"]
+    },
+
+    "EC2 Deep Dive": {
+        icon: "⚡",
+        overview: "Amazon EC2 (Elastic Compute Cloud) provides resizable virtual servers in the cloud. You can launch servers within minutes, scale capacity up or down, and pay only for what you use. EC2 eliminated the need for upfront hardware investment and the complexity of capacity planning.",
+        instanceTypes: {
+            "General Purpose (t3, m6i)": "Balanced CPU, memory, networking. Best for: web servers, code repos, small DBs.",
+            "Compute Optimized (c6i, c7g)": "High-performance processors. Best for: batch processing, HPC, ML inference.",
+            "Memory Optimized (r6i, x2idn)": "Large memory footprint. Best for: in-memory DBs, real-time analytics, SAP HANA.",
+            "Storage Optimized (i3en, d3en)": "High, sequential read/write. Best for: data warehousing, OLTP, distributed file systems.",
+            "Accelerated Computing (p4d, inf2)": "GPUs, FPGAs. Best for: ML training, video processing, HPC."
+        },
+        purchaseOptions: [
+            "On-Demand: Pay per second/hour, no commitment. Highest cost, maximum flexibility.",
+            "Reserved Instances: 1 or 3 year commitment. Up to 72% off On-Demand.",
+            "Savings Plans: Flexible commitment to $/hour usage. Up to 72% off.",
+            "Spot Instances: Bid on spare capacity. Up to 90% off but can be interrupted.",
+            "Dedicated Hosts: Physical server dedicated to you. License compliance (BYOL)."
+        ],
+        keyFeatures: ["User Data scripts (run at launch)", "Instance Metadata Service (IMDS)", "Placement Groups (cluster/spread/partition)", "Elastic Network Interfaces (ENI)", "Hibernate support", "Nitro Enclaves (confidential computing)"],
+        pricing: "On-Demand: t3.micro = $0.0104/hr. Savings Plans can reduce to $0.0028/hr. Spot can be as low as $0.003/hr. Free tier: 750 hrs/month t2.micro or t3.micro for 12 months.",
+        security: "Security Groups (stateful firewall), IAM Instance Profiles, Systems Manager Session Manager (no SSH needed), KMS encrypted EBS volumes, Nitro hypervisor for strong isolation.",
+        funFact: "Amazon EC2 launched in 2006 and was so successful it crashed during the public beta! Netflix migrated 100% to EC2 and now runs 100,000+ instances. AWS launches millions of new EC2 instances every day.",
+        codeExample: `# Launch an EC2 instance via CLI
+aws ec2 run-instances \\
+    --image-id ami-0c55b159cbfafe1f0 \\
+    --instance-type t3.micro \\
+    --key-name MyKeyPair \\
+    --security-group-ids sg-12345678 \\
+    --subnet-id subnet-12345678 \\
+    --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=MyServer}]'
+
+# Connect via Session Manager (no SSH needed!)
+aws ssm start-session --target i-1234567890abcdef0
+
+# User Data example (runs at launch)
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd`,
+        quickActions: ["Which EC2 instance type should I choose?", "Explain Spot vs Reserved Instances", "How does Auto Scaling work?", "What is a Security Group?", "EC2 pricing calculator tips"]
+    },
+
+    "AWS Lambda Deep Dive": {
+        icon: "λ",
+        overview: "AWS Lambda is a serverless, event-driven compute service that lets you run code without provisioning or managing servers. You write a function, upload it, and Lambda handles everything else: running, scaling, patching, and high availability. You're billed in 1ms increments.",
+        howItWorks: "Event occurs → Lambda invokes your function → Function runs in an isolated execution environment → Returns result → Environment may be reused (warm) or discarded (cold start).",
+        triggers: ["S3 (file uploads)", "DynamoDB Streams", "Kinesis Streams", "SQS/SNS messages", "API Gateway HTTP requests", "CloudWatch Events (scheduled)", "EventBridge rules", "IoT Rules", "Cognito", "CloudFront (Lambda@Edge)"],
+        limitations: [
+            "Max execution time: 15 minutes (timeout)",
+            "Memory: 128MB to 10,240MB (10GB)",
+            "Deployment package: 50MB zipped, 250MB unzipped",
+            "Temp storage (/tmp): 512MB to 10GB",
+            "Concurrency: 1,000 default (soft limit, can be increased)",
+            "Cold start: can add 100ms-1s latency (use Provisioned Concurrency)"
+        ],
+        bestPractices: [
+            "Keep functions small and single-purpose",
+            "Use Layers for shared libraries",
+            "Enable Provisioned Concurrency for latency-sensitive functions",
+            "Use ARM64 (Graviton2) for 20% better price/performance",
+            "Set appropriate timeout (don't use 15 min default for fast functions)",
+            "Use environment variables for configuration, not hardcoded values",
+            "Enable X-Ray tracing for distributed debugging"
+        ],
+        pricing: "Free Tier: 1M requests/month + 400,000 GB-seconds forever. After: $0.20/M requests + $0.0000166667/GB-second. A function using 512MB running 100ms costs $0.000000834 per invocation.",
+        funFact: "AWS Lambda runs more than 1 trillion function invocations per month! It was launched in 2014 and revolutionized how developers think about infrastructure. Amazon itself uses Lambda to power Alexa responses!",
+        codeExample: `# Python Lambda function example
+import json
+import boto3
+
+def lambda_handler(event, context):
+    # event = input data from trigger
+    # context = runtime information
+    
+    # Get data from event
+    bucket = event['Records'][0]['s3']['bucket']['name']
+    key = event['Records'][0]['s3']['object']['key']
+    
+    # Process the file
+    s3 = boto3.client('s3')
+    response = s3.get_object(Bucket=bucket, Key=key)
+    content = response['Body'].read().decode('utf-8')
+    
+    print(f"Processing file: {key} from {bucket}")
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps({'processed': key, 'size': len(content)})
+    }
+
+# Deploy with CLI
+aws lambda create-function \\
+    --function-name my-function \\
+    --runtime python3.11 \\
+    --handler lambda_function.lambda_handler \\
+    --role arn:aws:iam::123456789012:role/lambda-role \\
+    --zip-file fileb://function.zip`,
+        quickActions: ["What causes Lambda cold starts?", "Lambda vs EC2 - when to use which?", "How to reduce Lambda costs?", "Explain Provisioned Concurrency", "Lambda layers explained"]
+    },
+
+    "VPC Architecture": {
+        icon: "🌐",
+        overview: "Amazon Virtual Private Cloud (VPC) lets you launch AWS resources into a virtual network that closely resembles a traditional network — with the benefits of scalable AWS infrastructure. You have complete control over your virtual networking environment, including IP address ranges, subnets, route tables, and network gateways.",
+        components: {
+            "CIDR Block": "IP address range for your VPC. Default: 172.31.0.0/16. Can be /16 to /28. Example: 10.0.0.0/16 = 65,536 IP addresses.",
+            "Subnet": "Subdivision of VPC CIDR. Public subnets have internet access (IGW route). Private subnets don't. Each subnet is in one AZ.",
+            "Internet Gateway (IGW)": "Horizontally scaled, redundant, HA VPC component that allows communication between VPC and the internet. Attach one per VPC.",
+            "NAT Gateway": "Allows private subnet instances to access internet while preventing inbound internet connections. Costs $0.045/hr + data transfer.",
+            "Route Table": "Contains rules (routes) that determine where network traffic is directed. Each subnet must be associated with a route table.",
+            "Security Group": "Virtual stateful firewall at instance level. Controls inbound/outbound traffic. Default: deny all inbound, allow all outbound.",
+            "Network ACL (NACL)": "Optional stateless firewall at subnet level. Processes rules in order. Must explicitly allow return traffic."
+        },
+        design: "Best practice VPC design: 3 public subnets (1/AZ) + 3 private subnets (1/AZ) across 3 AZs. Public for load balancers. Private for app servers and databases.",
+        funFact: "You can create up to 5 VPCs per region (soft limit) and up to 200 subnets per VPC. AWS's own services (S3, DynamoDB) don't live in your VPC — they're accessed via the internet or VPC endpoints.",
+        codeExample: `# Create a VPC
+aws ec2 create-vpc --cidr-block 10.0.0.0/16 \\
+    --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=MyVPC}]'
+
+# Create public subnet
+aws ec2 create-subnet \\
+    --vpc-id vpc-12345678 \\
+    --cidr-block 10.0.1.0/24 \\
+    --availability-zone us-east-1a
+
+# Create and attach Internet Gateway
+aws ec2 create-internet-gateway
+aws ec2 attach-internet-gateway \\
+    --vpc-id vpc-12345678 \\
+    --internet-gateway-id igw-12345678
+
+# Create route table with internet route
+aws ec2 create-route \\
+    --route-table-id rtb-12345678 \\
+    --destination-cidr-block 0.0.0.0/0 \\
+    --gateway-id igw-12345678`,
+        quickActions: ["Public vs Private subnet difference?", "When to use NAT Gateway vs NAT Instance?", "Security Group vs NACL?", "How to design a VPC from scratch?", "What is VPC Flow Logs?"]
+    },
+
+    "Amazon RDS": {
+        icon: "🗄️",
+        overview: "Amazon Relational Database Service (RDS) makes it easy to set up, operate, and scale a relational database in the cloud. It provides cost-efficient and resizable capacity while automating time-consuming administration tasks — hardware provisioning, database setup, patching, and backups.",
+        engines: {
+            "Amazon Aurora": "Cloud-native. MySQL/PostgreSQL compatible. 5x faster than MySQL, 3x than PostgreSQL. Auto-scales to 128TB.",
+            "MySQL": "Most popular open-source DB. Versions 5.7, 8.0. Great for web applications.",
+            "PostgreSQL": "Advanced open-source DB. Versions 13-16. Supports JSON, full-text search, geospatial.",
+            "MariaDB": "MySQL fork. Versions 10.x. Community-driven.",
+            "Oracle": "Enterprise DB. BYOL or License Included. Versions 19c, 21c.",
+            "SQL Server": "Microsoft DB. Express, Web, Standard, Enterprise editions.",
+            "IBM Db2": "Newest addition. Enterprise workloads."
+        },
+        features: ["Multi-AZ deployment (automatic failover in <60s)", "Up to 15 Read Replicas (Aurora) / 5 (others)", "Automated backups (1-35 days retention)", "Point-in-time recovery", "Storage auto-scaling", "Performance Insights (free monitoring)", "Enhanced Monitoring (60+ OS metrics)", "Database Activity Streams (audit logs)"],
+        multiAZ: "In Multi-AZ, RDS maintains a synchronous standby replica in a different AZ. Failover is automatic — typically 60-120 seconds. DNS record updated to point to standby. No manual intervention needed.",
+        pricing: "db.t3.micro: ~$0.017/hr (Free tier: 750hr/month for 12mo). Multi-AZ doubles instance cost. Storage: $0.115/GB-month (gp2). PIOPS storage: $0.125/GB + $0.10/IOPS.",
+        funFact: "RDS manages billions of database operations per day! When you create an RDS instance, AWS automatically runs your database in a VM but handles all the infrastructure. Amazon.com's original database was Oracle before they moved to DynamoDB.",
+        codeExample: `# Create RDS MySQL instance
+aws rds create-db-instance \\
+    --db-instance-identifier mydb \\
+    --db-instance-class db.t3.micro \\
+    --engine mysql \\
+    --master-username admin \\
+    --master-user-password MySecurePass123! \\
+    --allocated-storage 20 \\
+    --multi-az \\
+    --storage-encrypted \\
+    --backup-retention-period 7 \\
+    --vpc-security-group-ids sg-12345678
+
+# Connect to RDS (from EC2 in same VPC)
+mysql -h mydb.xxxxx.us-east-1.rds.amazonaws.com \\
+    -u admin -p
+
+# Enable Performance Insights
+aws rds modify-db-instance \\
+    --db-instance-identifier mydb \\
+    --enable-performance-insights`,
+        quickActions: ["RDS vs Aurora - which is better?", "How does Multi-AZ failover work?", "How to set up Read Replicas?", "RDS backup strategies explained", "How to migrate to RDS?"]
+    },
+
+    "Amazon DynamoDB": {
+        icon: "⚡",
+        overview: "Amazon DynamoDB is a fully managed, serverless, key-value and document NoSQL database. It delivers single-digit millisecond performance at any scale. DynamoDB automatically scales tables up or down to handle virtually unlimited throughput — there's no limit to the amount of data you can store.",
+        coreComponents: {
+            "Table": "Collection of items (rows). Each table has a primary key.",
+            "Item": "A row in the table. Max 400KB per item.",
+            "Attribute": "A fundamental data element (column). Flexible — different items can have different attributes.",
+            "Primary Key": "Partition Key only (simple) OR Partition Key + Sort Key (composite). Must be unique.",
+            "GSI (Global Secondary Index)": "An index with a different partition/sort key. Queries across all items. Additional cost.",
+            "LSI (Local Secondary Index)": "Same partition key as table, different sort key. Must be created at table creation time.",
+            "DynamoDB Streams": "Captures time-ordered sequence of item-level changes. Triggers Lambda for CDC patterns.",
+            "DAX (DynamoDB Accelerator)": "In-memory cache for DynamoDB. Sub-microsecond latency for read-heavy workloads. API-compatible."
+        },
+        capacityModes: ["On-Demand: No capacity planning. Auto-scales instantly. $1.25/M writes, $0.25/M reads.", "Provisioned: Specify RCU and WCU. Cheaper at scale. Use Auto Scaling to adjust automatically."],
+        whenToUse: ["Gaming leaderboards", "Session stores", "Shopping carts", "Real-time voting", "IoT telemetry data", "Financial transactions", "User profiles at scale", "Any key-value access pattern at high scale"],
+        whenNOTToUse: ["Complex SQL joins or transactions across many tables", "Ad-hoc queries on non-key attributes", "Reporting/analytics workloads (use Redshift/Athena)", "Small datasets with complex relationships (use RDS)"],
+        funFact: "DynamoDB processed 89.2 million requests per second during Amazon Prime Day 2023! It stores trillions of items. Amazon's original shopping cart was built on DynamoDB's predecessor which inspired its creation.",
+        codeExample: `import boto3
+from boto3.dynamodb.conditions import Key
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('Users')
+
+# Create item (Write)
+table.put_item(Item={
+    'userId': 'user-123',
+    'email': 'john@example.com',
+    'name': 'John Doe',
+    'age': 30,
+    'createdAt': '2024-01-01'
+})
+
+# Get item (Read) - O(1) lookup
+response = table.get_item(Key={'userId': 'user-123'})
+user = response['Item']
+
+# Query by partition key
+response = table.query(
+    KeyConditionExpression=Key('userId').eq('user-123')
+)
+
+# Update item
+table.update_item(
+    Key={'userId': 'user-123'},
+    UpdateExpression='SET #n = :name',
+    ExpressionAttributeNames={'#n': 'name'},
+    ExpressionAttributeValues={':name': 'John Smith'}
+)`,
+        quickActions: ["How to design DynamoDB data model?", "When to use GSI vs LSI?", "DynamoDB vs RDS pricing comparison", "What is DynamoDB Streams?", "How to handle DynamoDB hot partitions?"]
+    },
+
+    "Amazon S3 Mastery": {
+        icon: "🪣",
+        overview: "Amazon S3 (Simple Storage Service) is object storage built for durability, availability, and scalability. It provides 11 nines (99.999999999%) of durability — if you stored 10 million objects, you'd expect to lose one object every 10,000 years. S3 is foundational to virtually every AWS architecture.",
+        storageClasses: {
+            "S3 Standard": "$0.023/GB. Frequent access. 99.99% availability. 3+ AZ replication. For active data.",
+            "S3 Intelligent-Tiering": "$0.023/GB + $0.0025/1K objects monitoring fee. Automatic tiering. No retrieval fees.",
+            "S3 Standard-IA": "$0.0125/GB + $0.01/GB retrieval. Infrequent access. Same durability. 30-day minimum.",
+            "S3 One Zone-IA": "$0.01/GB. Single AZ. 20% cheaper than Standard-IA. OK if data can be recreated.",
+            "S3 Glacier Instant Retrieval": "$0.004/GB. Archive, millisecond retrieval. 90-day minimum. For quarterly access.",
+            "S3 Glacier Flexible Retrieval": "$0.0036/GB. 1-12 hour retrieval. 90-day minimum. For backups.",
+            "S3 Glacier Deep Archive": "$0.00099/GB. Cheapest storage on AWS. 12-48 hr retrieval. 7-year compliance archives."
+        },
+        features: ["Versioning (keep all versions of objects)", "Lifecycle policies (auto-transition between storage classes)", "Replication (CRR cross-region, SRR same-region)", "Object Lock (WORM — write once read many)", "S3 Select (SQL queries on S3 objects)", "S3 Event Notifications → Lambda/SQS/SNS", "Access Logs", "Transfer Acceleration (CloudFront for uploads)", "Presigned URLs (time-limited access)"],
+        security: "Block Public Access (account & bucket level), Bucket Policies (JSON), ACLs, Object Ownership, SSE-S3 (AWS managed keys), SSE-KMS (customer managed keys), SSE-C (customer provided keys), HTTPS only enforcement, VPC endpoints.",
+        funFact: "S3 stores over 200 trillion objects! It was AWS's first storage service (2006). Amazon uses S3 to store product images, and Netflix stores all its original content on S3. The data in S3 is replicated across at least 3 AZs automatically.",
+        codeExample: `import boto3
+
+s3 = boto3.client('s3')
+
+# Create bucket
+s3.create_bucket(
+    Bucket='my-unique-bucket-name',
+    CreateBucketConfiguration={'LocationConstraint': 'us-east-2'}
+)
+
+# Upload file
+s3.upload_file('local_file.txt', 'my-bucket', 'folder/file.txt')
+
+# Generate presigned URL (expires in 1 hour)
+url = s3.generate_presigned_url('get_object',
+    Params={'Bucket': 'my-bucket', 'Key': 'folder/file.txt'},
+    ExpiresIn=3600
+)
+
+# Enable versioning
+s3.put_bucket_versioning(
+    Bucket='my-bucket',
+    VersioningConfiguration={'Status': 'Enabled'}
+)
+
+# Set lifecycle policy
+s3.put_bucket_lifecycle_configuration(
+    Bucket='my-bucket',
+    LifecycleConfiguration={
+        'Rules': [{
+            'Status': 'Enabled',
+            'Transitions': [
+                {'Days': 30, 'StorageClass': 'STANDARD_IA'},
+                {'Days': 90, 'StorageClass': 'GLACIER'}
+            ]
+        }]
+    }
+)`,
+        quickActions: ["S3 vs EBS vs EFS - when to use each?", "How to secure an S3 bucket?", "Explain S3 storage classes", "How to reduce S3 costs?", "What are S3 Presigned URLs?"]
+    },
+
+    "IAM Fundamentals": {
+        icon: "🔑",
+        overview: "AWS Identity and Access Management (IAM) is a free service that controls authentication (who you are) and authorization (what you can do) in AWS. IAM is the foundation of AWS security — every API call to AWS goes through IAM for authorization.",
+        components: {
+            "IAM Users": "Long-term identities for people or applications. Have access keys (programmatic) and passwords (console). Best practice: use roles instead.",
+            "IAM Groups": "Collection of users. Assign policies to groups. Users inherit group permissions. Can't nest groups.",
+            "IAM Roles": "Temporary identity assumed by AWS services, users, or external identities. No long-term credentials. Best practice for all AWS services.",
+            "IAM Policies": "JSON documents."
+        }, 
+    }
+
+}    
