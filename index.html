@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS Zero to Hero - AI-Powered Learning</title>
+    <title>AWS Zero to Hero - Complete Mastery Plan</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         :root {
             --aws-orange: #FF9900;
@@ -18,214 +22,1134 @@
             --bg-dark: #0F172A;
             --bg-card: #1E293B;
             --bg-card2: #162032;
-            --bg-notebook: #1a2744;
             --text-primary: #F1F5F9;
             --text-secondary: #94A3B8;
             --border: #334155;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: var(--bg-dark);
             color: var(--text-primary);
             overflow-x: hidden;
         }
 
-        ::-webkit-scrollbar { width: 6px; }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--aws-orange); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: var(--aws-orange); border-radius: 4px; }
 
-        /* ===== NAVBAR ===== */
-        .navbar {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(15,23,42,0.97);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 0.8rem 2rem;
-            display: flex; align-items: center; justify-content: space-between;
-        }
-
-        .nav-logo {
-            display: flex; align-items: center; gap: 0.5rem;
-            font-weight: 800; font-size: 1.1rem; color: var(--aws-orange);
-        }
-
-        .nav-links {
-            display: flex; gap: 0.3rem; list-style: none;
-            overflow-x: auto; max-width: 70vw;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary); text-decoration: none;
-            padding: 0.35rem 0.7rem; border-radius: 6px;
-            font-size: 0.8rem; white-space: nowrap; transition: all 0.2s;
-        }
-
-        .nav-links a:hover { color: var(--aws-orange); background: rgba(255,153,0,0.1); }
-
-        .progress-bar {
-            position: fixed; top: 0; left: 0; height: 3px;
-            background: linear-gradient(90deg, #FF9900, #FFD700);
-            z-index: 9999; transition: width 0.1s;
-        }
-
-        /* ===== HERO ===== */
+        /* Hero Section */
         .hero {
-            min-height: 100vh;
             background: linear-gradient(135deg, #0F172A 0%, #1a2744 50%, #0F172A 100%);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            text-align: center; padding: 2rem;
-            position: relative; overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero::before {
             content: '';
-            position: absolute; inset: 0;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: 
-                radial-gradient(ellipse at 20% 50%, rgba(255,153,0,0.12) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(0,168,225,0.12) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 50%, rgba(255,153,0,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(0,168,225,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(30,203,139,0.1) 0%, transparent 50%);
             pointer-events: none;
         }
 
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 0.5rem;
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .float-icon {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: floatAround 15s infinite linear;
+        }
+
+        @keyframes floatAround {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.1; }
+            90% { opacity: 0.1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .aws-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             background: rgba(255,153,0,0.15);
             border: 1px solid rgba(255,153,0,0.3);
-            padding: 0.5rem 1.5rem; border-radius: 50px;
-            font-size: 0.85rem; color: var(--aws-orange);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--aws-orange);
             margin-bottom: 2rem;
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0%,100% { box-shadow: 0 0 0 0 rgba(255,153,0,0.3); }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,153,0,0.3); }
             50% { box-shadow: 0 0 0 10px rgba(255,153,0,0); }
         }
 
         .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 4.5rem);
-            font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
             background: linear-gradient(135deg, #FF9900, #FFD700, #FF6B35);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .hero p {
-            font-size: 1.1rem; color: var(--text-secondary);
-            max-width: 650px; margin: 0 auto 2rem; line-height: 1.8;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
         }
 
-        .ai-badge-hero {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(0,168,225,0.2));
-            border: 1px solid rgba(139,92,246,0.3);
-            padding: 0.8rem 1.5rem; border-radius: 50px;
-            font-size: 0.9rem; margin-bottom: 2rem;
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .ai-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--aws-green); animation: blink 1s infinite; }
-        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+        .stat {
+            text-align: center;
+        }
 
-        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--aws-orange);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
         .btn {
-            padding: 0.9rem 1.8rem; border-radius: 50px;
-            font-size: 0.95rem; font-weight: 600;
-            cursor: pointer; border: none; transition: all 0.3s;
-            text-decoration: none; display: inline-flex;
-            align-items: center; gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #FF9900, #FF6B35);
-            color: white; box-shadow: 0 4px 20px rgba(255,153,0,0.4);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255,153,0,0.4);
         }
 
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,153,0,0.6); }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255,153,0,0.6);
+        }
 
         .btn-secondary {
-            background: transparent; color: var(--aws-orange);
+            background: transparent;
+            color: var(--aws-orange);
             border: 2px solid var(--aws-orange);
         }
 
-        .btn-secondary:hover { background: rgba(255,153,0,0.1); transform: translateY(-3px); }
+        .btn-secondary:hover {
+            background: rgba(255,153,0,0.1);
+            transform: translateY(-3px);
+        }
 
-        /* ===== SECTIONS ===== */
-        .section-wrapper { max-width: 1300px; margin: 0 auto; padding: 4rem 1.5rem; }
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15,23,42,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s;
+        }
 
-        .section-header { text-align: center; margin-bottom: 3rem; }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--aws-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            overflow-x: auto;
+            max-width: 70vw;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--aws-orange);
+            background: rgba(255,153,0,0.1);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #FF9900, #FFD700);
+            z-index: 9999;
+            transition: width 0.1s;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
 
         .section-tag {
-            display: inline-block; padding: 0.35rem 1rem;
-            border-radius: 50px; font-size: 0.75rem;
-            font-weight: 700; text-transform: uppercase;
-            letter-spacing: 2px; margin-bottom: 1rem;
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
         }
 
         .tag-orange { background: rgba(255,153,0,0.15); color: var(--aws-orange); }
-        .tag-purple { background: rgba(139,92,246,0.15); color: var(--aws-purple); }
-        .tag-green { background: rgba(30,203,139,0.15); color: var(--aws-green); }
         .tag-blue { background: rgba(0,168,225,0.15); color: var(--aws-light-blue); }
+        .tag-green { background: rgba(30,203,139,0.15); color: var(--aws-green); }
+        .tag-purple { background: rgba(139,92,246,0.15); color: var(--aws-purple); }
+        .tag-red { background: rgba(239,68,68,0.15); color: var(--aws-red); }
 
         .section-header h2 {
-            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-            font-weight: 800; margin-bottom: 0.8rem;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #FF9900, #FFD700);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .gradient-purple {
-            background: linear-gradient(135deg, #8B5CF6, #00A8E1);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* Learning Path */
+        .phases-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
         }
 
-        /* ===== PHASE CARDS ===== */
         .phase-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 20px; overflow: hidden;
-            margin-bottom: 2rem;
-            transition: box-shadow 0.3s;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .phase-card:hover { box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
 
         .phase-header {
-            padding: 1.5rem 2rem;
-            display: flex; align-items: center; gap: 1.2rem;
-            cursor: pointer; user-select: none;
-            transition: background 0.2s;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            cursor: pointer;
+            user-select: none;
         }
-
-        .phase-header:hover { background: rgba(255,255,255,0.02); }
 
         .phase-icon {
-            width: 60px; height: 60px; border-radius: 14px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.8rem; flex-shrink: 0;
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
         }
 
-        .phase-info h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .phase-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
 
-        .phase-meta { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+        .phase-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
 
         .meta-tag {
-            display: inline-flex; align-items: center; gap: 0.3rem;
-            padding: 0.2rem 0.7rem; border-radius: 50px;
-            font-size: 0.75rem; background: rgba(255,255,255,0.05);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            background: rgba(255,255,255,0.05);
             color: var(--text-secondary);
         }
 
+        .phase-toggle {
+            margin-left: auto;
+            color: var(--aws-orange);
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .phase-content {
+            padding: 0 2rem 2rem;
+            display: none;
+        }
+
+        .phase-content.active {
+            display: block;
+        }
+
+        .phase-toggle.rotated {
+            transform: rotate(180deg);
+        }
+
+        /* Service Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--aws-orange), var(--aws-light-blue));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .service-card:hover::before { opacity: 1; }
+
+        .service-card:hover {
+            border-color: rgba(255,153,0,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .service-name {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .service-category {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .service-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .stag {
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 500;
+        }
+
+        .stag-problem { background: rgba(239,68,68,0.15); color: #FCA5A5; }
+        .stag-use { background: rgba(30,203,139,0.15); color: #6EE7B7; }
+        .stag-feature { background: rgba(255,153,0,0.15); color: #FCD34D; }
+
+        .fun-fact {
+            background: linear-gradient(135deg, rgba(255,153,0,0.08), rgba(0,168,225,0.08));
+            border: 1px solid rgba(255,153,0,0.15);
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            font-size: 0.82rem;
+            color: var(--aws-orange);
+            margin-top: 0.8rem;
+        }
+
+        .fun-fact::before {
+            content: '🎯 Fun Fact: ';
+            font-weight: 700;
+        }
+
+        .learn-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--aws-orange);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            margin-top: 0.5rem;
+            transition: gap 0.2s;
+        }
+
+        .learn-more-btn:hover { gap: 0.6rem; }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover { background: rgba(255,68,68,0.3); }
+
+        .modal h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--aws-orange);
+        }
+
+        .modal-section {
+            margin: 1.5rem 0;
+        }
+
+        .modal-section h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-section p, .modal-section li {
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .modal-section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .modal-section li::before {
+            content: '→ ';
+            color: var(--aws-orange);
+        }
+
+        .pricing-box {
+            background: rgba(30,203,139,0.08);
+            border: 1px solid rgba(30,203,139,0.2);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .security-box {
+            background: rgba(139,92,246,0.08);
+            border: 1px solid rgba(139,92,246,0.2);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        /* Tools & Best Practices */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .tool-card:hover {
+            border-color: rgba(255,153,0,0.3);
+            transform: translateY(-3px);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Roadmap Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--aws-orange), var(--aws-light-blue), var(--aws-green));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--aws-orange);
+            border: 3px solid var(--bg-dark);
+            box-shadow: 0 0 0 3px rgba(255,153,0,0.3);
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: rgba(255,153,0,0.15);
+            color: var(--aws-orange);
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .timeline-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            padding: 0.2rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            background: rgba(255,255,255,0.05);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .cert-badge {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-level {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-name {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-desc {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Share Section */
+        .share-section {
+            background: linear-gradient(135deg, rgba(255,153,0,0.1), rgba(0,168,225,0.1));
+            border: 1px solid rgba(255,153,0,0.2);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .share-url {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            font-family: monospace;
+            font-size: 1rem;
+            color: var(--aws-orange);
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: rgba(255,153,0,0.15);
+            border: 1px solid rgba(255,153,0,0.3);
+            color: var(--aws-orange);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255,153,0,0.3);
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        /* Search */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 1rem 1.5rem 1rem 3.5rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--aws-orange);
+            box-shadow: 0 0 0 3px rgba(255,153,0,0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+
+        .filter-tab.active, .filter-tab:hover {
+            background: rgba(255,153,0,0.15);
+            border-color: rgba(255,153,0,0.3);
+            color: var(--aws-orange);
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--aws-green);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            color: var(--aws-green);
+            font-weight: 600;
+            z-index: 9999;
+            transform: translateX(200%);
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toast.show { transform: translateX(0); }
+
+        /* Best Practices */
+        .practices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .practice-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .practice-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255,153,0,0.3);
+        }
+
+        .practice-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(255,153,0,0.2);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .practice-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .practice-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-stats { gap: 1.5rem; }
+            section { padding: 3rem 1rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .modal { padding: 1.5rem; }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glow effects */
+        .glow-orange { text-shadow: 0 0 30px rgba(255,153,0,0.5); }
+        .glow-blue { text-shadow: 0 0 30px rgba(0,168,225,0.5); }
+
+        /* Color variants */
+        .bg-orange { background: rgba(255,153,0,0.15); }
+        .bg-blue { background: rgba(0,168,225,0.15); }
+        .bg-green { background: rgba(30,203,139,0.15); }
+        .bg-purple { background: rgba(139,92,246,0.15); }
+        .bg-red { background: rgba(239,68,68,0.15); }
+        .bg-teal { background: rgba(20,184,166,0.15); }
+
+        .text-orange { color: var(--aws-orange); }
+        .text-blue { color: var(--aws-light-blue); }
+        .text-green { color: var(--aws-green); }
+        .text-purple { color: var(--aws-purple); }
+        .text-red { color: var(--aws-red); }
+        .border-orange { border-color: rgba(255,153,0,0.3); }
+        .border-blue { border-color: rgba(0,168,225,0.3); }
+        .border-green { border-color: rgba(30,203,139,0.3); }
+        .border-purple { border-color: rgba(139,92,246,0.3); }
+
+        /* Quiz Section */
+        .quiz-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .quiz-option {
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .quiz-option:hover {
+            border-color: rgba(255,153,0,0.3);
+            background: rgba(255,153,0,0.05);
+        }
+
+        .quiz-option.correct {
+            border-color: var(--aws-green);
+            background: rgba(30,203,139,0.1);
+            color: var(--aws-green);
+        }
+
+        .quiz-option.wrong {
+            border-color: var(--aws-red);
+            background: rgba(239,68,68,0.1);
+            color: var(--aws-red);
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .quiz-progress {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Architecture Patterns */
+        .arch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .arch-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .arch-card:hover {
+            border-color: rgba(0,168,225,0.3);
+            transform: translateY(-3px);
+        }
+
+        .arch-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .arch-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--aws-light-blue);
+        }
+
+        .arch-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.8rem;
+        }
+
+        .arch-service-tag {
+            background: rgba(0,168,225,0.1);
+            color: var(--aws-light-blue);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        /* Sticky TOC */
+        .toc {
+            position: fixed;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 500;
+        }
+
+        .toc-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .toc-dot:hover, .toc-dot.active {
+            background: var(--aws-orange);
+            transform: scale(1.3);
+        }
+
+        .toc-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .toc-dot:hover::after { opacity: 1; }
+
+        @media (max-width: 1024px) {
+            .toc { display: none; }
+        }
+
+        /* Level badges */
         .level-badge {
-            display: inline-flex; align-items: center; gap: 0.3rem;
-            padding: 0.2rem 0.7rem; border-radius: 50px;
-            font-size: 0.75rem; font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
         }
 
         .level-beginner { background: rgba(30,203,139,0.15); color: var(--aws-green); }
@@ -233,889 +1157,1923 @@
         .level-advanced { background: rgba(239,68,68,0.15); color: var(--aws-red); }
         .level-expert { background: rgba(139,92,246,0.15); color: var(--aws-purple); }
 
-        .phase-toggle {
-            margin-left: auto; color: var(--aws-orange);
-            font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0;
+        /* Accordion for phase content */
+        .topic-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
         }
-
-        .phase-toggle.rotated { transform: rotate(180deg); }
-
-        .phase-body { display: none; padding: 0 2rem 2rem; }
-        .phase-body.open { display: block; }
-
-        .phase-desc {
-            color: var(--text-secondary); font-size: 0.9rem;
-            line-height: 1.7; margin-bottom: 1.5rem;
-            padding: 1rem; background: rgba(255,255,255,0.02);
-            border-radius: 10px; border-left: 3px solid var(--aws-orange);
-        }
-
-        /* ===== TOPIC ITEMS ===== */
-        .topics-list { display: flex; flex-direction: column; gap: 0.8rem; }
-
-        .topic-wrapper { position: relative; }
 
         .topic-item {
-            display: flex; align-items: flex-start; gap: 1rem;
-            padding: 1rem 1.2rem;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.25s;
-            user-select: none;
-        }
-
-        .topic-item:hover {
-            background: rgba(255,153,0,0.05);
-            border-color: rgba(255,153,0,0.25);
-        }
-
-        .topic-item.active {
-            background: rgba(255,153,0,0.08);
-            border-color: rgba(255,153,0,0.4);
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-
-        .topic-checkbox {
-            width: 22px; height: 22px; border-radius: 50%;
-            border: 2px solid var(--border); flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s; margin-top: 1px;
-        }
-
-        .topic-checkbox.checked {
-            background: var(--aws-green); border-color: var(--aws-green);
-            box-shadow: 0 0 0 3px rgba(30,203,139,0.2);
-        }
-
-        .topic-checkbox.checked::after { content: '✓'; color: white; font-size: 0.7rem; font-weight: 900; }
-
-        .topic-text-wrap { flex: 1; }
-
-        .topic-title {
-            font-weight: 700; font-size: 0.95rem; margin-bottom: 0.2rem;
-            display: flex; align-items: center; gap: 0.5rem;
-        }
-
-        .topic-subtitle { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.4; }
-
-        .topic-arrow {
-            margin-left: auto; color: var(--aws-orange);
-            font-size: 0.9rem; transition: transform 0.25s; flex-shrink: 0;
-        }
-
-        .topic-item.active .topic-arrow { transform: rotate(90deg); }
-
-        /* ===== NOTEBOOK PANEL ===== */
-        .notebook-panel {
-            display: none;
-            background: var(--bg-notebook);
-            border: 1px solid rgba(255,153,0,0.25);
-            border-top: none;
-            border-radius: 0 0 14px 14px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .notebook-panel.open { display: block; }
-
-        .notebook-panel::before {
-            content: '';
-            position: absolute; left: 28px; top: 0; bottom: 0; width: 1px;
-            background: rgba(255,153,0,0.15);
-        }
-
-        .notebook-lines {
-            padding: 1.5rem 1.5rem 1.5rem 3.5rem;
-            position: relative;
-        }
-
-        /* Notebook tabs */
-        .notebook-tabs {
-            display: flex; gap: 0;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            background: rgba(0,0,0,0.2);
-            padding: 0 1.5rem 0 3.5rem;
-            overflow-x: auto;
-        }
-
-        .nb-tab {
-            padding: 0.7rem 1.2rem;
-            font-size: 0.78rem; font-weight: 600;
-            color: var(--text-secondary);
-            cursor: pointer; border-bottom: 2px solid transparent;
-            white-space: nowrap; transition: all 0.2s;
-        }
-
-        .nb-tab:hover { color: var(--text-primary); }
-        .nb-tab.active { color: var(--aws-orange); border-bottom-color: var(--aws-orange); }
-
-        .nb-content { display: none; }
-        .nb-content.active { display: block; }
-
-        /* Service Details Styling */
-        .detail-grid {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 1rem; margin: 1rem 0;
-        }
-
-        @media(max-width: 600px) { .detail-grid { grid-template-columns: 1fr; } }
-
-        .detail-box {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 10px; padding: 1rem;
-        }
-
-        .detail-box-label {
-            font-size: 0.7rem; text-transform: uppercase;
-            letter-spacing: 1px; color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .detail-box-value { font-size: 0.88rem; line-height: 1.6; }
-
-        .info-section { margin: 1.2rem 0; }
-
-        .info-label {
-            font-size: 0.75rem; text-transform: uppercase;
-            letter-spacing: 1px; color: var(--aws-orange);
-            font-weight: 700; margin-bottom: 0.5rem;
-            display: flex; align-items: center; gap: 0.4rem;
-        }
-
-        .info-content {
-            font-size: 0.88rem; color: var(--text-primary);
-            line-height: 1.75; padding: 0.8rem 1rem;
-            background: rgba(255,255,255,0.03);
-            border-radius: 8px;
-        }
-
-        .info-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-        .info-list li { font-size: 0.87rem; display: flex; gap: 0.5rem; line-height: 1.5; }
-        .info-list li::before { content: '→'; color: var(--aws-orange); flex-shrink: 0; }
-
-        .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0; }
-
-        .service-tag {
-            padding: 0.25rem 0.7rem; border-radius: 5px;
-            font-size: 0.75rem; font-weight: 600;
-        }
-
-        .tag-blue { background: rgba(0,168,225,0.12); color: var(--aws-light-blue); }
-        .tag-green2 { background: rgba(30,203,139,0.12); color: var(--aws-green); }
-        .tag-orange2 { background: rgba(255,153,0,0.12); color: var(--aws-orange); }
-        .tag-purple2 { background: rgba(139,92,246,0.12); color: var(--aws-purple); }
-        .tag-red2 { background: rgba(239,68,68,0.12); color: var(--aws-red); }
-
-        .fun-fact-box {
-            background: linear-gradient(135deg, rgba(255,153,0,0.08), rgba(139,92,246,0.08));
-            border: 1px solid rgba(255,153,0,0.2);
-            border-radius: 10px; padding: 1rem; margin: 1rem 0;
-            font-size: 0.87rem; line-height: 1.6;
-        }
-
-        .fun-fact-box strong { color: var(--aws-orange); }
-
-        .code-block {
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 8px; padding: 1rem;
-            font-family: 'Courier New', monospace;
-            font-size: 0.8rem; line-height: 1.7;
-            color: #a8e6cf; margin: 0.8rem 0;
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .code-label {
-            position: absolute; top: 0.5rem; right: 0.8rem;
-            font-size: 0.65rem; text-transform: uppercase;
-            letter-spacing: 1px; color: var(--text-secondary);
-        }
-
-        .cost-card {
-            background: rgba(30,203,139,0.06);
-            border: 1px solid rgba(30,203,139,0.2);
-            border-radius: 10px; padding: 1rem;
-        }
-
-        .security-card {
-            background: rgba(139,92,246,0.06);
-            border: 1px solid rgba(139,92,246,0.2);
-            border-radius: 10px; padding: 1rem;
-        }
-
-        /* ===== AI CHAT SECTION ===== */
-        .ai-chat-section {
-            border-top: 1px solid rgba(255,255,255,0.06);
-            padding: 1.2rem 1.5rem 1.5rem 3.5rem;
-        }
-
-        .ai-chat-header {
-            display: flex; align-items: center; gap: 0.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .ai-avatar {
-            width: 34px; height: 34px; border-radius: 50%;
-            background: linear-gradient(135deg, #8B5CF6, #00A8E1);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1rem; flex-shrink: 0;
-            box-shadow: 0 0 0 3px rgba(139,92,246,0.2);
-        }
-
-        .ai-name { font-weight: 700; font-size: 0.9rem; }
-        .ai-status { font-size: 0.75rem; color: var(--aws-green); }
-
-        .chat-history {
-            max-height: 350px; overflow-y: auto;
-            display: flex; flex-direction: column; gap: 0.8rem;
-            margin-bottom: 1rem; padding-right: 0.5rem;
-        }
-
-        .chat-history::-webkit-scrollbar { width: 4px; }
-        .chat-history::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-        .chat-bubble {
-            max-width: 90%;
-            padding: 0.9rem 1.1rem;
-            border-radius: 14px;
-            font-size: 0.87rem; line-height: 1.7;
-            position: relative;
-        }
-
-        .bubble-ai {
-            background: rgba(139,92,246,0.1);
-            border: 1px solid rgba(139,92,246,0.2);
-            border-radius: 4px 14px 14px 14px;
-            align-self: flex-start;
-        }
-
-        .bubble-user {
-            background: rgba(255,153,0,0.1);
-            border: 1px solid rgba(255,153,0,0.2);
-            border-radius: 14px 4px 14px 14px;
-            align-self: flex-end;
-            text-align: right;
-        }
-
-        .bubble-sender {
-            font-size: 0.7rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.5px;
-            margin-bottom: 0.3rem;
-        }
-
-        .bubble-ai .bubble-sender { color: var(--aws-purple); }
-        .bubble-user .bubble-sender { color: var(--aws-orange); }
-
-        .chat-input-row {
-            display: flex; gap: 0.6rem; align-items: flex-end;
-        }
-
-        .chat-input {
-            flex: 1;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
             padding: 0.8rem 1rem;
-            color: var(--text-primary); font-size: 0.88rem;
-            resize: none; min-height: 44px; max-height: 120px;
-            font-family: inherit; outline: none;
-            transition: border-color 0.2s;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+
+        .topic-item:hover { background: rgba(255,255,255,0.06); }
+
+        .topic-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .topic-check.checked {
+            background: var(--aws-green);
+            border-color: var(--aws-green);
+        }
+
+        .topic-check.checked::after { content: '✓'; color: white; font-size: 0.7rem; font-weight: 900; }
+
+        .topic-text {
+            font-size: 0.9rem;
             line-height: 1.5;
         }
 
-        .chat-input:focus { border-color: rgba(139,92,246,0.4); }
-        .chat-input::placeholder { color: var(--text-secondary); }
-
-        .send-btn {
-            background: linear-gradient(135deg, #8B5CF6, #00A8E1);
-            border: none; border-radius: 10px;
-            padding: 0.7rem 1rem;
-            color: white; cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.2s;
-            display: flex; align-items: center;
-            justify-content: center;
-            flex-shrink: 0; height: 44px;
+        .topic-text strong {
+            color: var(--text-primary);
+            display: block;
         }
 
-        .send-btn:hover { transform: scale(1.05); opacity: 0.9; }
-        .send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-        .quick-questions {
-            display: flex; flex-wrap: wrap; gap: 0.4rem;
-            margin-bottom: 0.8rem;
+        .topic-text span {
+            color: var(--text-secondary);
+            font-size: 0.82rem;
         }
 
-        .quick-q {
-            padding: 0.35rem 0.8rem;
-            background: rgba(139,92,246,0.08);
-            border: 1px solid rgba(139,92,246,0.2);
-            border-radius: 50px; font-size: 0.75rem;
-            color: var(--aws-purple); cursor: pointer;
-            transition: all 0.2s; white-space: nowrap;
-        }
-
-        .quick-q:hover {
-            background: rgba(139,92,246,0.2);
-            border-color: rgba(139,92,246,0.4);
-        }
-
-        /* Typing indicator */
-        .typing-indicator {
-            display: flex; align-items: center; gap: 0.3rem;
+        /* Cost optimization specific */
+        .cost-tip {
+            background: rgba(30,203,139,0.06);
+            border-left: 3px solid var(--aws-green);
             padding: 0.8rem 1rem;
-            background: rgba(139,92,246,0.08);
-            border: 1px solid rgba(139,92,246,0.15);
-            border-radius: 4px 14px 14px 14px;
-            width: fit-content;
+            border-radius: 0 8px 8px 0;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: var(--aws-green);
         }
 
-        .typing-dot {
-            width: 6px; height: 6px; border-radius: 50%;
-            background: var(--aws-purple);
-            animation: typingBounce 1.2s infinite;
-        }
-
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typingBounce {
-            0%,100% { transform: translateY(0); opacity: 0.4; }
-            50% { transform: translateY(-4px); opacity: 1; }
-        }
-
-        /* ===== AI RESPONSE FORMATTING ===== */
-        .ai-response h4 { color: var(--aws-orange); margin: 0.8rem 0 0.4rem; font-size: 0.9rem; }
-        .ai-response ul { list-style: none; margin: 0.4rem 0; }
-        .ai-response ul li { padding: 0.2rem 0; font-size: 0.87rem; }
-        .ai-response ul li::before { content: '→ '; color: var(--aws-purple); }
-        .ai-response p { margin: 0.4rem 0; }
-        .ai-response code {
-            background: rgba(0,0,0,0.3); padding: 0.1rem 0.4rem;
-            border-radius: 4px; font-family: monospace; font-size: 0.82rem;
-            color: #a8e6cf;
-        }
-        .ai-response strong { color: var(--aws-orange); }
-        .ai-response em { color: var(--aws-light-blue); font-style: italic; }
-
-        /* ===== TOAST ===== */
-        .toast {
-            position: fixed; bottom: 2rem; right: 2rem;
-            background: var(--bg-card);
-            border: 1px solid var(--aws-green);
-            border-radius: 12px; padding: 0.8rem 1.2rem;
-            color: var(--aws-green); font-weight: 600;
-            z-index: 9999; transform: translateX(200%);
-            transition: transform 0.3s;
-            display: flex; align-items: center; gap: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .toast.show { transform: translateX(0); }
-
-        /* ===== MISC ===== */
-        .divider { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
-
-        .progress-note {
-            font-size: 0.78rem; color: var(--text-secondary);
-            margin-top: 1rem; text-align: right;
-        }
-
-        .phase-progress-bar {
-            height: 4px; background: rgba(255,255,255,0.06);
-            border-radius: 2px; margin-top: 0.5rem; overflow: hidden;
-        }
-
-        .phase-progress-fill {
-            height: 100%; background: linear-gradient(90deg, var(--aws-green), var(--aws-orange));
-            border-radius: 2px; transition: width 0.4s ease;
-        }
-
-        /* Model selector */
-        .model-selector {
-            display: flex; gap: 0.4rem; margin-left: auto;
-        }
-
-        .model-opt {
-            padding: 0.2rem 0.6rem; border-radius: 4px;
-            font-size: 0.7rem; cursor: pointer;
-            border: 1px solid var(--border); color: var(--text-secondary);
-            background: transparent; transition: all 0.2s;
-        }
-
-        .model-opt.selected {
-            background: rgba(139,92,246,0.15);
-            border-color: rgba(139,92,246,0.4);
+        /* Security specific */
+        .security-tip {
+            background: rgba(139,92,246,0.06);
+            border-left: 3px solid var(--aws-purple);
+            padding: 0.8rem 1rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
             color: var(--aws-purple);
         }
 
-        .notebook-footer {
-            padding: 0.6rem 1.5rem 0.8rem 3.5rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            display: flex; justify-content: space-between; align-items: center;
-            font-size: 0.75rem; color: var(--text-secondary);
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #FF9900, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* Fade in animation */
-        .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.5s; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-        @media(max-width: 768px) {
-            .nav-links { display: none; }
-            .phase-header { padding: 1rem 1.2rem; }
-            .phase-body { padding: 0 1rem 1.5rem; }
-            .notebook-lines, .ai-chat-section { padding-left: 1rem; }
-            .notebook-panel::before { display: none; }
-            .notebook-tabs { padding-left: 1rem; }
-            .notebook-footer { padding-left: 1rem; }
+        .gradient-text-blue {
+            background: linear-gradient(135deg, #00A8E1, #1A73E8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
+
+        .gradient-text-green {
+            background: linear-gradient(135deg, #1ECB8B, #10B981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Divider */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2rem 0;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255,153,0,0.05), rgba(0,168,225,0.05));
+            border: 1px solid rgba(255,153,0,0.15);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
     </style>
 </head>
 <body>
 
+<!-- Progress Bar -->
 <div class="progress-bar" id="progressBar"></div>
-<div class="toast" id="toast">✅ Copied!</div>
 
-<!-- NAVBAR -->
+<!-- Toast -->
+<div class="toast" id="toast">✅ Copied to clipboard!</div>
+
+<!-- Navigation -->
 <nav class="navbar">
     <div class="nav-logo">☁️ AWS Zero to Hero</div>
     <ul class="nav-links">
-        <li><a href="#learning">Learning Path</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="#learning-path">Learning Path</a></li>
+        <li><a href="#services">All Services</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#cost">Cost Optimization</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#certs">Certifications</a></li>
+        <li><a href="#architecture">Architectures</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+        <li><a href="#best-practices">Best Practices</a></li>
+        <li><a href="#share">Share</a></li>
     </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="top">
-    <div style="position:relative; z-index:1;">
-        <div class="hero-badge">🚀 AI-Powered AWS Learning • 2024 Edition</div>
-        <h1>AWS Zero to Hero<br>with AI-Powered Learning</h1>
-        <p>Click any topic in the learning plan to get a full deep-dive explanation + an AI notebook that answers all your questions about that AWS service.</p>
+<!-- TOC Dots -->
+<div class="toc" id="tocDots">
+    <div class="toc-dot" data-label="Top" onclick="scrollToSection('hero')"></div>
+    <div class="toc-dot" data-label="Learning Path" onclick="scrollToSection('learning-path')"></div>
+    <div class="toc-dot" data-label="Services" onclick="scrollToSection('services')"></div>
+    <div class="toc-dot" data-label="Roadmap" onclick="scrollToSection('roadmap')"></div>
+    <div class="toc-dot" data-label="Cost" onclick="scrollToSection('cost')"></div>
+    <div class="toc-dot" data-label="Security" onclick="scrollToSection('security')"></div>
+    <div class="toc-dot" data-label="Certs" onclick="scrollToSection('certs')"></div>
+    <div class="toc-dot" data-label="Architectures" onclick="scrollToSection('architecture')"></div>
+    <div class="toc-dot" data-label="Quiz" onclick="scrollToSection('quiz')"></div>
+    <div class="toc-dot" data-label="Best Practices" onclick="scrollToSection('best-practices')"></div>
+    <div class="toc-dot" data-label="Share" onclick="scrollToSection('share')"></div>
+</div>
 
-        <div class="ai-badge-hero">
-            <div class="ai-dot"></div>
-            <span>🤖 AI Assistant Active — Ask anything about any AWS service</span>
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" id="modalContent">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<!-- Hero Section -->
+<section id="hero" class="hero">
+    <div class="floating-icons" id="floatingIcons"></div>
+    
+    <div style="position: relative; z-index: 1;">
+        <div class="aws-badge">🚀 Complete AWS Mastery Guide • Updated 2024</div>
+        
+        <h1>AWS Zero to Hero<br>Complete Mastery Plan</h1>
+        
+        <p>Master every AWS service from beginner to expert. Complete with definitions, use cases, cost optimization, security best practices, and real-world architectures.</p>
+        
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-number">200+</div>
+                <div class="stat-label">AWS Services</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Year Journey</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Certifications</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Architectures</div>
+            </div>
         </div>
-
+        
         <div class="hero-buttons">
-            <a href="#learning" class="btn btn-primary">🚀 Start Learning</a>
-            <a href="#about" class="btn btn-secondary">ℹ️ How It Works</div></a>
+            <a href="#learning-path" class="btn btn-primary">🚀 Start Learning</a>
+            <a href="#services" class="btn btn-secondary">📚 Explore Services</a>
+            <a href="#share" class="btn btn-secondary">🔗 Share</a>
         </div>
     </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section id="about">
-    <div class="section-wrapper">
-        <div class="section-header fade-in">
-            <div class="section-tag tag-purple">✨ New Feature</div>
-            <h2>How the <span class="gradient-purple">AI Notebook</span> Works</h2>
+<!-- Learning Path -->
+<section id="learning-path">
+    <div class="section-header fade-in">
+        <div class="section-tag tag-orange">📚 Structured Learning</div>
+        <h2>Complete <span class="gradient-text">Learning Path</span></h2>
+        <p>A structured 12-phase journey from cloud newcomer to AWS expert architect</p>
+    </div>
+    
+    <div class="phases-container" id="phasesContainer"></div>
+</section>
+
+<!-- All Services -->
+<section id="services" style="padding-top: 2rem;">
+    <div class="section-header fade-in">
+        <div class="section-tag tag-blue">☁️ AWS Services</div>
+        <h2>All AWS <span class="gradient-text-blue">Services Explained</span></h2>
+        <p>Every service with definition, problems solved, use cases, and fun facts</p>
+    </div>
+    
+    <div class="search-container fade-in">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search any AWS service..." oninput="filterServices()">
+    </div>
+    
+    <div class="filter-tabs fade-in" id="filterTabs">
+        <button class="filter-tab active" onclick="setFilter('all', this)">All Services</button>
+        <button class="filter-tab" onclick="setFilter('compute', this)">⚡ Compute</button>
+        <button class="filter-tab" onclick="setFilter('storage', this)">💾 Storage</button>
+        <button class="filter-tab" onclick="setFilter('database', this)">🗄️ Database</button>
+        <button class="filter-tab" onclick="setFilter('network', this)">🌐 Networking</button>
+        <button class="filter-tab" onclick="setFilter('security', this)">🔒 Security</button>
+        <button class="filter-tab" onclick="setFilter('ai', this)">🤖 AI/ML</button>
+        <button class="filter-tab" onclick="setFilter('devops', this)">🔧 DevOps</button>
+        <button class="filter-tab" onclick="setFilter('serverless', this)">⚡ Serverless</button>
+        <button class="filter-tab" onclick="setFilter('analytics', this)">📊 Analytics</button>
+        <button class="filter-tab" onclick="setFilter('iot', this)">📡 IoT</button>
+        <button class="filter-tab" onclick="setFilter('management', this)">🎛️ Management</button>
+    </div>
+    
+    <div class="services-grid" id="servicesGrid"></div>
+</section>
+
+<!-- Career Roadmap -->
+<section id="roadmap">
+    <div class="section-header fade-in">
+        <div class="section-tag tag-green">🗺️ Career Journey</div>
+        <h2>0 to 12 Year <span class="gradient-text-green">Experience Roadmap</span></h2>
+        <p>Month-by-month and year-by-year progression guide with skills, salary, and role evolution</p>
+    </div>
+    
+    <div class="timeline fade-in" id="timelineContainer"></div>
+</section>
+
+<!-- Cost Optimization -->
+<section id="cost">
+    <div class="section-header fade-in">
+        <div class="section-tag tag-green">💰 Save Money</div>
+        <h2>Cost <span class="gradient-text-green">Optimization</span></h2>
+        <p>Tools, strategies and services to minimize your AWS spend</p>
+    </div>
+    
+    <div class="tools-grid fade-in" id="costToolsGrid"></div>
+</section>
+
+<!-- Security -->
+<section id="security">
+    <div class="section-header fade-in">
+        <div class="section-tag tag-purple">🔒 Stay Secure</div>
+        <h2>Security <span class="gradient-text">Mastery</span></h2>
+        <p>Complete AWS security tools, services and frameworks</p>
+    </div>
+    
+    <div class="tools-grid fade-in" id="securityToolsGrid"></div>
+</section>
+
+<!-- Certifications -->
+<section id="certs">
+    <div class="section-header fade-in">
+        <div class="section-tag tag-orange">🏆 Certifications</div>
+        <h2>AWS <span class="gradient-text">Certification</span> Path</h2>
+        <p>All 12 AWS certifications with preparation tips and exam details</p>
+    </div>
+    
+    <div class="cert-grid fade-in" id="certGrid"></div>
+</section>
+
+<!-- Architecture Patterns -->
+<section id="architecture">
+    <div class="section-header fade-in">
+        <div class="section-tag tag-blue">🏗️ Design Patterns</div>
+        <h2>Reference <span class="gradient-text-blue">Architectures</span></h2>
+        <p>Real-world architecture patterns used by top companies</p>
+    </div>
+    
+    <div class="arch-grid fade-in" id="archGrid"></div>
+</section>
+
+<!-- Quiz Section -->
+<section id="quiz">
+    <div class="section-header fade-in">
+        <div class="section-tag tag-orange">🧠 Test Knowledge</div>
+        <h2>AWS Knowledge <span class="gradient-text">Quiz</span></h2>
+        <p>Test your AWS knowledge with scenario-based questions</p>
+    </div>
+    
+    <div class="quiz-card fade-in" id="quizContainer"></div>
+</section>
+
+<!-- Best Practices -->
+<section id="best-practices">
+    <div class="section-header fade-in">
+        <div class="section-tag tag-green">⭐ Expert Tips</div>
+        <h2>Best <span class="gradient-text-green">Practices</span></h2>
+        <p>Industry-proven best practices from AWS Well-Architected Framework</p>
+    </div>
+    
+    <div class="practices-grid fade-in" id="practicesGrid"></div>
+</section>
+
+<!-- Share Section -->
+<section id="share">
+    <div class="share-section fade-in">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">🔗</div>
+        <h2 style="font-size: 2rem; margin-bottom: 1rem;">Share This Resource</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 0;">Share this complete AWS guide with your team, colleagues, or community!</p>
+        
+        <div class="share-url" id="shareUrl">
+            <span id="shareUrlText">Loading...</span>
+            <button class="copy-btn" onclick="copyUrl()">📋 Copy</button>
         </div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.2rem;" class="fade-in">
-            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:1.5rem; text-align:center;">
-                <div style="font-size:2.5rem; margin-bottom:1rem;">📚</div>
-                <h3 style="margin-bottom:0.5rem;">1. Open a Topic</h3>
-                <p style="color:var(--text-secondary); font-size:0.88rem; line-height:1.6;">Click any topic in the learning plan to open its AI-powered notebook panel right below it.</p>
-            </div>
-            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:1.5rem; text-align:center;">
-                <div style="font-size:2.5rem; margin-bottom:1rem;">📖</div>
-                <h3 style="margin-bottom:0.5rem;">2. Read Full Details</h3>
-                <p style="color:var(--text-secondary); font-size:0.88rem; line-height:1.6;">Get complete service documentation: what it is, architecture, pricing, security, use cases, and code examples.</p>
-            </div>
-            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:1.5rem; text-align:center;">
-                <div style="font-size:2.5rem; margin-bottom:1rem;">🤖</div>
-                <h3 style="margin-bottom:0.5rem;">3. Ask the AI</h3>
-                <p style="color:var(--text-secondary); font-size:0.88rem; line-height:1.6;">Each topic has its own AI assistant that knows everything about that service. Ask any question you want!</p>
-            </div>
-            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:1.5rem; text-align:center;">
-                <div style="font-size:2.5rem; margin-bottom:1rem;">✅</div>
-                <h3 style="margin-bottom:0.5rem;">4. Track Progress</h3>
-                <p style="color:var(--text-secondary); font-size:0.88rem; line-height:1.6;">Check off topics as you complete them. Your progress is saved and shown per phase.</p>
-            </div>
+        
+        <div class="share-buttons">
+            <a class="btn btn-primary" onclick="shareTwitter()" href="#" style="text-decoration:none;">🐦 Twitter</a>
+            <a class="btn btn-secondary" onclick="shareLinkedIn()" href="#" style="text-decoration:none;">💼 LinkedIn</a>
+            <a class="btn btn-secondary" onclick="shareWhatsApp()" href="#" style="text-decoration:none;">💬 WhatsApp</a>
+            <button class="btn btn-secondary" onclick="copyUrl()">📋 Copy Link</button>
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,153,0,0.05); border: 1px solid rgba(255,153,0,0.1); border-radius: 16px;">
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                💡 <strong style="color: var(--aws-orange);">Pro Tip:</strong> Bookmark this page and revisit it as you grow. The content scales from absolute beginner to 12+ years of experience. Share it with your learning community!
+            </p>
         </div>
     </div>
 </section>
 
-<!-- LEARNING PATH -->
-<section id="learning">
-    <div class="section-wrapper">
-        <div class="section-header fade-in">
-            <div class="section-tag tag-orange">📚 Complete Curriculum</div>
-            <h2>AI-Powered <span class="gradient-text">Learning Path</span></h2>
-            <p style="color:var(--text-secondary);">Click any topic → get full details + AI assistant opens right below</p>
-        </div>
-        <div id="phasesContainer"></div>
+<!-- Footer -->
+<footer>
+    <div style="font-size: 2rem; margin-bottom: 1rem;">☁️</div>
+    <p style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">AWS Zero to Hero - Complete Mastery Plan</p>
+    <p>Covering 200+ AWS services • 12 certification paths • Real-world architectures • Cost & Security optimization</p>
+    <p style="margin-top: 1rem; font-size: 0.8rem;">Built with ❤️ for the cloud community • Not affiliated with Amazon Web Services</p>
+    <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <span style="color: var(--aws-orange); font-size: 0.85rem;">🚀 Compute</span>
+        <span style="color: var(--aws-light-blue); font-size: 0.85rem;">💾 Storage</span>
+        <span style="color: var(--aws-green); font-size: 0.85rem;">🗄️ Database</span>
+        <span style="color: var(--aws-purple); font-size: 0.85rem;">🔒 Security</span>
+        <span style="color: var(--aws-orange); font-size: 0.85rem;">🤖 AI/ML</span>
+        <span style="color: var(--aws-light-blue); font-size: 0.85rem;">📊 Analytics</span>
     </div>
-</section>
-
-<footer style="background:var(--bg-card); border-top:1px solid var(--border); padding:2rem; text-align:center;">
-    <p style="color:var(--text-secondary); font-size:0.85rem;">☁️ AWS Zero to Hero • AI-Powered Learning • Not affiliated with Amazon Web Services</p>
 </footer>
 
 <script>
-// ===================================================
-// KNOWLEDGE BASE - Full details for every topic
-// ===================================================
-const serviceKnowledge = {
-    "What is Cloud Computing?": {
-        icon: "☁️",
-        overview: "Cloud computing is the on-demand delivery of IT resources — servers, storage, databases, networking, software, analytics — over the Internet with pay-as-you-go pricing. Instead of buying, owning, and maintaining physical data centers, you access technology services on an as-needed basis from a cloud provider like AWS.",
-        models: [
-            { name: "IaaS (Infrastructure as a Service)", desc: "You manage OS, middleware, runtime, data, applications. AWS provides virtualization, networking, storage. Example: EC2, EBS, VPC." },
-            { name: "PaaS (Platform as a Service)", desc: "AWS manages OS, middleware, runtime. You manage data and applications. Example: Elastic Beanstalk, RDS, Lambda." },
-            { name: "SaaS (Software as a Service)", desc: "Everything managed by AWS. You just use the software. Example: WorkMail, Chime, QuickSight." }
-        ],
-        benefits: ["Trade capital expense for variable expense", "Massive economies of scale", "Stop guessing capacity", "Increase speed and agility", "Go global in minutes", "Focus on business differentiators"],
-        architecture: "AWS Cloud = Regions → Availability Zones (AZs) → Edge Locations → Local Zones → Outposts",
-        pricing: "Pay-as-you-go: only pay for what you use. No upfront costs, no long-term contracts (unless you want discounts). Prices continuously decrease as AWS grows.",
-        funFact: "AWS started in 2006 with just S3 and EC2. Today it has 200+ services across 32 geographic regions! Netflix, Airbnb, NASA, and the CIA all run on AWS.",
-        useCases: ["Host websites and web apps", "Store and backup data", "Build and run applications", "Stream video and audio", "Train ML models", "Analyze big data", "Build IoT solutions"],
-        keyTerms: {
-            "Region": "Geographic area with 2+ AZs. Data stays within region unless you move it.",
-            "AZ (Availability Zone)": "One or more discrete data centers with redundant power, networking, and connectivity.",
-            "Edge Location": "Content delivery node for CloudFront CDN. 450+ worldwide.",
-            "VPC": "Virtual Private Cloud — your own isolated network in AWS.",
-            "IAM": "Identity and Access Management — who can do what in your AWS account."
-        },
-        codeExample: `# Install AWS CLI
-pip install awscli
+// ===== DATA =====
 
-# Configure credentials
-aws configure
-# Enter: Access Key, Secret Key, Region, Output format
-
-# Your first AWS CLI command
-aws s3 ls                    # List all S3 buckets
-aws ec2 describe-instances  # List EC2 instances
-aws iam get-user            # Get current IAM user`,
-        quickActions: ["Explain IaaS vs PaaS vs SaaS", "What are AWS Regions?", "How does AWS pricing work?", "What is an AZ?", "AWS vs Azure vs GCP"]
+const phases = [
+    {
+        id: 1,
+        icon: "🌱",
+        color: "#1ECB8B",
+        bgColor: "rgba(30,203,139,0.15)",
+        title: "Phase 1: Cloud Foundations (0-3 Months)",
+        experience: "0 Experience",
+        duration: "3 Months",
+        level: "beginner",
+        description: "Build your cloud foundation. Understand what cloud computing is, why AWS leads the market, and get hands-on with the AWS Console.",
+        topics: [
+            { name: "What is Cloud Computing?", desc: "IaaS, PaaS, SaaS models explained with real-world analogies" },
+            { name: "AWS Global Infrastructure", desc: "Regions, Availability Zones, Edge Locations, Local Zones" },
+            { name: "AWS Management Console", desc: "Navigate the console, CLI setup, and SDK basics" },
+            { name: "IAM Fundamentals", desc: "Users, Groups, Roles, Policies - the foundation of AWS security" },
+            { name: "AWS Free Tier", desc: "12-month free tier, always-free services, and spending alerts" },
+            { name: "Billing & Cost Management", desc: "AWS Budgets, Cost Explorer, billing alarms" },
+            { name: "AWS CLI Setup", desc: "Configure AWS CLI, profiles, and basic commands" },
+            { name: "Core Networking Concepts", desc: "IP addressing, CIDR notation, DNS, HTTP/HTTPS basics" }
+        ]
     },
-
-    "AWS Global Infrastructure": {
-        icon: "🌍",
-        overview: "AWS operates the most extensive global cloud infrastructure in the world. This infrastructure consists of Regions, Availability Zones, Edge Locations, Local Zones, and AWS Outposts — designed for fault tolerance, low latency, and data residency compliance.",
-        architecture: "32 Regions → 102 Availability Zones → 600+ Edge Locations → 32+ Local Zones → AWS Outposts (on-premises)",
-        keyComponents: {
-            "AWS Region": "A physical location around the world where AWS clusters data centers. Each Region is completely independent — choosing a Region determines where your data is stored (data sovereignty).",
-            "Availability Zone (AZ)": "One or more discrete data centers, each with redundant power, networking, and connectivity. AZs in a Region are connected via private, high-bandwidth, low-latency fiber links.",
-            "Edge Locations": "CloudFront CDN endpoints closer to end users than Regions. Caches content for sub-millisecond delivery. 600+ locations worldwide.",
-            "Local Zones": "AWS infrastructure placed closer to large population centers for ultra-low latency (single-digit ms). Example: Los Angeles, New York, Mumbai.",
-            "AWS Outposts": "Bring AWS services, infrastructure, and operating models to virtually any datacenter, co-location space, or on-premises facility."
-        },
-        regionSelection: ["Latency to end users", "Data sovereignty / compliance requirements", "Service availability (not all services in all regions)", "Disaster recovery strategy", "Cost differences between regions"],
-        funFact: "AWS has more global infrastructure than the next several cloud providers combined! The us-east-1 (N. Virginia) region is the oldest and largest, processing more internet traffic than most countries.",
-        codeExample: `# List all available AWS regions
-aws ec2 describe-regions --output table
-
-# List AZs in current region
-aws ec2 describe-availability-zones \
-    --filters "Name=state,Values=available"
-
-# Check service availability in a region
-aws ssm get-parameters-by-path \
-    --path "/aws/service/global-infrastructure/regions/us-east-1/services"`,
-        quickActions: ["How to choose an AWS Region?", "What is data residency?", "Explain Multi-AZ vs Multi-Region", "How many AZs are in us-east-1?", "What is AWS Outposts?"]
-    },
-
-    "EC2 Deep Dive": {
+    {
+        id: 2,
         icon: "⚡",
-        overview: "Amazon EC2 (Elastic Compute Cloud) provides resizable virtual servers in the cloud. You can launch servers within minutes, scale capacity up or down, and pay only for what you use. EC2 eliminated the need for upfront hardware investment and the complexity of capacity planning.",
-        instanceTypes: {
-            "General Purpose (t3, m6i)": "Balanced CPU, memory, networking. Best for: web servers, code repos, small DBs.",
-            "Compute Optimized (c6i, c7g)": "High-performance processors. Best for: batch processing, HPC, ML inference.",
-            "Memory Optimized (r6i, x2idn)": "Large memory footprint. Best for: in-memory DBs, real-time analytics, SAP HANA.",
-            "Storage Optimized (i3en, d3en)": "High, sequential read/write. Best for: data warehousing, OLTP, distributed file systems.",
-            "Accelerated Computing (p4d, inf2)": "GPUs, FPGAs. Best for: ML training, video processing, HPC."
-        },
-        purchaseOptions: [
-            "On-Demand: Pay per second/hour, no commitment. Highest cost, maximum flexibility.",
-            "Reserved Instances: 1 or 3 year commitment. Up to 72% off On-Demand.",
-            "Savings Plans: Flexible commitment to $/hour usage. Up to 72% off.",
-            "Spot Instances: Bid on spare capacity. Up to 90% off but can be interrupted.",
-            "Dedicated Hosts: Physical server dedicated to you. License compliance (BYOL)."
-        ],
-        keyFeatures: ["User Data scripts (run at launch)", "Instance Metadata Service (IMDS)", "Placement Groups (cluster/spread/partition)", "Elastic Network Interfaces (ENI)", "Hibernate support", "Nitro Enclaves (confidential computing)"],
-        pricing: "On-Demand: t3.micro = $0.0104/hr. Savings Plans can reduce to $0.0028/hr. Spot can be as low as $0.003/hr. Free tier: 750 hrs/month t2.micro or t3.micro for 12 months.",
-        security: "Security Groups (stateful firewall), IAM Instance Profiles, Systems Manager Session Manager (no SSH needed), KMS encrypted EBS volumes, Nitro hypervisor for strong isolation.",
-        funFact: "Amazon EC2 launched in 2006 and was so successful it crashed during the public beta! Netflix migrated 100% to EC2 and now runs 100,000+ instances. AWS launches millions of new EC2 instances every day.",
-        codeExample: `# Launch an EC2 instance via CLI
-aws ec2 run-instances \\
-    --image-id ami-0c55b159cbfafe1f0 \\
-    --instance-type t3.micro \\
-    --key-name MyKeyPair \\
-    --security-group-ids sg-12345678 \\
-    --subnet-id subnet-12345678 \\
-    --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=MyServer}]'
-
-# Connect via Session Manager (no SSH needed!)
-aws ssm start-session --target i-1234567890abcdef0
-
-# User Data example (runs at launch)
-#!/bin/bash
-yum update -y
-yum install -y httpd
-systemctl start httpd
-systemctl enable httpd`,
-        quickActions: ["Which EC2 instance type should I choose?", "Explain Spot vs Reserved Instances", "How does Auto Scaling work?", "What is a Security Group?", "EC2 pricing calculator tips"]
+        color: "#FF9900",
+        bgColor: "rgba(255,153,0,0.15)",
+        title: "Phase 2: Core Compute & Storage (3-6 Months)",
+        experience: "0-6 Months",
+        duration: "3 Months",
+        level: "beginner",
+        description: "Deep dive into EC2, S3, and EBS. These are the bread and butter of AWS and form the basis of nearly every workload.",
+        topics: [
+            { name: "EC2 Deep Dive", desc: "Instance types, AMIs, key pairs, security groups, user data" },
+            { name: "EC2 Auto Scaling", desc: "Launch templates, Auto Scaling Groups, scaling policies" },
+            { name: "Elastic Load Balancing", desc: "ALB, NLB, CLB - differences, use cases, and configuration" },
+            { name: "Amazon S3 Mastery", desc: "Buckets, objects, versioning, lifecycle policies, storage classes" },
+            { name: "EBS Deep Dive", desc: "Volume types (gp3, io2, st1, sc1), snapshots, encryption" },
+            { name: "Amazon EFS", desc: "Shared file system for EC2 instances across AZs" },
+            { name: "AMI Creation", desc: "Custom AMIs, AWS Marketplace, Golden AMI strategy" },
+            { name: "First Web App Deployment", desc: "Deploy a LAMP/MEAN stack on EC2 with S3 for static assets" }
+        ]
     },
-
-    "AWS Lambda Deep Dive": {
-        icon: "λ",
-        overview: "AWS Lambda is a serverless, event-driven compute service that lets you run code without provisioning or managing servers. You write a function, upload it, and Lambda handles everything else: running, scaling, patching, and high availability. You're billed in 1ms increments.",
-        howItWorks: "Event occurs → Lambda invokes your function → Function runs in an isolated execution environment → Returns result → Environment may be reused (warm) or discarded (cold start).",
-        triggers: ["S3 (file uploads)", "DynamoDB Streams", "Kinesis Streams", "SQS/SNS messages", "API Gateway HTTP requests", "CloudWatch Events (scheduled)", "EventBridge rules", "IoT Rules", "Cognito", "CloudFront (Lambda@Edge)"],
-        limitations: [
-            "Max execution time: 15 minutes (timeout)",
-            "Memory: 128MB to 10,240MB (10GB)",
-            "Deployment package: 50MB zipped, 250MB unzipped",
-            "Temp storage (/tmp): 512MB to 10GB",
-            "Concurrency: 1,000 default (soft limit, can be increased)",
-            "Cold start: can add 100ms-1s latency (use Provisioned Concurrency)"
-        ],
-        bestPractices: [
-            "Keep functions small and single-purpose",
-            "Use Layers for shared libraries",
-            "Enable Provisioned Concurrency for latency-sensitive functions",
-            "Use ARM64 (Graviton2) for 20% better price/performance",
-            "Set appropriate timeout (don't use 15 min default for fast functions)",
-            "Use environment variables for configuration, not hardcoded values",
-            "Enable X-Ray tracing for distributed debugging"
-        ],
-        pricing: "Free Tier: 1M requests/month + 400,000 GB-seconds forever. After: $0.20/M requests + $0.0000166667/GB-second. A function using 512MB running 100ms costs $0.000000834 per invocation.",
-        funFact: "AWS Lambda runs more than 1 trillion function invocations per month! It was launched in 2014 and revolutionized how developers think about infrastructure. Amazon itself uses Lambda to power Alexa responses!",
-        codeExample: `# Python Lambda function example
-import json
-import boto3
-
-def lambda_handler(event, context):
-    # event = input data from trigger
-    # context = runtime information
-    
-    # Get data from event
-    bucket = event['Records'][0]['s3']['bucket']['name']
-    key = event['Records'][0]['s3']['object']['key']
-    
-    # Process the file
-    s3 = boto3.client('s3')
-    response = s3.get_object(Bucket=bucket, Key=key)
-    content = response['Body'].read().decode('utf-8')
-    
-    print(f"Processing file: {key} from {bucket}")
-    
-    return {
-        'statusCode': 200,
-        'body': json.dumps({'processed': key, 'size': len(content)})
-    }
-
-# Deploy with CLI
-aws lambda create-function \\
-    --function-name my-function \\
-    --runtime python3.11 \\
-    --handler lambda_function.lambda_handler \\
-    --role arn:aws:iam::123456789012:role/lambda-role \\
-    --zip-file fileb://function.zip`,
-        quickActions: ["What causes Lambda cold starts?", "Lambda vs EC2 - when to use which?", "How to reduce Lambda costs?", "Explain Provisioned Concurrency", "Lambda layers explained"]
-    },
-
-    "VPC Architecture": {
+    {
+        id: 3,
         icon: "🌐",
-        overview: "Amazon Virtual Private Cloud (VPC) lets you launch AWS resources into a virtual network that closely resembles a traditional network — with the benefits of scalable AWS infrastructure. You have complete control over your virtual networking environment, including IP address ranges, subnets, route tables, and network gateways.",
-        components: {
-            "CIDR Block": "IP address range for your VPC. Default: 172.31.0.0/16. Can be /16 to /28. Example: 10.0.0.0/16 = 65,536 IP addresses.",
-            "Subnet": "Subdivision of VPC CIDR. Public subnets have internet access (IGW route). Private subnets don't. Each subnet is in one AZ.",
-            "Internet Gateway (IGW)": "Horizontally scaled, redundant, HA VPC component that allows communication between VPC and the internet. Attach one per VPC.",
-            "NAT Gateway": "Allows private subnet instances to access internet while preventing inbound internet connections. Costs $0.045/hr + data transfer.",
-            "Route Table": "Contains rules (routes) that determine where network traffic is directed. Each subnet must be associated with a route table.",
-            "Security Group": "Virtual stateful firewall at instance level. Controls inbound/outbound traffic. Default: deny all inbound, allow all outbound.",
-            "Network ACL (NACL)": "Optional stateless firewall at subnet level. Processes rules in order. Must explicitly allow return traffic."
-        },
-        design: "Best practice VPC design: 3 public subnets (1/AZ) + 3 private subnets (1/AZ) across 3 AZs. Public for load balancers. Private for app servers and databases.",
-        funFact: "You can create up to 5 VPCs per region (soft limit) and up to 200 subnets per VPC. AWS's own services (S3, DynamoDB) don't live in your VPC — they're accessed via the internet or VPC endpoints.",
-        codeExample: `# Create a VPC
-aws ec2 create-vpc --cidr-block 10.0.0.0/16 \\
-    --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=MyVPC}]'
-
-# Create public subnet
-aws ec2 create-subnet \\
-    --vpc-id vpc-12345678 \\
-    --cidr-block 10.0.1.0/24 \\
-    --availability-zone us-east-1a
-
-# Create and attach Internet Gateway
-aws ec2 create-internet-gateway
-aws ec2 attach-internet-gateway \\
-    --vpc-id vpc-12345678 \\
-    --internet-gateway-id igw-12345678
-
-# Create route table with internet route
-aws ec2 create-route \\
-    --route-table-id rtb-12345678 \\
-    --destination-cidr-block 0.0.0.0/0 \\
-    --gateway-id igw-12345678`,
-        quickActions: ["Public vs Private subnet difference?", "When to use NAT Gateway vs NAT Instance?", "Security Group vs NACL?", "How to design a VPC from scratch?", "What is VPC Flow Logs?"]
+        color: "#00A8E1",
+        bgColor: "rgba(0,168,225,0.15)",
+        title: "Phase 3: Networking & VPC (6-9 Months)",
+        experience: "6-9 Months",
+        duration: "3 Months",
+        level: "intermediate",
+        description: "Master AWS networking. VPC is the backbone of every production AWS architecture and is critical for security and performance.",
+        topics: [
+            { name: "VPC Architecture", desc: "Public/private subnets, route tables, internet gateways" },
+            { name: "NAT Gateways & Instances", desc: "Private subnet internet access, cost comparisons" },
+            { name: "Security Groups vs NACLs", desc: "Stateful vs stateless, differences and when to use each" },
+            { name: "VPC Peering", desc: "Cross-account and cross-region VPC connectivity" },
+            { name: "AWS Transit Gateway", desc: "Hub-spoke model, replacing complex VPC peering meshes" },
+            { name: "VPN & Direct Connect", desc: "Site-to-site VPN, AWS Direct Connect, hybrid connectivity" },
+            { name: "Route 53", desc: "DNS routing policies, health checks, geolocation routing" },
+            { name: "CloudFront CDN", desc: "Edge caching, custom origins, OAI, Lambda@Edge" }
+        ]
     },
-
-    "Amazon RDS": {
+    {
+        id: 4,
         icon: "🗄️",
-        overview: "Amazon Relational Database Service (RDS) makes it easy to set up, operate, and scale a relational database in the cloud. It provides cost-efficient and resizable capacity while automating time-consuming administration tasks — hardware provisioning, database setup, patching, and backups.",
-        engines: {
-            "Amazon Aurora": "Cloud-native. MySQL/PostgreSQL compatible. 5x faster than MySQL, 3x than PostgreSQL. Auto-scales to 128TB.",
-            "MySQL": "Most popular open-source DB. Versions 5.7, 8.0. Great for web applications.",
-            "PostgreSQL": "Advanced open-source DB. Versions 13-16. Supports JSON, full-text search, geospatial.",
-            "MariaDB": "MySQL fork. Versions 10.x. Community-driven.",
-            "Oracle": "Enterprise DB. BYOL or License Included. Versions 19c, 21c.",
-            "SQL Server": "Microsoft DB. Express, Web, Standard, Enterprise editions.",
-            "IBM Db2": "Newest addition. Enterprise workloads."
-        },
-        features: ["Multi-AZ deployment (automatic failover in <60s)", "Up to 15 Read Replicas (Aurora) / 5 (others)", "Automated backups (1-35 days retention)", "Point-in-time recovery", "Storage auto-scaling", "Performance Insights (free monitoring)", "Enhanced Monitoring (60+ OS metrics)", "Database Activity Streams (audit logs)"],
-        multiAZ: "In Multi-AZ, RDS maintains a synchronous standby replica in a different AZ. Failover is automatic — typically 60-120 seconds. DNS record updated to point to standby. No manual intervention needed.",
-        pricing: "db.t3.micro: ~$0.017/hr (Free tier: 750hr/month for 12mo). Multi-AZ doubles instance cost. Storage: $0.115/GB-month (gp2). PIOPS storage: $0.125/GB + $0.10/IOPS.",
-        funFact: "RDS manages billions of database operations per day! When you create an RDS instance, AWS automatically runs your database in a VM but handles all the infrastructure. Amazon.com's original database was Oracle before they moved to DynamoDB.",
-        codeExample: `# Create RDS MySQL instance
-aws rds create-db-instance \\
-    --db-instance-identifier mydb \\
-    --db-instance-class db.t3.micro \\
-    --engine mysql \\
-    --master-username admin \\
-    --master-user-password MySecurePass123! \\
-    --allocated-storage 20 \\
-    --multi-az \\
-    --storage-encrypted \\
-    --backup-retention-period 7 \\
-    --vpc-security-group-ids sg-12345678
-
-# Connect to RDS (from EC2 in same VPC)
-mysql -h mydb.xxxxx.us-east-1.rds.amazonaws.com \\
-    -u admin -p
-
-# Enable Performance Insights
-aws rds modify-db-instance \\
-    --db-instance-identifier mydb \\
-    --enable-performance-insights`,
-        quickActions: ["RDS vs Aurora - which is better?", "How does Multi-AZ failover work?", "How to set up Read Replicas?", "RDS backup strategies explained", "How to migrate to RDS?"]
+        color: "#8B5CF6",
+        bgColor: "rgba(139,92,246,0.15)",
+        title: "Phase 4: Databases (9-12 Months)",
+        experience: "9-12 Months",
+        duration: "3 Months",
+        level: "intermediate",
+        description: "AWS offers 15+ purpose-built database services. Learn when to use SQL vs NoSQL, managed vs unmanaged, and how to design for scale.",
+        topics: [
+            { name: "Amazon RDS", desc: "MySQL, PostgreSQL, Oracle, SQL Server - Multi-AZ, Read Replicas" },
+            { name: "Amazon Aurora", desc: "Up to 5x faster than MySQL, Aurora Serverless, Global Database" },
+            { name: "DynamoDB Deep Dive", desc: "Partition keys, sort keys, GSIs, LSIs, DAX, DynamoDB Streams" },
+            { name: "ElastiCache", desc: "Redis vs Memcached, use cases, caching strategies" },
+            { name: "Amazon Redshift", desc: "Data warehousing, columnar storage, RA3 nodes, Spectrum" },
+            { name: "DocumentDB", desc: "MongoDB-compatible, when to use vs DynamoDB" },
+            { name: "Neptune", desc: "Graph database, use cases (social networks, fraud detection)" },
+            { name: "Database Migration Service", desc: "Homogeneous and heterogeneous migrations, SCT" }
+        ]
     },
-
-    "Amazon DynamoDB": {
+    {
+        id: 5,
         icon: "⚡",
-        overview: "Amazon DynamoDB is a fully managed, serverless, key-value and document NoSQL database. It delivers single-digit millisecond performance at any scale. DynamoDB automatically scales tables up or down to handle virtually unlimited throughput — there's no limit to the amount of data you can store.",
-        coreComponents: {
-            "Table": "Collection of items (rows). Each table has a primary key.",
-            "Item": "A row in the table. Max 400KB per item.",
-            "Attribute": "A fundamental data element (column). Flexible — different items can have different attributes.",
-            "Primary Key": "Partition Key only (simple) OR Partition Key + Sort Key (composite). Must be unique.",
-            "GSI (Global Secondary Index)": "An index with a different partition/sort key. Queries across all items. Additional cost.",
-            "LSI (Local Secondary Index)": "Same partition key as table, different sort key. Must be created at table creation time.",
-            "DynamoDB Streams": "Captures time-ordered sequence of item-level changes. Triggers Lambda for CDC patterns.",
-            "DAX (DynamoDB Accelerator)": "In-memory cache for DynamoDB. Sub-microsecond latency for read-heavy workloads. API-compatible."
-        },
-        capacityModes: ["On-Demand: No capacity planning. Auto-scales instantly. $1.25/M writes, $0.25/M reads.", "Provisioned: Specify RCU and WCU. Cheaper at scale. Use Auto Scaling to adjust automatically."],
-        whenToUse: ["Gaming leaderboards", "Session stores", "Shopping carts", "Real-time voting", "IoT telemetry data", "Financial transactions", "User profiles at scale", "Any key-value access pattern at high scale"],
-        whenNOTToUse: ["Complex SQL joins or transactions across many tables", "Ad-hoc queries on non-key attributes", "Reporting/analytics workloads (use Redshift/Athena)", "Small datasets with complex relationships (use RDS)"],
-        funFact: "DynamoDB processed 89.2 million requests per second during Amazon Prime Day 2023! It stores trillions of items. Amazon's original shopping cart was built on DynamoDB's predecessor which inspired its creation.",
-        codeExample: `import boto3
-from boto3.dynamodb.conditions import Key
-
-dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('Users')
-
-# Create item (Write)
-table.put_item(Item={
-    'userId': 'user-123',
-    'email': 'john@example.com',
-    'name': 'John Doe',
-    'age': 30,
-    'createdAt': '2024-01-01'
-})
-
-# Get item (Read) - O(1) lookup
-response = table.get_item(Key={'userId': 'user-123'})
-user = response['Item']
-
-# Query by partition key
-response = table.query(
-    KeyConditionExpression=Key('userId').eq('user-123')
-)
-
-# Update item
-table.update_item(
-    Key={'userId': 'user-123'},
-    UpdateExpression='SET #n = :name',
-    ExpressionAttributeNames={'#n': 'name'},
-    ExpressionAttributeValues={':name': 'John Smith'}
-)`,
-        quickActions: ["How to design DynamoDB data model?", "When to use GSI vs LSI?", "DynamoDB vs RDS pricing comparison", "What is DynamoDB Streams?", "How to handle DynamoDB hot partitions?"]
+        color: "#FF9900",
+        bgColor: "rgba(255,153,0,0.15)",
+        title: "Phase 5: Serverless & Lambda (12-18 Months)",
+        experience: "1-1.5 Years",
+        duration: "6 Months",
+        level: "intermediate",
+        description: "Serverless is the future. Master Lambda, API Gateway, Step Functions, and build complete serverless applications.",
+        topics: [
+            { name: "AWS Lambda Deep Dive", desc: "Execution model, cold starts, concurrency, layers, ARM64" },
+            { name: "API Gateway", desc: "REST vs HTTP vs WebSocket APIs, authorization, throttling" },
+            { name: "AWS Step Functions", desc: "Workflow orchestration, Express vs Standard, error handling" },
+            { name: "EventBridge", desc: "Event bus, rules, targets, schema registry, pipes" },
+            { name: "SQS & SNS", desc: "Message queues, pub/sub, FIFO queues, dead letter queues" },
+            { name: "DynamoDB Streams + Lambda", desc: "Event-driven processing, CDC patterns" },
+            { name: "Serverless Framework & SAM", desc: "Infrastructure as code for serverless applications" },
+            { name: "Build Serverless App", desc: "Complete CRUD API with Lambda, API GW, DynamoDB, S3" }
+        ]
     },
+    {
+        id: 6,
+        icon: "🐳",
+        color: "#00A8E1",
+        bgColor: "rgba(0,168,225,0.15)",
+        title: "Phase 6: Containers & Microservices (18-24 Months)",
+        experience: "1.5-2 Years",
+        duration: "6 Months",
+        level: "advanced",
+        description: "Containers are the standard for modern applications. Master ECS, EKS, Docker, and microservices patterns on AWS.",
+        topics: [
+            { name: "Docker Fundamentals", desc: "Images, containers, Dockerfile, Docker Compose, registries" },
+            { name: "Amazon ECR", desc: "Private container registry, image scanning, lifecycle policies" },
+            { name: "Amazon ECS", desc: "Task definitions, services, Fargate, EC2 launch types" },
+            { name: "Amazon EKS", desc: "Managed Kubernetes, node groups, Fargate profiles, add-ons" },
+            { name: "AWS App Mesh", desc: "Service mesh, traffic routing, observability" },
+            { name: "Container Security", desc: "Image scanning, runtime security, IAM roles for tasks" },
+            { name: "Microservices Patterns", desc: "Service discovery, circuit breaker, saga pattern, CQRS" },
+            { name: "Deploy Microservices App", desc: "Build & deploy 5-service app with ECS/EKS, ALB, RDS" }
+        ]
+    },
+    {
+        id: 7,
+        icon: "🔧",
+        color: "#1ECB8B",
+        bgColor: "rgba(30,203,139,0.15)",
+        title: "Phase 7: DevOps & CI/CD (2-3 Years)",
+        experience: "2-3 Years",
+        duration: "6 Months",
+        level: "advanced",
+        description: "Automate everything. Infrastructure as Code, CI/CD pipelines, and GitOps practices that scale.",
+        topics: [
+            { name: "CloudFormation Deep Dive", desc: "Templates, stacks, nested stacks, stack sets, drift detection" },
+            { name: "AWS CDK", desc: "Construct library, L1/L2/L3 constructs, CDK Pipelines" },
+            { name: "AWS CodePipeline", desc: "Build complete CI/CD pipelines with approval stages" },
+            { name: "CodeBuild & CodeDeploy", desc: "Build environments, deployment strategies (Blue/Green, Canary)" },
+            { name: "AWS CodeArtifact", desc: "Package management, upstream repositories" },
+            { name: "Terraform on AWS", desc: "HCL, state management, modules, Terraform Cloud" },
+            { name: "GitOps with FluxCD/ArgoCD", desc: "GitOps principles, sync loops, reconciliation" },
+            { name: "Build Complete DevOps Pipeline", desc: "End-to-end pipeline: code → test → build → deploy → monitor" }
+        ]
+    },
+    {
+        id: 8,
+        icon: "📊",
+        color: "#8B5CF6",
+        bgColor: "rgba(139,92,246,0.15)",
+        title: "Phase 8: Monitoring & Observability (3-4 Years)",
+        experience: "3-4 Years",
+        duration: "6 Months",
+        level: "advanced",
+        description: "You can't manage what you can't measure. Master CloudWatch, X-Ray, and build comprehensive observability solutions.",
+        topics: [
+            { name: "CloudWatch Deep Dive", desc: "Metrics, logs, dashboards, alarms, Logs Insights, Synthetics" },
+            { name: "AWS X-Ray", desc: "Distributed tracing, service maps, sampling rules, groups" },
+            { name: "AWS CloudTrail", desc: "API logging, event history, trail configuration, Insights" },
+            { name: "AWS Config", desc: "Resource inventory, configuration history, compliance rules" },
+            { name: "Amazon Managed Grafana", desc: "Visualization, dashboards, data sources, alerting" },
+            { name: "Amazon Managed Prometheus", desc: "Metrics ingestion, workspace management, recording rules" },
+            { name: "OpenTelemetry on AWS", desc: "ADOT, instrumentation, traces, metrics, logs" },
+            { name: "Build Observability Platform", desc: "Full-stack monitoring: metrics, traces, logs, alerts" }
+        ]
+    },
+    {
+        id: 9,
+        icon: "🤖",
+        color: "#FF9900",
+        bgColor: "rgba(255,153,0,0.15)",
+        title: "Phase 9: AI/ML & Data (4-6 Years)",
+        experience: "4-6 Years",
+        duration: "12 Months",
+        level: "advanced",
+        description: "AI and ML are transforming every industry. Learn to build, train, and deploy ML models at scale on AWS.",
+        topics: [
+            { name: "Amazon SageMaker", desc: "Notebooks, training jobs, hyperparameter tuning, model registry, deployment" },
+            { name: "Amazon Bedrock", desc: "Foundation models, RAG, agents, fine-tuning, knowledge bases" },
+            { name: "AWS AI Services", desc: "Rekognition, Textract, Comprehend, Polly, Transcribe, Translate" },
+            { name: "Data Lake Architecture", desc: "Lake Formation, Glue, Athena, S3 data lake design" },
+            { name: "Amazon Kinesis", desc: "Data Streams, Firehose, Analytics, Video Streams" },
+            { name: "AWS Glue", desc: "ETL jobs, crawlers, data catalog, DataBrew, Glue Studio" },
+            { name: "Amazon EMR", desc: "Big data processing with Spark, Hive, Presto at scale" },
+            { name: "MLOps on AWS", desc: "Model monitoring, drift detection, CI/CD for ML pipelines" }
+        ]
+    },
+    {
+        id: 10,
+        icon: "🔒",
+        color: "#EF4444",
+        bgColor: "rgba(239,68,68,0.15)",
+        title: "Phase 10: Advanced Security (6-8 Years)",
+        experience: "6-8 Years",
+        duration: "12 Months",
+        level: "expert",
+        description: "Security is everyone's job. Master AWS security services, frameworks, and build zero-trust architectures.",
+        topics: [
+            { name: "AWS Security Hub", desc: "Security posture management, findings, compliance standards" },
+            { name: "Amazon GuardDuty", desc: "Threat intelligence, anomaly detection, malware protection" },
+            { name: "AWS WAF & Shield", desc: "Web application firewall, DDoS protection, managed rules" },
+            { name: "AWS KMS & Secrets Manager", desc: "Encryption at rest, key rotation, secrets lifecycle" },
+            { name: "Zero Trust Architecture", desc: "BeyondCorp model, Verified Access, identity-centric security" },
+            { name: "Compliance Frameworks", desc: "HIPAA, PCI-DSS, SOC2, GDPR on AWS, automated compliance" },
+            { name: "Incident Response on AWS", desc: "IR playbooks, automated remediation, forensics" },
+            { name: "Penetration Testing", desc: "AWS pen testing rules, tools, finding and fixing vulnerabilities" }
+        ]
+    },
+    {
+        id: 11,
+        icon: "🏗️",
+        color: "#00A8E1",
+        bgColor: "rgba(0,168,225,0.15)",
+        title: "Phase 11: Well-Architected & Solutions (8-10 Years)",
+        experience: "8-10 Years",
+        duration: "12 Months",
+        level: "expert",
+        description: "Design world-class cloud architectures. Master the AWS Well-Architected Framework and lead architectural decisions.",
+        topics: [
+            { name: "Well-Architected Framework", desc: "All 6 pillars: Operational Excellence, Security, Reliability, Performance, Cost, Sustainability" },
+            { name: "Multi-Region Architecture", desc: "Active-active, active-passive, data residency, latency optimization" },
+            { name: "Disaster Recovery", desc: "RTO/RPO, backup & restore, pilot light, warm standby, multi-site" },
+            { name: "High Availability Design", desc: "Eliminating SPOFs, graceful degradation, chaos engineering" },
+            { name: "AWS Organizations", desc: "Multi-account strategy, SCPs, consolidated billing, Control Tower" },
+            { name: "Migration Strategies", desc: "7 Rs: Retire, Retain, Rehost, Replatform, Refactor, Repurchase, Relocate" },
+            { name: "Performance Engineering", desc: "Load testing, profiling, right-sizing, caching strategies" },
+            { name: "Architecture Reviews", desc: "Leading Well-Architected Reviews, creating ADRs" }
+        ]
+    },
+    {
+        id: 12,
+        icon: "👑",
+        color: "#FFD700",
+        bgColor: "rgba(255,215,0,0.15)",
+        title: "Phase 12: Principal & Leadership (10-12+ Years)",
+        experience: "10-12+ Years",
+        duration: "Ongoing",
+        level: "expert",
+        description: "At this level, you're shaping cloud strategy for organizations. Focus on leadership, innovation, and driving cloud transformation.",
+        topics: [
+            { name: "Cloud Strategy & Governance", desc: "Landing zones, cloud center of excellence, FinOps practices" },
+            { name: "Cost Optimization at Scale", desc: "Savings Plans, Reserved Instances, Spot optimization, chargeback" },
+            { name: "Enterprise Architecture", desc: "Large-scale migrations, vendor negotiations, technology roadmaps" },
+            { name: "AWS Partner Network", desc: "APN partner tiers, competencies, Marketplace publishing" },
+            { name: "Custom AWS Solutions", desc: "CDK constructs, internal developer platforms, golden paths" },
+            { name: "Speaking & Community", desc: "AWS re:Invent talks, blog posts, open source contributions" },
+            { name: "Team Building & Mentorship", desc: "Building cloud teams, runbooks, training programs" },
+            { name: "Emerging Technologies", desc: "Quantum computing, edge computing, AWS Outposts, Wavelength" }
+        ]
+    }
+];
 
-    "Amazon S3 Mastery": {
+const awsServices = [
+    // Compute
+    {
+        name: "Amazon EC2",
+        icon: "⚡",
+        category: "compute",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "Elastic Compute Cloud",
+        desc: "Resizable virtual servers in the cloud. Like renting a computer in AWS datacenters — you choose the OS, CPU, RAM, storage, and network capacity.",
+        problem: "Running applications without buying physical hardware",
+        useWhen: "Long-running workloads, lift-and-shift migrations, full OS control needed",
+        features: ["750 free tier hours/month", "300+ instance types", "Spot up to 90% cheaper"],
+        funFact: "EC2 was AWS's second-ever service, launched in 2006. Netflix uses over 100,000 EC2 instances simultaneously!",
+        pricing: "On-Demand, Reserved (up to 72% off), Spot (up to 90% off), Savings Plans",
+        security: "Security Groups, KMS encryption, IAM Instance Profiles, Nitro hypervisor"
+    },
+    {
+        name: "AWS Lambda",
+        icon: "λ",
+        category: "serverless",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "Serverless Functions",
+        desc: "Run code without provisioning or managing servers. You pay only when code runs, measured in milliseconds. Supports 15+ runtimes.",
+        problem: "Paying for idle servers and managing infrastructure",
+        useWhen: "Event-driven processing, microservices, APIs, scheduled tasks, file processing",
+        features: ["1M free requests/month", "Up to 10GB RAM", "15 min max duration"],
+        funFact: "Lambda can execute code in under 1ms and AWS handles billions of Lambda invocations per day. Amazon.com uses Lambda for product updates!",
+        pricing: "Pay per invocation + duration ($0.20/1M requests, $0.0000166/GB-second)",
+        security: "IAM execution roles, VPC integration, encrypted environment variables"
+    },
+    {
+        name: "Amazon ECS",
+        icon: "🐳",
+        category: "compute",
+        iconBg: "rgba(0,168,225,0.15)",
+        iconColor: "#00A8E1",
+        tagline: "Elastic Container Service",
+        desc: "Fully managed container orchestration service. Run Docker containers at scale without managing your own cluster orchestration.",
+        problem: "Orchestrating containers across multiple hosts with high availability",
+        useWhen: "Microservices, batch processing, web apps in containers, replacing VMs",
+        features: ["AWS-native integration", "Fargate serverless mode", "EC2 launch type"],
+        funFact: "ECS runs more containers than Kubernetes on AWS! Duolingo moved from servers to ECS and reduced costs by 75%.",
+        pricing: "No charge for ECS itself. Pay for underlying EC2 or Fargate compute.",
+        security: "Task IAM roles, Secrets Manager integration, VPC isolation, image scanning"
+    },
+    {
+        name: "Amazon EKS",
+        icon: "☸️",
+        category: "compute",
+        iconBg: "rgba(0,168,225,0.15)",
+        iconColor: "#00A8E1",
+        tagline: "Elastic Kubernetes Service",
+        desc: "Managed Kubernetes service. AWS handles the control plane, patching, and availability. You focus on deploying workloads.",
+        problem: "Self-managing Kubernetes control plane complexity and availability",
+        useWhen: "Kubernetes workloads, multi-cloud portability, advanced orchestration needs",
+        features: ["Managed control plane", "Fargate & EC2 nodes", "EKS Anywhere"],
+        funFact: "EKS runs the Kubernetes control plane across 3 AZs for 99.95% SLA. AWS internally runs one of the world's largest Kubernetes fleets!",
+        pricing: "$0.10/hour per cluster + EC2/Fargate for worker nodes",
+        security: "RBAC, pod security, secrets encryption, private API server endpoint"
+    },
+    {
+        name: "AWS Fargate",
+        icon: "🚀",
+        category: "serverless",
+        iconBg: "rgba(30,203,139,0.15)",
+        iconColor: "#1ECB8B",
+        tagline: "Serverless Containers",
+        desc: "Serverless compute for containers. No EC2 instances to manage — just define CPU and memory, and Fargate runs your containers.",
+        problem: "Managing EC2 instances for container workloads, cluster capacity planning",
+        useWhen: "You want containers without managing servers, variable workloads, cost optimization",
+        features: ["No cluster management", "Per-second billing", "Works with ECS & EKS"],
+        funFact: "Fargate uses Firecracker microVMs (also used by Lambda) for sub-second startup and strong isolation between customer workloads!",
+        pricing: "Pay per vCPU ($0.04048/hr) and memory ($0.004445/GB-hr) used",
+        security: "No shared kernel, task-level isolation, VPC networking, IAM task roles"
+    },
+    // Storage
+    {
+        name: "Amazon S3",
         icon: "🪣",
-        overview: "Amazon S3 (Simple Storage Service) is object storage built for durability, availability, and scalability. It provides 11 nines (99.999999999%) of durability — if you stored 10 million objects, you'd expect to lose one object every 10,000 years. S3 is foundational to virtually every AWS architecture.",
-        storageClasses: {
-            "S3 Standard": "$0.023/GB. Frequent access. 99.99% availability. 3+ AZ replication. For active data.",
-            "S3 Intelligent-Tiering": "$0.023/GB + $0.0025/1K objects monitoring fee. Automatic tiering. No retrieval fees.",
-            "S3 Standard-IA": "$0.0125/GB + $0.01/GB retrieval. Infrequent access. Same durability. 30-day minimum.",
-            "S3 One Zone-IA": "$0.01/GB. Single AZ. 20% cheaper than Standard-IA. OK if data can be recreated.",
-            "S3 Glacier Instant Retrieval": "$0.004/GB. Archive, millisecond retrieval. 90-day minimum. For quarterly access.",
-            "S3 Glacier Flexible Retrieval": "$0.0036/GB. 1-12 hour retrieval. 90-day minimum. For backups.",
-            "S3 Glacier Deep Archive": "$0.00099/GB. Cheapest storage on AWS. 12-48 hr retrieval. 7-year compliance archives."
-        },
-        features: ["Versioning (keep all versions of objects)", "Lifecycle policies (auto-transition between storage classes)", "Replication (CRR cross-region, SRR same-region)", "Object Lock (WORM — write once read many)", "S3 Select (SQL queries on S3 objects)", "S3 Event Notifications → Lambda/SQS/SNS", "Access Logs", "Transfer Acceleration (CloudFront for uploads)", "Presigned URLs (time-limited access)"],
-        security: "Block Public Access (account & bucket level), Bucket Policies (JSON), ACLs, Object Ownership, SSE-S3 (AWS managed keys), SSE-KMS (customer managed keys), SSE-C (customer provided keys), HTTPS only enforcement, VPC endpoints.",
-        funFact: "S3 stores over 200 trillion objects! It was AWS's first storage service (2006). Amazon uses S3 to store product images, and Netflix stores all its original content on S3. The data in S3 is replicated across at least 3 AZs automatically.",
-        codeExample: `import boto3
-
-s3 = boto3.client('s3')
-
-# Create bucket
-s3.create_bucket(
-    Bucket='my-unique-bucket-name',
-    CreateBucketConfiguration={'LocationConstraint': 'us-east-2'}
-)
-
-# Upload file
-s3.upload_file('local_file.txt', 'my-bucket', 'folder/file.txt')
-
-# Generate presigned URL (expires in 1 hour)
-url = s3.generate_presigned_url('get_object',
-    Params={'Bucket': 'my-bucket', 'Key': 'folder/file.txt'},
-    ExpiresIn=3600
-)
-
-# Enable versioning
-s3.put_bucket_versioning(
-    Bucket='my-bucket',
-    VersioningConfiguration={'Status': 'Enabled'}
-)
-
-# Set lifecycle policy
-s3.put_bucket_lifecycle_configuration(
-    Bucket='my-bucket',
-    LifecycleConfiguration={
-        'Rules': [{
-            'Status': 'Enabled',
-            'Transitions': [
-                {'Days': 30, 'StorageClass': 'STANDARD_IA'},
-                {'Days': 90, 'StorageClass': 'GLACIER'}
-            ]
-        }]
-    }
-)`,
-        quickActions: ["S3 vs EBS vs EFS - when to use each?", "How to secure an S3 bucket?", "Explain S3 storage classes", "How to reduce S3 costs?", "What are S3 Presigned URLs?"]
+        category: "storage",
+        iconBg: "rgba(30,203,139,0.15)",
+        iconColor: "#1ECB8B",
+        tagline: "Simple Storage Service",
+        desc: "Object storage built to store and retrieve any amount of data from anywhere. 11 nines (99.999999999%) of durability. The foundation of AWS data storage.",
+        problem: "Storing unlimited amounts of data reliably without hardware management",
+        useWhen: "Static websites, backups, data lakes, media storage, software distribution",
+        features: ["11 9s durability", "Unlimited capacity", "6 storage classes"],
+        funFact: "S3 stores over 200 trillion objects! If you printed each object on a piece of paper, the stack would reach the moon 500 times. Amazon.com images are served from S3!",
+        pricing: "From $0.023/GB (Standard) to $0.004/GB (Glacier Deep Archive). First 5GB free.",
+        security: "Bucket policies, ACLs, SSE-S3/KMS/C, Object Lock (WORM), Block Public Access"
     },
-
-    "IAM Fundamentals": {
+    {
+        name: "Amazon EBS",
+        icon: "💿",
+        category: "storage",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "Elastic Block Store",
+        desc: "High-performance block storage for EC2. Like a virtual hard drive that persists independently from your EC2 instance lifecycle.",
+        problem: "Persistent block storage for databases and applications on EC2",
+        useWhen: "EC2 boot volumes, databases requiring low latency, file systems needing consistent IOPS",
+        features: ["Up to 64,000 IOPS (io2)", "Sub-millisecond latency", "Multi-attach support"],
+        funFact: "EBS io2 Block Express can deliver 256,000 IOPS — that's faster than most on-premises SAN storage costing millions of dollars!",
+        pricing: "gp3: $0.08/GB-month, io2: $0.125/GB + $0.065/IOPS, st1: $0.045/GB",
+        security: "AES-256 encryption, KMS integration, encrypted snapshots"
+    },
+    {
+        name: "Amazon EFS",
+        icon: "📁",
+        category: "storage",
+        iconBg: "rgba(0,168,225,0.15)",
+        iconColor: "#00A8E1",
+        tagline: "Elastic File System",
+        desc: "Fully managed, scalable NFS file system for AWS Cloud and on-premises resources. Grows and shrinks automatically as you add/remove files.",
+        problem: "Shared file storage accessible by multiple EC2 instances simultaneously",
+        useWhen: "Shared home directories, CMS, big data analytics, web serving, container storage",
+        features: ["Scales to petabytes", "Concurrent access", "Automatic scaling"],
+        funFact: "EFS can scale to petabytes with no provisioning required. It automatically handles file system growth without you touching any configuration!",
+        pricing: "Standard: $0.30/GB-month, Infrequent Access: $0.025/GB-month",
+        security: "VPC access control, IAM authorization, TLS encryption in transit, KMS at rest"
+    },
+    {
+        name: "AWS Storage Gateway",
+        icon: "🔌",
+        category: "storage",
+        iconBg: "rgba(139,92,246,0.15)",
+        iconColor: "#8B5CF6",
+        tagline: "Hybrid Cloud Storage",
+        desc: "Hybrid cloud storage service that connects on-premises software appliances with cloud-based storage. Bridge between on-prem and AWS.",
+        problem: "Integrating on-premises applications with cloud storage seamlessly",
+        useWhen: "Backup & archive to cloud, cloud storage as primary with local cache, tape replacement",
+        features: ["File, Volume, Tape modes", "Local caching", "S3 backend"],
+        funFact: "Storage Gateway can cache recently accessed data locally so you get cloud economics with on-premises performance — best of both worlds!",
+        pricing: "Per GB transferred and stored. File GW: $0.024/GB stored in S3.",
+        security: "SSE, TLS in transit, AWS PrivateLink, VPC endpoint support"
+    },
+    // Database
+    {
+        name: "Amazon RDS",
+        icon: "🗄️",
+        category: "database",
+        iconBg: "rgba(139,92,246,0.15)",
+        iconColor: "#8B5CF6",
+        tagline: "Relational Database Service",
+        desc: "Managed relational database service supporting MySQL, PostgreSQL, MariaDB, Oracle, SQL Server, and Db2. Handles backups, patching, and failover automatically.",
+        problem: "Managing database infrastructure, backups, patching, and high availability",
+        useWhen: "Web apps, CRMs, ERP systems, any relational data workload",
+        features: ["Multi-AZ failover", "Read Replicas", "Automated backups (35 days)"],
+        funFact: "RDS Multi-AZ can fail over to standby in under 60 seconds using DNS propagation! NASA uses RDS to store mission data.",
+        pricing: "db.t3.micro: ~$0.017/hr (free tier 12 months). Multi-AZ doubles cost.",
+        security: "VPC isolation, SSL/TLS, KMS encryption, IAM database authentication"
+    },
+    {
+        name: "Amazon Aurora",
+        icon: "✨",
+        category: "database",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "Cloud-Native Relational DB",
+        desc: "MySQL and PostgreSQL-compatible relational database built for the cloud. Up to 5x faster than MySQL, 3x faster than PostgreSQL at 1/10th the cost.",
+        problem: "Enterprise database performance without enterprise licensing costs",
+        useWhen: "High-performance OLTP, SaaS applications, applications needing global scale",
+        features: ["6-way replication", "Auto-scales to 128TB", "Global Database (<1s replication)"],
+        funFact: "Aurora can replicate data to 15 read replicas in under 10ms! Its storage layer replicates data 6 ways across 3 AZs automatically — no RAID needed!",
+        pricing: "On-Demand from $0.073/hr. Serverless v2 billed per ACU-hour.",
+        security: "AES-256 encryption, VPC, IAM, Audit logs, Advanced Auditing plugin"
+    },
+    {
+        name: "Amazon DynamoDB",
+        icon: "⚡",
+        category: "database",
+        iconBg: "rgba(30,203,139,0.15)",
+        iconColor: "#1ECB8B",
+        tagline: "Serverless NoSQL Database",
+        desc: "Fully managed, serverless, key-value and document database. Delivers single-digit millisecond performance at any scale with automatic scaling.",
+        problem: "Massive scale NoSQL without managing servers or clusters",
+        useWhen: "Gaming leaderboards, IoT data, session management, shopping carts, real-time data",
+        features: ["Single-digit ms latency", "Auto scaling", "DynamoDB Streams"],
+        funFact: "DynamoDB handles Amazon Prime Day: 89.2 million requests per second at peak! It was originally built to handle Amazon.com's shopping cart at black friday scale.",
+        pricing: "On-Demand: $1.25/M writes, $0.25/M reads. Provisioned: cheaper at scale.",
+        security: "Encryption at rest, VPC endpoints, IAM conditions, fine-grained access control"
+    },
+    {
+        name: "Amazon ElastiCache",
+        icon: "⚡",
+        category: "database",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "In-Memory Caching",
+        desc: "Fully managed Redis and Memcached in-memory caching service. Sub-millisecond response times for real-time applications.",
+        problem: "Database bottlenecks from repeated expensive queries",
+        useWhen: "Session stores, leaderboards, caching API responses, message queues, real-time analytics",
+        features: ["Sub-ms latency", "Redis Pub/Sub", "Cluster mode"],
+        funFact: "ElastiCache Redis can handle 1+ million requests per second! Airbnb uses ElastiCache to serve 100M+ users with sub-millisecond response times.",
+        pricing: "cache.t3.micro: ~$0.017/hr. Serverless: pay per ECU and GB of data stored.",
+        security: "VPC isolation, TLS in transit, Redis AUTH, encryption at rest"
+    },
+    // Networking
+    {
+        name: "Amazon VPC",
+        icon: "🌐",
+        category: "network",
+        iconBg: "rgba(0,168,225,0.15)",
+        iconColor: "#00A8E1",
+        tagline: "Virtual Private Cloud",
+        desc: "Your own logically isolated section of AWS Cloud. Define your own IP space, subnets, route tables, and network gateways — like having your own datacenter in AWS.",
+        problem: "Network isolation and security for AWS resources",
+        useWhen: "Almost every AWS workload — VPC is the foundation of AWS networking",
+        features: ["Custom IP ranges", "Security Groups", "Network ACLs"],
+        funFact: "You can create up to 5 VPCs per region (soft limit). Each VPC can have over 65,000 IP addresses. AWS itself uses VPCs for all its internal services!",
+        pricing: "No charge for VPC. Pay for NAT Gateway ($0.045/hr + $0.045/GB), VPN, etc.",
+        security: "NACLs, Security Groups, VPC Flow Logs, PrivateLink, Network Firewall"
+    },
+    {
+        name: "Amazon CloudFront",
+        icon: "🌍",
+        category: "network",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "Global Content Delivery Network",
+        desc: "Fast CDN service that securely delivers data, videos, applications, and APIs to customers globally with low latency and high transfer speeds.",
+        problem: "High latency when serving content to globally distributed users",
+        useWhen: "Static websites, video streaming, API acceleration, software distribution",
+        features: ["450+ PoPs globally", "HTTPS by default", "Lambda@Edge"],
+        funFact: "CloudFront serves over 400 Tbps of traffic and has 600+ edge locations! Amazon Prime Video uses CloudFront to stream to 200M+ subscribers.",
+        pricing: "First 1TB/month free (12 months). $0.0085/GB after that in US/Europe.",
+        security: "WAF integration, Shield, OAC for S3, field-level encryption, HTTPS only"
+    },
+    {
+        name: "Amazon Route 53",
+        icon: "🔍",
+        category: "network",
+        iconBg: "rgba(30,203,139,0.15)",
+        iconColor: "#1ECB8B",
+        tagline: "Scalable DNS Service",
+        desc: "Highly available and scalable DNS web service. Routes users to infrastructure and also works as a domain registrar. Supports complex routing policies.",
+        problem: "DNS management, health checking, and intelligent traffic routing",
+        useWhen: "Domain registration, DNS management, failover routing, geolocation routing",
+        features: ["100% SLA", "7 routing policies", "Health checks"],
+        funFact: "Route 53 is named after TCP/UDP port 53, which is the DNS port! It can handle trillions of DNS queries per day with zero downtime.",
+        pricing: "$0.50/hosted zone/month + $0.40/M queries. Health checks: $0.50-$0.75/check/month.",
+        security: "DNSSEC signing, query logging, private hosted zones"
+    },
+    {
+        name: "AWS Transit Gateway",
+        icon: "🔀",
+        category: "network",
+        iconBg: "rgba(139,92,246,0.15)",
+        iconColor: "#8B5CF6",
+        tagline: "Network Transit Hub",
+        desc: "Centralized hub to connect VPCs, accounts, and on-premises networks. Replaces complex VPC peering meshes with a simple hub-and-spoke model.",
+        problem: "Managing hundreds of VPC peering connections at enterprise scale",
+        useWhen: "Large organizations with many VPCs, shared services architecture, multi-account strategy",
+        features: ["Unlimited VPCs", "Cross-account routing", "Multicast support"],
+        funFact: "Without Transit Gateway, 100 VPCs would need 4,950 peering connections! TGW reduces that to 100 attachments — a 98% reduction in complexity.",
+        pricing: "$0.05/attachment/hr + $0.02/GB data processed",
+        security: "Resource Access Manager sharing, route table policies, blackhole routes"
+    },
+    // Security
+    {
+        name: "AWS IAM",
         icon: "🔑",
-        overview: "AWS Identity and Access Management (IAM) is a free service that controls authentication (who you are) and authorization (what you can do) in AWS. IAM is the foundation of AWS security — every API call to AWS goes through IAM for authorization.",
-        components: {
-            "IAM Users": "Long-term identities for people or applications. Have access keys (programmatic) and passwords (console). Best practice: use roles instead.",
-            "IAM Groups": "Collection of users. Assign policies to groups. Users inherit group permissions. Can't nest groups.",
-            "IAM Roles": "Temporary identity assumed by AWS services, users, or external identities. No long-term credentials. Best practice for all AWS services.",
-            "IAM Policies": "JSON documents."
-        }, 
+        category: "security",
+        iconBg: "rgba(239,68,68,0.15)",
+        iconColor: "#EF4444",
+        tagline: "Identity & Access Management",
+        desc: "Control who can access which AWS resources and what actions they can perform. The foundation of AWS security — free service with every account.",
+        problem: "Unauthorized access and overly permissive cloud resource access",
+        useWhen: "Always! IAM is mandatory for any AWS security strategy",
+        features: ["Users, Groups, Roles", "Policy simulator", "Access Analyzer"],
+        funFact: "AWS evaluates over 500 million IAM policy decisions per second globally! The least-privilege principle in IAM is called 'Zero Standing Privilege' at Amazon.",
+        pricing: "Free! No charge for IAM itself.",
+        security: "MFA, password policies, access keys rotation, permission boundaries, SCPs"
+    },
+    {
+        name: "AWS KMS",
+        icon: "🔐",
+        category: "security",
+        iconBg: "rgba(139,92,246,0.15)",
+        iconColor: "#8B5CF6",
+        tagline: "Key Management Service",
+        desc: "Managed service to create and control encryption keys. Integrated with 100+ AWS services. FIPS 140-2 validated hardware security modules.",
+        problem: "Secure key management and rotation for data encryption",
+        useWhen: "Encrypting data in any AWS service, key rotation, envelope encryption",
+        features: ["Automatic key rotation", "CloudTrail audit log", "Multi-region keys"],
+        funFact: "KMS processes trillions of cryptographic operations per year! AWS employees cannot access your KMS keys — even with root access to the physical hardware.",
+        pricing: "$1/key/month + $0.03/10,000 API requests. Free tier: 20,000 requests/month.",
+        security: "FIPS 140-2 Level 2, CloudTrail logging, key policies, grants"
+    },
+    {
+        name: "Amazon GuardDuty",
+        icon: "🛡️",
+        category: "security",
+        iconBg: "rgba(239,68,68,0.15)",
+        iconColor: "#EF4444",
+        tagline: "Intelligent Threat Detection",
+        desc: "Continuous security monitoring using ML, anomaly detection, and threat intelligence. Analyzes billions of events across CloudTrail, VPC Flow Logs, and DNS logs.",
+        problem: "Detecting compromised instances, unauthorized access, and cryptocurrency mining",
+        useWhen: "Always-on threat detection, compliance requirements, automated security response",
+        features: ["ML-based detection", "S3 protection", "EKS & Lambda protection"],
+        funFact: "GuardDuty detects AWS account compromise within minutes! It identified a cryptomining operation in one customer's account just 3 hours after the attack started.",
+        pricing: "$4/M CloudTrail events, $1/GB VPC/DNS logs analyzed. 30-day free trial!",
+        security: "No agents needed, reads logs non-invasively, integrates with Security Hub"
+    },
+    {
+        name: "AWS WAF",
+        icon: "🧱",
+        category: "security",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "Web Application Firewall",
+        desc: "Protect web applications from common exploits like SQL injection, XSS, and bot attacks. Inspect HTTP/HTTPS requests before they reach your application.",
+        problem: "Web application attacks: SQLi, XSS, bad bots, DDoS at application layer",
+        useWhen: "Any public-facing web application, API protection, regulatory compliance",
+        features: ["Managed rule groups", "Rate limiting", "Bot control"],
+        funFact: "AWS WAF blocks billions of malicious requests per day! AWS Managed Rules are updated continuously based on intelligence from AWS's global threat network.",
+        pricing: "$5/WebACL/month + $1/rule/month + $0.60/M requests",
+        security: "Works with CloudFront, ALB, API Gateway, AppSync, Cognito"
+    },
+    {
+        name: "AWS Shield",
+        icon: "⛨",
+        category: "security",
+        iconBg: "rgba(139,92,246,0.15)",
+        iconColor: "#8B5CF6",
+        tagline: "DDoS Protection",
+        desc: "Managed DDoS protection service. Shield Standard (free) protects all AWS customers. Shield Advanced provides enhanced protection with 24/7 DRT support.",
+        problem: "Distributed Denial of Service attacks targeting AWS workloads",
+        useWhen: "Any public-facing resource, high-value applications, government/finance sites",
+        features: ["Always-on detection", "Automatic mitigation", "DRT support (Advanced)"],
+        funFact: "AWS Shield has absorbed some of the largest DDoS attacks ever recorded — over 2.3 Tbps in a single attack! Advanced customers get AWS engineers during an attack.",
+        pricing: "Standard: Free. Advanced: $3,000/month + data transfer fees.",
+        security: "Works with CloudFront, Route 53, ELB, EC2 elastic IPs"
+    },
+    // AI/ML
+    {
+        name: "Amazon SageMaker",
+        icon: "🤖",
+        category: "ai",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "Complete ML Platform",
+        desc: "Fully managed ML platform to build, train, and deploy ML models at scale. Covers every step of the ML lifecycle with specialized tools for each stage.",
+        problem: "Complex ML infrastructure setup and scaling model training and deployment",
+        useWhen: "Custom ML models, computer vision, NLP, fraud detection, recommendation engines",
+        features: ["Built-in algorithms", "Automatic Model Tuning", "Model Monitor"],
+        funFact: "SageMaker can distribute training across thousands of GPUs! Amazon.com uses SageMaker for product recommendations that drive billions in annual revenue.",
+        pricing: "Free tier: 250 Studio hrs/month. Training from $0.05/hr. Inference from $0.0464/hr.",
+        security: "VPC, encryption at rest/transit, IAM, network isolation, audit logging"
+    },
+    {
+        name: "Amazon Bedrock",
+        icon: "🧠",
+        category: "ai",
+        iconBg: "rgba(139,92,246,0.15)",
+        iconColor: "#8B5CF6",
+        tagline: "Foundation Models as a Service",
+        desc: "Fully managed service for accessing state-of-the-art foundation models from AI21 Labs, Anthropic, Cohere, Meta, Stability AI, and Amazon. Build generative AI apps without GPU infrastructure.",
+        problem: "Accessing and deploying large language models without ML expertise or GPU clusters",
+        useWhen: "Generative AI apps, chatbots, document summarization, code generation, image generation",
+        features: ["Multiple FM providers", "Knowledge Bases (RAG)", "Agents for Bedrock"],
+        funFact: "Bedrock lets you switch between Claude, Llama, Titan, and other models with a single API! Amazon Rufus (AI shopping assistant) is powered by Bedrock.",
+        pricing: "Pay per token. Claude: ~$0.008/1K tokens. On-demand with no minimums.",
+        security: "Data never used for training FMs, private VPC connectivity, CloudTrail logging"
+    },
+    {
+        name: "Amazon Rekognition",
+        icon: "👁️",
+        category: "ai",
+        iconBg: "rgba(0,168,225,0.15)",
+        iconColor: "#00A8E1",
+        tagline: "Computer Vision Service",
+        desc: "Deep learning-based image and video analysis. Detect objects, scenes, faces, text, celebrities, and inappropriate content without ML expertise.",
+        problem: "Analyzing millions of images/videos manually",
+        useWhen: "Content moderation, face verification, media analysis, security, compliance",
+        features: ["Real-time video analysis", "Face comparison", "Custom labels"],
+        funFact: "Rekognition can identify over 1,000 different object categories and detect emotions from faces! Used by law enforcement and US Customs to identify travelers.",
+        pricing: "First 5,000 images/month free (12 months). $0.001/image after that.",
+        security: "Data encrypted in transit and at rest, no data used for training (opt-out available)"
+    },
+    {
+        name: "Amazon Comprehend",
+        icon: "📝",
+        category: "ai",
+        iconBg: "rgba(30,203,139,0.15)",
+        iconColor: "#1ECB8B",
+        tagline: "Natural Language Processing",
+        desc: "Fully managed NLP service that uses ML to find insights in text. Sentiment analysis, entity recognition, key phrase extraction, language detection.",
+        problem: "Understanding and extracting insights from large volumes of text",
+        useWhen: "Customer feedback analysis, document classification, social media monitoring",
+        features: ["Custom models", "Sentiment analysis", "PII detection"],
+        funFact: "Comprehend can analyze sentiment in 100+ languages and detect PII in real-time! News agencies use it to categorize thousands of articles per day automatically.",
+        pricing: "$0.0001/unit (100 chars). Custom: $3/hr training + $0.0005/unit.",
+        security: "HIPAA eligible, VPC endpoint, KMS encryption"
+    },
+    // DevOps
+    {
+        name: "AWS CodePipeline",
+        icon: "🔄",
+        category: "devops",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "CI/CD Pipeline Service",
+        desc: "Fully managed continuous delivery service. Automate release pipelines for fast and reliable application and infrastructure updates.",
+        problem: "Manual, error-prone deployment processes and slow release cycles",
+        useWhen: "Any software release process, automating deployment to multiple environments",
+        features: ["Multi-provider sources", "Parallel stages", "Manual approval gates"],
+        funFact: "AWS uses CodePipeline to deploy its own services! Teams at AWS deploy code thousands of times per day using pipelines — some services deploy every 11 seconds!",
+        pricing: "$1/active pipeline/month. First pipeline free for 30 days.",
+        security: "IAM roles, VPC, encrypted artifacts in S3, CloudTrail audit"
+    },
+    {
+        name: "AWS CloudFormation",
+        icon: "📋",
+        category: "devops",
+        iconBg: "rgba(0,168,225,0.15)",
+        iconColor: "#00A8E1",
+        tagline: "Infrastructure as Code",
+        desc: "Model and provision AWS and third-party resources with YAML/JSON templates. Treat infrastructure the same way as code — version control, code review, automation.",
+        problem: "Manual, inconsistent infrastructure provisioning across environments",
+        useWhen: "Any AWS infrastructure deployment, environment consistency, disaster recovery",
+        features: ["Drift detection", "Stack sets (multi-account)", "Rollback on failure"],
+        funFact: "CloudFormation was AWS's first IaC service (2011)! A single CloudFormation template can spin up hundreds of resources in parallel in minutes.",
+        pricing: "Free! Only pay for resources created.",
+        security: "Stack policies, IAM roles, secret parameters via SSM/Secrets Manager"
+    },
+    {
+        name: "AWS CDK",
+        icon: "⌨️",
+        category: "devops",
+        iconBg: "rgba(30,203,139,0.15)",
+        iconColor: "#1ECB8B",
+        tagline: "Cloud Development Kit",
+        desc: "Define cloud infrastructure in familiar programming languages (TypeScript, Python, Java, C#, Go). CDK synthesizes to CloudFormation under the hood.",
+        problem: "YAML/JSON CloudFormation verbosity and lack of programming constructs",
+        useWhen: "Complex infrastructure with programming logic, reusable infrastructure components",
+        features: ["10+ language support", "L1/L2/L3 constructs", "CDK Pipelines"],
+        funFact: "CDK Constructs can reduce 1000 lines of CloudFormation to 10 lines of code! The CDK community has published 2,000+ open-source construct libraries on npm.",
+        pricing: "Free! Only pay for CloudFormation and deployed resources.",
+        security: "Full CloudFormation security features, constructs enforce secure defaults"
+    },
+    {
+        name: "Amazon CloudWatch",
+        icon: "📊",
+        category: "management",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "Monitoring & Observability",
+        desc: "Complete observability service for AWS resources and applications. Collect metrics, logs, and traces. Set alarms, create dashboards, and automate responses.",
+        problem: "Lack of visibility into application and infrastructure performance",
+        useWhen: "Any AWS workload monitoring, alerting, debugging, cost optimization",
+        features: ["Custom metrics", "Logs Insights (SQL-like)", "Synthetics monitoring"],
+        funFact: "CloudWatch processes petabytes of metrics data every day! It can alarm on a metric within 60 seconds of a threshold breach — faster than a human could respond.",
+        pricing: "10 custom metrics free. $0.30/metric/month. 5GB free log ingestion.",
+        security: "Log group encryption with KMS, IAM access control, VPC endpoint"
+    },
+    // Analytics
+    {
+        name: "Amazon Redshift",
+        icon: "📊",
+        category: "analytics",
+        iconBg: "rgba(139,92,246,0.15)",
+        iconColor: "#8B5CF6",
+        tagline: "Cloud Data Warehouse",
+        desc: "Fast, scalable data warehouse. Query exabytes of structured and semi-structured data across your warehouse and S3 data lake using SQL.",
+        problem: "Slow analytics on large datasets with traditional databases",
+        useWhen: "Business intelligence, data analytics, complex SQL queries on TBs-PBs of data",
+        features: ["Redshift Spectrum (S3 queries)", "ML built-in", "Serverless option"],
+        funFact: "Redshift is 3x faster than traditional data warehouses and costs 75% less! Companies like Lyft analyze 500+ billion rows of data in Redshift daily.",
+        pricing: "Serverless: $0.36/RPU-hour. RA3.xlplus node: $1.086/hr.",
+        security: "VPC, SSE, column-level security, row-level security, audit logging"
+    },
+    {
+        name: "Amazon Kinesis",
+        icon: "🌊",
+        category: "analytics",
+        iconBg: "rgba(0,168,225,0.15)",
+        iconColor: "#00A8E1",
+        tagline: "Real-Time Data Streaming",
+        desc: "Platform for streaming data on AWS. Collect, process, and analyze real-time streaming data. Kinesis Data Streams, Firehose, Analytics, and Video Streams.",
+        problem: "Processing high-velocity streaming data in real-time",
+        useWhen: "IoT telemetry, log analytics, clickstream analysis, real-time dashboards",
+        features: ["Sub-second latency", "Automatic scaling", "S3/Redshift/ES delivery"],
+        funFact: "Kinesis can ingest terabytes of data per hour from thousands of sources! Netflix uses Kinesis to monitor streaming quality for 270 million subscribers in real-time.",
+        pricing: "Data Streams: $0.015/shard-hr. Firehose: $0.029/GB delivered.",
+        security: "KMS encryption, VPC, CloudTrail, server-side encryption"
+    },
+    {
+        name: "AWS Glue",
+        icon: "🔗",
+        category: "analytics",
+        iconBg: "rgba(30,203,139,0.15)",
+        iconColor: "#1ECB8B",
+        tagline: "Serverless ETL Service",
+        desc: "Fully managed ETL (Extract, Transform, Load) service. Discover, prepare, and integrate data for analytics, ML, and application development.",
+        problem: "Complex data integration and transformation pipelines for analytics",
+        useWhen: "Data lake ETL, data catalog, schema discovery, data quality, ML feature engineering",
+        features: ["Glue Studio (visual ETL)", "Data Catalog", "DataBrew"],
+        funFact: "Glue can automatically discover schema from 30+ data formats and generate ETL code! It can process petabytes of data without managing any infrastructure.",
+        pricing: "ETL jobs: $0.44/DPU-hour. Crawlers: $0.44/DPU-hour. Catalog: $1/100K objects/month.",
+        security: "VPC, KMS, job bookmark for incremental loads, Lake Formation integration"
+    },
+    {
+        name: "Amazon Athena",
+        icon: "🔍",
+        category: "analytics",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "Serverless Query Service",
+        desc: "Interactive query service to analyze data directly in Amazon S3 using standard SQL. Serverless — no infrastructure to manage and you pay only for data scanned.",
+        problem: "Running SQL queries on S3 data without loading it into a database",
+        useWhen: "Ad-hoc analysis of S3 data, log analysis, data lake querying",
+        features: ["Standard SQL (Presto)", "No loading data", "ML with SageMaker"],
+        funFact: "Athena can query a compressed Parquet file 10x cheaper than the same data in CSV! Expedia analyzes billions of travel records in Athena without any servers.",
+        pricing: "Pay per query: $5/TB scanned. Use Parquet/ORC + partition to cut costs 90%!",
+        security: "IAM, S3 bucket policies, encryption with SSE, Lake Formation column-level"
+    },
+    // IoT
+    {
+        name: "AWS IoT Core",
+        icon: "📡",
+        category: "iot",
+        iconBg: "rgba(30,203,139,0.15)",
+        iconColor: "#1ECB8B",
+        tagline: "Managed IoT Platform",
+        desc: "Connect billions of IoT devices to the cloud securely. Supports MQTT, HTTPS, WebSockets. Routes messages to AWS services without managing brokers.",
+        problem: "Connecting and managing millions of IoT devices at scale",
+        useWhen: "Smart home devices, industrial IoT, connected vehicles, health monitoring",
+        features: ["Device Shadows", "Rules Engine", "Fleet Indexing"],
+        funFact: "IoT Core can connect 1 billion devices simultaneously! Amazon Ring doorbells use IoT Core to send video alerts to millions of homes worldwide.",
+        pricing: "$1/M messages. $0.08/device/year for Device Registry.",
+        security: "X.509 certs, TLS 1.2/1.3, per-device policies, Defender for anomaly detection"
+    },
+    // Management
+    {
+        name: "AWS Systems Manager",
+        icon: "🎛️",
+        category: "management",
+        iconBg: "rgba(0,168,225,0.15)",
+        iconColor: "#00A8E1",
+        tagline: "Operational Hub",
+        desc: "Unified interface to view operational data and automate tasks across AWS resources. Patch, configure, and manage EC2 instances and on-premises servers.",
+        problem: "Managing thousands of servers without SSH access or manual intervention",
+        useWhen: "Fleet management, patching, configuration management, secrets storage, automation",
+        features: ["Session Manager (no SSH)", "Patch Manager", "Parameter Store (free secrets)"],
+        funFact: "Session Manager lets you access EC2 instances without any open ports or SSH keys! This eliminates a huge attack surface. Amazon.com manages 1M+ servers with SSM.",
+        pricing: "Most features free. Advanced Parameters: $0.05/parameter/month.",
+        security: "No inbound ports needed, CloudTrail logging, encrypted sessions, KMS params"
+    },
+    {
+        name: "AWS Organizations",
+        icon: "🏢",
+        category: "management",
+        iconBg: "rgba(139,92,246,0.15)",
+        iconColor: "#8B5CF6",
+        tagline: "Multi-Account Management",
+        desc: "Centrally manage and govern multiple AWS accounts. Automate account creation, apply Service Control Policies (SCPs), and consolidate billing.",
+        problem: "Managing multiple AWS accounts with consistent security and governance",
+        useWhen: "Any organization with multiple teams, compliance requirements, billing isolation",
+        features: ["Service Control Policies", "Consolidated billing", "AWS Control Tower"],
+        funFact: "Netflix runs 3,000+ AWS accounts under one organization! SCPs act as guardrails — even the root user of a member account can't bypass them.",
+        pricing: "Free! Consolidated billing can save costs through volume discounts.",
+        security: "SCPs, Delegated Administration, CloudTrail organization trail, Security Hub aggregate"
+    },
+    {
+        name: "AWS Control Tower",
+        icon: "🗼",
+        category: "management",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "Landing Zone Automation",
+        desc: "Easiest way to set up and govern a secure, multi-account AWS environment (landing zone). Automates best practices from AWS Organizations, IAM, CloudTrail, and Config.",
+        problem: "Setting up secure, compliant multi-account environments manually",
+        useWhen: "Enterprise cloud adoption, new AWS environments, compliance-driven organizations",
+        features: ["Pre-built guardrails", "Account vending", "Drift detection"],
+        funFact: "Control Tower can provision a new, fully-compliant AWS account in under 10 minutes! It enforces 20+ mandatory security guardrails automatically.",
+        pricing: "Free! Pay only for underlying services (Config, CloudTrail, etc.)",
+        security: "Mandatory SCPs, CloudTrail, AWS Config, pre-configured IAM roles"
+    },
+    {
+        name: "Amazon EventBridge",
+        icon: "🔀",
+        category: "serverless",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "Serverless Event Bus",
+        desc: "Serverless event bus to connect applications using events. Route events from AWS services, SaaS applications, and custom apps to targets like Lambda, SQS, Step Functions.",
+        problem: "Decoupling microservices and building event-driven architectures",
+        useWhen: "Microservices communication, automation triggers, SaaS integrations",
+        features: ["200+ AWS sources", "Schema registry", "Event Pipes", "Scheduler"],
+        funFact: "EventBridge connects to 200+ SaaS applications including Zendesk, Shopify, and Stripe! Its event bus processes millions of events per second with no infrastructure.",
+        pricing: "$1/M custom events. AWS service events free. Cross-region: $0.01/M.",
+        security: "Resource-based policies, VPC endpoints, encryption with KMS"
+    },
+    {
+        name: "Amazon SQS",
+        icon: "📨",
+        category: "serverless",
+        iconBg: "rgba(30,203,139,0.15)",
+        iconColor: "#1ECB8B",
+        tagline: "Managed Message Queue",
+        desc: "Fully managed message queuing for decoupling microservices. Standard queues (at-least-once) and FIFO queues (exactly-once) for different use cases.",
+        problem: "Losing messages when downstream services are slow or down",
+        useWhen: "Async processing, decoupling services, buffer spikes, work distribution",
+        features: ["Unlimited throughput", "FIFO ordering", "Dead Letter Queue"],
+        funFact: "SQS was AWS's FIRST service, launched in 2004 — 2 years before EC2! Amazon.com uses SQS to process billions of messages daily for order management.",
+        pricing: "First 1M requests/month free. $0.40/M requests after. FIFO: $0.50/M.",
+        security: "KMS encryption, HTTPS, VPC endpoint, IAM resource-based policies"
+    },
+    {
+        name: "Amazon SNS",
+        icon: "📢",
+        category: "serverless",
+        iconBg: "rgba(255,153,0,0.15)",
+        iconColor: "#FF9900",
+        tagline: "Pub/Sub Messaging",
+        desc: "Fully managed pub/sub messaging service. Fan out messages to many subscribers including SQS, Lambda, email, SMS, HTTP endpoints, and mobile push.",
+        problem: "Sending notifications to multiple systems simultaneously",
+        useWhen: "Fan-out patterns, alerts/notifications, mobile push, SMS, email at scale",
+        features: ["15M subscriptions/topic", "SMS to 200+ countries", "FIFO topics"],
+        funFact: "SNS sends billions of SMS messages and emails monthly! Amazon sends order confirmation emails through SNS — likely that 'Order Confirmed' email uses SNS!",
+        pricing: "First 1M publishes free. $0.50/M publishes. SMS: $0.00645/message (US).",
+        security: "KMS encryption, VPC endpoints, topic policies, delivery status logging"
     }
+];
 
-}    
+const roadmapData = [
+    {
+        period: "Month 1-3",
+        title: "Cloud Newcomer",
+        salary: "$60K-$75K",
+        role: "Junior Cloud Practitioner",
+        desc: "Understanding cloud fundamentals, navigating AWS Console, setting up IAM, launching first EC2, creating S3 buckets. Study for AWS Cloud Practitioner certification.",
+        skills: ["AWS Console", "IAM Basics", "EC2", "S3", "Billing Alerts", "Cloud Practitioner Cert"],
+        color: "#1ECB8B"
+    },
+    {
+        period: "Month 4-9",
+        title: "Cloud Associate",
+        salary: "$75K-$95K",
+        role: "Cloud Engineer I",
+        desc: "Building multi-tier architectures, VPC from scratch, RDS databases, Auto Scaling, Load Balancers. Working toward Solutions Architect Associate.",
+        skills: ["VPC", "RDS", "ALB/NLB", "Auto Scaling", "CloudWatch", "IAM Advanced", "SAA-C03"],
+        color: "#FF9900"
+    },
+    {
+        period: "Month 10-18",
+        title: "Serverless & Containers",
+        salary: "$90K-$115K",
+        role: "Cloud Engineer II",
+        desc: "Building serverless apps with Lambda, mastering containers with ECS/EKS, implementing CI/CD pipelines, understanding DevOps practices.",
+        skills: ["Lambda", "API Gateway", "ECS/EKS", "CodePipeline", "Terraform", "CloudFormation", "Developer Associate"],
+        color: "#00A8E1"
+    },
+    {
+        period: "Year 2-3",
+        title: "Full Stack Cloud",
+        salary: "$110K-$140K",
+        role: "Senior Cloud Engineer",
+        desc: "Designing complete cloud architectures, advanced networking, database optimization, security hardening, monitoring and observability, cost optimization.",
+        skills: ["Advanced Networking", "Security Hub", "GuardDuty", "Well-Architected", "Multi-account", "SysOps Associate", "Cost Optimization"],
+        color: "#8B5CF6"
+    },
+    {
+        period: "Year 3-5",
+        title: "Cloud Architect",
+        salary: "$135K-$170K",
+        role: "Solutions Architect",
+        desc: "Leading architectural decisions, designing for scale, disaster recovery, compliance architecture, mentoring junior engineers, architecture reviews.",
+        skills: ["Solutions Architect Pro", "Multi-Region DR", "Compliance (HIPAA/PCI)", "FinOps", "Architecture Reviews", "Team Leadership"],
+        color: "#FF9900"
+    },
+    {
+        period: "Year 5-7",
+        title: "Cloud Specialist",
+        salary: "$160K-$200K",
+        role: "Principal Engineer / AWS Specialist",
+        desc: "Deep expertise in 2-3 domains (Data, Security, ML, Networking). Leading org-wide initiatives, defining standards, advanced certifications.",
+        skills: ["DevOps Pro", "Data Analytics Specialty", "Security Specialty", "ML Specialty", "Open Source", "Technical Writing"],
+        color: "#1ECB8B"
+    },
+    {
+        period: "Year 7-10",
+        title: "Cloud Principal",
+        salary: "$190K-$250K",
+        role: "Distinguished Engineer / CTA",
+        desc: "Shaping cloud strategy for entire organizations. Building Centers of Excellence, vendor management, enterprise negotiations, cloud governance.",
+        skills: ["Cloud Strategy", "FinOps Leadership", "Enterprise Architecture", "Vendor Management", "Executive Communication", "All Specialty Certs"],
+        color: "#00A8E1"
+    },
+    {
+        period: "Year 10-12+",
+        title: "Cloud Executive / AWS Hero",
+        salary: "$250K-$500K+",
+        role: "CTO / VP Engineering / AWS Hero",
+        desc: "Industry leadership. AWS Hero recognition. Speaking at re:Invent. Shaping cloud industry direction. Authoring books. Building next-generation cloud practices.",
+        skills: ["AWS Hero", "re:Invent Speaker", "Industry Analyst", "Board Advisor", "Startup CTO", "Author/Instructor"],
+        color: "#FFD700"
+    }
+];
+
+const costTools = [
+    { icon: "💰", name: "AWS Cost Explorer", desc: "Visualize, understand, and manage your AWS costs and usage over time. Provides hourly granularity and forecasting.", tip: "Enable Cost Explorer and check weekly. Set up anomaly detection alerts to catch unexpected spend immediately.", color: "#1ECB8B" },
+    { icon: "📊", name: "AWS Budgets", desc: "Set custom cost and usage budgets with automatic alerts via SNS or Chatbot when thresholds are breached.", tip: "Set budgets at 80% threshold so you have time to react before hitting limits. Create separate budgets per team.", color: "#1ECB8B" },
+    { icon: "🎫", name: "AWS Savings Plans", desc: "Flexible pricing model offering up to 72% savings over On-Demand in exchange for a commitment to usage for 1 or 3 years.", tip: "Analyze your last 3 months of usage in Cost Explorer and buy Compute Savings Plans — they cover EC2, Lambda, and Fargate.", color: "#1ECB8B" },
+    { icon: "🎯", name: "Reserved Instances", desc: "Up to 72% discount over On-Demand for predictable workloads. Standard RIs offer highest discounts; Convertible RIs offer flexibility.", tip: "Never buy RIs without 3+ months of historical data. Use Convertible RIs for flexibility in growing environments.", color: "#1ECB8B" },
+    { icon: "💫", name: "EC2 Spot Instances", desc: "Use spare AWS capacity at up to 90% discount. Perfect for fault-tolerant workloads like batch processing and ML training.", tip: "Use Spot for stateless, fault-tolerant workloads. Enable Spot Interruption Handler in Lambda to gracefully handle terminations.", color: "#1ECB8B" },
+    { icon: "🔍", name: "AWS Compute Optimizer", desc: "Uses ML to analyze usage metrics and recommend optimal AWS resources, reducing costs while improving performance.", tip: "Run Compute Optimizer monthly. It can find EC2 instances that are over-provisioned by 50%+ — massive savings!", color: "#1ECB8B" },
+    { icon: "🏷️", name: "Resource Tagging Strategy", desc: "Tag every resource with cost center, environment, owner, and project. Enable cost allocation tags for chargeback/showback.", tip: "Use tag policies in AWS Organizations to enforce tagging. Untagged resources should be flagged and remediated automatically.", color: "#1ECB8B" },
+    { icon: "📦", name: "S3 Intelligent-Tiering", desc: "Automatically moves objects between access tiers based on access patterns. No retrieval fees, no minimum storage duration for frequent tier.", tip: "Enable S3 Intelligent-Tiering for any S3 bucket with objects larger than 128KB that have unknown access patterns.", color: "#1ECB8B" },
+    { icon: "🌙", name: "EC2 Instance Scheduler", desc: "Automatically start and stop EC2 and RDS instances based on schedules. Dev/test environments don't need to run 24/7!", tip: "Stopping dev/test instances nights & weekends saves 65% on compute! Use CloudWatch Events or Instance Scheduler.", color: "#1ECB8B" },
+    { icon: "📈", name: "AWS Trusted Advisor", desc: "Provides real-time guidance on cost optimization, security, performance, and fault tolerance based on AWS best practices.", tip: "Check Trusted Advisor's 'Cost Optimization' category monthly for unused Elastic IPs, idle load balancers, and underutilized EC2.", color: "#1ECB8B" },
+    { icon: "🔢", name: "Right-Sizing", desc: "Match instance types and sizes to workload requirements. Use CloudWatch metrics to identify overprovisioned resources.", tip: "Most companies are 40-60% overprovisioned. Use Compute Optimizer + 2 weeks of CloudWatch data to right-size safely.", color: "#1ECB8B" },
+    { icon: "🗑️", name: "Waste Elimination", desc: "Find and delete unused EBS volumes, orphaned snapshots, unused Elastic IPs, idle NAT Gateways, and empty load balancers.", tip: "Run a monthly 'cloud waste audit'. Unattached EBS volumes accumulate silently — enable automated alerts via CloudTrail.", color: "#1ECB8B" }
+];
+
+const securityTools = [
+    { icon: "🔑", name: "AWS IAM", desc: "Foundation of AWS security. Manage users, groups, roles, and policies. Apply principle of least privilege everywhere.", tip: "Never use root account. Enable MFA on ALL accounts. Use IAM Access Analyzer to find overly permissive policies.", color: "#8B5CF6" },
+    { icon: "🛡️", name: "Amazon GuardDuty", desc: "AI-powered threat detection analyzing CloudTrail, VPC Flow Logs, DNS, S3, EKS, Lambda, and RDS logs continuously.", tip: "Enable GuardDuty in ALL regions even ones you're not using — attackers often target quiet regions! Auto-remediate with Lambda.", color: "#8B5CF6" },
+    { icon: "📋", name: "AWS Security Hub", desc: "Central view of security alerts and compliance status. Aggregates findings from GuardDuty, Inspector, Macie, and more.", tip: "Enable Security Hub with CIS AWS Benchmark standard. Configure findings to auto-create Jira tickets for critical findings.", color: "#8B5CF6" },
+    { icon: "🔐", name: "AWS KMS", desc: "Managed hardware security modules for creating and controlling encryption keys. Integrates with 100+ AWS services.", tip: "Never store plaintext secrets. Use KMS for all encryption keys and enable automatic yearly rotation on all customer-managed keys.", color: "#8B5CF6" },
+    { icon: "🔒", name: "AWS Secrets Manager", desc: "Rotate, manage, and retrieve database credentials, API keys, and other secrets automatically. Eliminate hardcoded secrets.", tip: "Enable automatic rotation for ALL RDS passwords. Use Lambda rotation functions. Never hardcode credentials in code or AMIs.", color: "#8B5CF6" },
+    { icon: "🧱", name: "AWS WAF", desc: "Web application firewall to protect against SQLi, XSS, bad bots, and OWASP Top 10. Works with CloudFront, ALB, API GW.", tip: "Enable AWS Managed Core Rule Set as baseline. Add Bot Control to stop credential stuffing. Enable rate-based rules!", color: "#8B5CF6" },
+    { icon: "📊", name: "AWS CloudTrail", desc: "Log every API call made in your AWS account. Who did what, when, from where. Essential for forensics and compliance.", tip: "Enable CloudTrail in ALL regions with a single multi-region trail. Send to S3 with Object Lock to prevent tampering.", color: "#8B5CF6" },
+    { icon: "🔎", name: "Amazon Inspector", desc: "Automated vulnerability management. Continuously scans EC2, Lambda, and container images for software vulnerabilities and misconfigs.", tip: "Inspector now runs continuously — not just on-demand! It integrates with ECR to scan images before deployment in CI/CD.", color: "#8B5CF6" },
+    { icon: "🦅", name: "Amazon Macie", desc: "ML-powered data security service that discovers, classifies, and protects sensitive data (PII, PHI, financial data) in S3.", tip: "Enable Macie on all S3 buckets storing customer data. It auto-discovers SSNs, credit cards, passports in unstructured data.", color: "#8B5CF6" },
+    { icon: "🏰", name: "AWS Network Firewall", desc: "Managed network firewall and IPS for VPCs. Stateful inspection, intrusion prevention, and web filtering at scale.", tip: "Deploy Network Firewall at VPC ingress/egress points. Use managed threat intelligence rules from AWS and third parties.", color: "#8B5CF6" },
+    { icon: "✅", name: "AWS Config", desc: "Continuous monitoring of AWS resource configurations. Record changes and evaluate against compliance rules automatically.", tip: "Enable Config with conformance packs for CIS or NIST. Use auto-remediation with SSM Automation documents for violations.", color: "#8B5CF6" },
+    { icon: "🎭", name: "AWS IAM Identity Center", desc: "Single sign-on for all AWS accounts and business applications. Replaces manual IAM users across accounts. Supports SAML 2.0.", tip: "Replace IAM users with IAM Identity Center + your IdP (Okta, Azure AD). One place to manage access for all accounts!", color: "#8B5CF6" }
+];
+
+const certifications = [
+    { badge: "🌩️", name: "Cloud Practitioner", level: "Foundational", levelColor: "#1ECB8B", desc: "Entry-level certification. Business and technical users. 65 questions, 90 minutes. No prerequisites.", exam: "CLF-C02", cost: "$100", studyTime: "40-80 hrs" },
+    { badge: "🏗️", name: "Solutions Architect Associate", level: "Associate", levelColor: "#FF9900", desc: "Design distributed systems. Most popular AWS cert! 65 questions, 130 minutes.", exam: "SAA-C03", cost: "$150", studyTime: "80-120 hrs" },
+    { badge: "⚡", name: "Developer Associate", level: "Associate", levelColor: "#FF9900", desc: "Develop and optimize AWS applications. Focus on Lambda, API GW, DynamoDB, CI/CD.", exam: "DVA-C02", cost: "$150", studyTime: "60-100 hrs" },
+    { badge: "🔧", name: "SysOps Administrator Associate", level: "Associate", levelColor: "#FF9900", desc: "Manage, operate, and optimize AWS workloads. Most challenging associate cert.", exam: "SOA-C02", cost: "$150", studyTime: "80-120 hrs" },
+    { badge: "👑", name: "Solutions Architect Professional", level: "Professional", levelColor: "#EF4444", desc: "Complex architectures, migrations, multi-account. Hardest AWS cert! 75 questions, 180 minutes.", exam: "SAP-C02", cost: "$300", studyTime: "200-300 hrs" },
+    { badge: "🔄", name: "DevOps Engineer Professional", level: "Professional", levelColor: "#EF4444", desc: "SDLC automation, monitoring, security, HA at scale. Requires SAA or Dev Associate.", exam: "DOP-C02", cost: "$300", studyTime: "150-250 hrs" },
+    { badge: "🔒", name: "Security Specialty", level: "Specialty", levelColor: "#8B5CF6", desc: "Security services, data protection, incident response, compliance and governance.", exam: "SCS-C02", cost: "$300", studyTime: "100-150 hrs" },
+    { badge: "📊", name: "Data Analytics Specialty", level: "Specialty", levelColor: "#8B5CF6", desc: "Collection, storage, processing, visualization of data. Kinesis, EMR, Redshift, Athena.", exam: "DAS-C01", cost: "$300", studyTime: "100-150 hrs" },
+    { badge: "🤖", name: "ML Specialty", level: "Specialty", levelColor: "#8B5CF6", desc: "ML concepts, SageMaker, feature engineering, model training/tuning/deployment.", exam: "MLS-C01", cost: "$300", studyTime: "150-200 hrs" },
+    { badge: "🌐", name: "Advanced Networking Specialty", level: "Specialty", levelColor: "#8B5CF6", desc: "Complex network tasks, VPN, Direct Connect, BGP, hybrid networks.", exam: "ANS-C01", cost: "$300", studyTime: "120-180 hrs" },
+    { badge: "🗄️", name: "Database Specialty", level: "Specialty", levelColor: "#8B5CF6", desc: "Database design, migration, deployment, management, and optimization.", exam: "DBS-C01", cost: "$300", studyTime: "100-150 hrs" },
+    { badge: "🌍", name: "SAP on AWS Specialty", level: "Specialty", levelColor: "#8B5CF6", desc: "Design and deploy SAP workloads on AWS infrastructure.", exam: "PAS-C01", cost: "$300", studyTime: "80-120 hrs" }
+];
+
+const architecturePatterns = [
+    {
+        icon: "🌐",
+        title: "Three-Tier Web Application",
+        desc: "Classic presentation, logic, and data tier separation. Industry standard for scalable web apps.",
+        services: ["Route 53", "CloudFront", "ALB", "EC2/ECS", "RDS Aurora", "ElastiCache"],
+        usedBy: "Netflix, Airbnb, Uber for core web services"
+    },
+    {
+        icon: "⚡",
+        title: "Serverless REST API",
+        desc: "Zero infrastructure management. API Gateway + Lambda + DynamoDB for unlimited scale.",
+        services: ["API Gateway", "Lambda", "DynamoDB", "Cognito", "CloudWatch", "X-Ray"],
+        usedBy: "Startups, FinTech, IoT backends"
+    },
+    {
+        icon: "🎯",
+        title: "Event-Driven Microservices",
+        desc: "Loosely coupled services communicating via events. Resilient and scalable.",
+        services: ["EventBridge", "SQS", "SNS", "Lambda", "ECS", "Step Functions"],
+        usedBy: "Amazon.com, Lyft, Expedia for order processing"
+    },
+    {
+        icon: "📊",
+        title: "Data Lake & Analytics",
+        desc: "Ingest, store, process, and analyze petabytes of structured and unstructured data.",
+        services: ["S3", "Kinesis", "Glue", "Lake Formation", "Athena", "Redshift", "QuickSight"],
+        usedBy: "Zillow, Nasdaq, Pfizer for data analytics"
+    },
+    {
+        icon: "🔄",
+        title: "Multi-Region Active-Active",
+        desc: "Zero downtime across regions with automated failover and data replication.",
+        services: ["Route 53", "Aurora Global", "DynamoDB Global", "CloudFront", "Transit GW"],
+        usedBy: "Financial institutions, healthcare, government"
+    },
+    {
+        icon: "🐳",
+        title: "Container Platform (EKS)",
+        desc: "Production Kubernetes with service mesh, GitOps, and automated scaling.",
+        services: ["EKS", "ECR", "Fargate", "App Mesh", "ALB", "ACM", "Secrets Manager"],
+        usedBy: "Weaveworks, Capital One, Lyft for microservices"
+    },
+    {
+        icon: "🤖",
+        title: "ML Pipeline",
+        desc: "End-to-end machine learning: data ingestion → training → evaluation → deployment → monitoring.",
+        services: ["S3", "Glue", "SageMaker", "Step Functions", "ECR", "CloudWatch", "Bedrock"],
+        usedBy: "Amazon Recommendations, Spotify, Pinterest"
+    },
+    {
+        icon: "🔒",
+        title: "Zero Trust Security",
+        desc: "Never trust, always verify. Identity-centric access without VPN dependency.",
+        services: ["IAM Identity Center", "Verified Access", "WAF", "Network Firewall", "GuardDuty", "Security Hub"],
+        usedBy: "Banks, healthcare orgs, government agencies"
+    },
+    {
+        icon: "🌊",
+        title: "Real-Time Streaming",
+        desc: "Ingest and process millions of events per second with sub-second latency.",
+        services: ["Kinesis Streams", "Lambda", "Kinesis Analytics", "OpenSearch", "Redshift", "Grafana"],
+        usedBy: "Twitter, LinkedIn, NYSE for real-time processing"
+    }
+];
+
+const quizQuestions = [
+    {
+        q: "Your application needs to store user session data that can be accessed in under 1ms by multiple services. What's the best AWS service?",
+        options: ["Amazon RDS", "Amazon ElastiCache (Redis)", "Amazon S3", "Amazon DynamoDB"],
+        correct: 1,
+        explanation: "ElastiCache Redis provides sub-millisecond latency for session data, is perfect for shared state across services, and supports data structures ideal for sessions."
+    },
+    {
+        q: "You need to process 10,000 images when they are uploaded to S3. Which is the most cost-effective serverless solution?",
+        options: ["EC2 Auto Scaling fleet", "S3 Trigger → Lambda function", "ECS with Fargate", "AWS Batch with Spot Instances"],
+        correct: 1,
+        explanation: "S3 Event Notifications trigger Lambda directly on uploads. Lambda scales instantly, you pay only for execution time, and no infrastructure management is needed."
+    },
+    {
+        q: "A company needs to run a database that handles 500K writes/second for a gaming leaderboard. Which service handles this?",
+        options: ["Amazon RDS MySQL", "Amazon DynamoDB", "Amazon Redshift", "Amazon Aurora"],
+        correct: 1,
+        explanation: "DynamoDB is designed for massive scale NoSQL workloads. It can handle millions of requests per second with single-digit millisecond latency — perfect for gaming."
+    },
+    {
+        q: "You want to reduce NAT Gateway costs for Lambda functions accessing S3. What's the solution?",
+        options: ["Use S3 Transfer Acceleration", "Create a VPC Endpoint for S3", "Move Lambda outside VPC", "Enable S3 Intelligent Tiering"],
+        correct: 1,
+        explanation: "VPC Endpoints for S3 allow Lambda (or EC2) to access S3 without going through NAT Gateway, eliminating NAT data processing fees and improving security."
+    },
+    {
+        q: "Which AWS service provides the most cost savings for a steady-state EC2 workload running 24/7 for 3 years?",
+        options: ["On-Demand Instances", "Spot Instances", "Reserved Instances (3-year)", "Dedicated Hosts"],
+        correct: 2,
+        explanation: "3-year Reserved Instances (All Upfront) can save up to 72% over On-Demand for steady-state workloads. Spot is cheaper but can be terminated."
+    },
+    {
+        q: "Your team needs to deploy infrastructure consistently across 50 AWS accounts. Which is the best approach?",
+        options: ["Manual console configuration", "CloudFormation StackSets", "Copying CloudFormation templates per account", "AWS CLI scripts"],
+        correct: 1,
+        explanation: "CloudFormation StackSets can deploy stacks to multiple accounts and regions with a single operation, maintaining consistency and supporting drift detection."
+    },
+    {
+        q: "An application needs to send notifications to 1 million mobile users simultaneously. Which services handle this?",
+        options: ["SES for all users", "SNS + SNS Mobile Push", "SQS with Lambda workers", "EventBridge"],
+        correct: 1,
+        explanation: "SNS with Mobile Push (using APNs for iOS, FCM for Android) can fan-out to millions of devices simultaneously. It's designed for exactly this use case."
+    },
+    {
+        q: "You need to analyze server logs stored in S3 using SQL without loading data into a database. Which service?",
+        options: ["Amazon Redshift", "Amazon RDS", "Amazon Athena", "Amazon EMR"],
+        correct: 2,
+        explanation: "Athena is serverless and queries S3 data directly using SQL. You pay only for data scanned. No loading, no infrastructure. Perfect for log analysis!"
+    }
+];
+
+const bestPractices = [
+    { num: "01", title: "Apply Principle of Least Privilege", desc: "Grant only the minimum permissions required. Use IAM Access Analyzer to review policies. Rotate credentials regularly. Use roles instead of long-term access keys.", category: "Security" },
+    { num: "02", title: "Design for Failure", desc: "Assume everything will fail. Use Multi-AZ deployments, Route 53 health checks, Auto Scaling, circuit breakers, and retry logic with exponential backoff.", category: "Reliability" },
+    { num: "03", title: "Use Managed Services First", desc: "Prefer RDS over self-managed MySQL, ECS over self-managed Docker, ElastiCache over self-managed Redis. Managed services reduce operational overhead dramatically.", category: "Operational Excellence" },
+    { num: "04", title: "Everything as Code (IaC)", desc: "Use CloudFormation, CDK, or Terraform for all infrastructure. Never click-ops production. Store in version control. Enable change review via pull requests.", category: "Operational Excellence" },
+    { num: "05", title: "Tag Every Resource", desc: "Tag with: Environment, Team, CostCenter, Owner, Project. Enable cost allocation tags. Use AWS Config rules to flag untagged resources. Enables chargeback/showback.", category: "Cost Optimization" },
+    { num: "06", title: "Enable Encryption Everywhere", desc: "Encrypt at rest (KMS) and in transit (TLS 1.2+). Never store plaintext secrets. Use Secrets Manager with automatic rotation. Enable S3 default encryption.", category: "Security" },
+    { num: "07", title: "Multi-Account Strategy", desc: "Use separate accounts for prod/staging/dev. Use AWS Organizations with SCPs. Control Tower for landing zone automation. Consolidated billing for discounts.", category: "Security & Cost" },
+    { num: "08", title: "Monitor Everything", desc: "CloudWatch for metrics and logs, X-Ray for traces, CloudTrail for API calls. Set alarms with SNS notifications. Create runbooks for every alarm. Use anomaly detection.", category: "Operational Excellence" },
+    { num: "09", title: "Optimize Costs Continuously", desc: "Review Cost Explorer weekly. Use Compute Optimizer monthly. Right-size before reserving. Delete idle resources. Use Spot for fault-tolerant workloads. S3 Intelligent-Tiering.", category: "Cost Optimization" },
+    { num: "10", title: "Test Disaster Recovery", desc: "Define RTO and RPO. Test backups by restoring them. Run Game Days to simulate failures. Use AWS FIS for chaos engineering. Document and rehearse IR plans.", category: "Reliability" },
+    { num: "11", title: "Use VPC Endpoints", desc: "Access S3, DynamoDB, and other services via VPC Endpoints instead of NAT Gateway. Saves cost (no data transfer charges) and improves security (no internet routing).", category: "Cost & Security" },
+    { num: "12", title: "Enable AWS Security Defaults", desc: "GuardDuty in all regions, Security Hub with CIS benchmark, Config with managed rules, Macie on sensitive buckets, CloudTrail organization trail. Turn these on and leave them on.", category: "Security" }
+];
+
+// ===== RENDERING FUNCTIONS =====
+let currentFilter = 'all';
+let currentQuizIndex = 0;
+let quizAnswered = false;
+let checkedTopics = {};
+
+function renderFloatingIcons() {
+    const icons = ['☁️','⚡','🔒','📊','🤖','🌐','🗄️','🔧','📦','🚀','⚙️','🔑','📡','🐳','☸️'];
+    const container = document.getElementById('floatingIcons');
+    icons.forEach((icon, i) => {
+        const el = document.createElement('div');
+        el.className = 'float-icon';
+        el.textContent = icon;
+        el.style.left = Math.random() * 100 + '%';
+        el.style.animationDelay = (i * 1.5) + 's';
+        el.style.animationDuration = (12 + Math.random() * 8) + 's';
+        container.appendChild(el);
+    });
+}
+
+function renderPhases() {
+    const container = document.getElementById('phasesContainer');
+    container.innerHTML = phases.map(phase => `
+        <div class="phase-card fade-in">
+            <div class="phase-header" onclick="togglePhase(${phase.id})">
+                <div class="phase-icon" style="background:${phase.bgColor}; color:${phase.color}">
+                    ${phase.icon}
+                </div>
+                <div class="phase-info">
+                    <h3>${phase.title}</h3>
+                    <div class="phase-meta">
+                        <span class="meta-tag">📅 ${phase.duration}</span>
+                        <span class="meta-tag">💼 ${phase.experience}</span>
+                        <span class="level-badge level-${phase.level}">${phase.level.charAt(0).toUpperCase() + phase.level.slice(1)}</span>
+                    </div>
+                </div>
+                <div class="phase-toggle" id="toggle-${phase.id}">▼</div>
+            </div>
+            <div class="phase-content" id="phase-content-${phase.id}">
+                <p style="color:var(--text-secondary); margin-bottom:1rem; line-height:1.7;">${phase.description}</p>
+                <div class="topic-list">
+                    ${phase.topics.map((topic, idx) => `
+                        <div class="topic-item">
+                            <div class="topic-check" id="check-${phase.id}-${idx}" onclick="toggleCheck(${phase.id}, ${idx})"></div>
+                            <div class="topic-text">
+                                <strong>${topic.name}</strong>
+                                <span>${topic.desc}</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function togglePhase(id) {
+    const content = document.getElementById(`phase-content-${id}`);
+    const toggle = document.getElementById(`toggle-${id}`);
+    content.classList.toggle('active');
+    toggle.classList.toggle('rotated');
+}
+
+function toggleCheck(phaseId, idx) {
+    const key = `${phaseId}-${idx}`;
+    checkedTopics[key] = !checkedTopics[key];
+    const el = document.getElementById(`check-${phaseId}-${idx}`);
+    el.classList.toggle('checked', checkedTopics[key]);
+}
+
+function renderServices() {
+    const grid = document.getElementById('servicesGrid');
+    const filtered = awsServices.filter(s => 
+        currentFilter === 'all' || s.category === currentFilter
+    );
+    
+    grid.innerHTML = filtered.map((service, idx) => `
+        <div class="service-card fade-in" onclick="openServiceModal(${awsServices.indexOf(service)})">
+            <div class="service-header">
+                <div class="service-icon" style="background:${service.iconBg}; color:${service.iconColor}">
+                    ${service.icon}
+                </div>
+                <div>
+                    <div class="service-name">${service.name}</div>
+                    <div class="service-category">${service.tagline}</div>
+                </div>
+            </div>
+            <div class="service-desc">${service.desc.substring(0, 120)}...</div>
+            <div class="service-tags">
+                <span class="stag stag-problem">🔴 Solves: ${service.problem.substring(0, 35)}...</span>
+            </div>
+            <div class="service-tags">
+                <span class="stag stag-use">✅ ${service.useWhen.substring(0, 45)}...</span>
+            </div>
+            <div class="service-tags">
+                ${service.features.map(f => `<span class="stag stag-feature">⭐ ${f}</span>`).join('')}
+            </div>
+            <div class="fun-fact">${service.funFact.substring(0, 100)}...</div>
+            <button class="learn-more-btn">Deep Dive →</button>
+        </div>
+    `).join('');
+}
+
+function openServiceModal(idx) {
+    const service = awsServices[idx];
+    const body = document.getElementById('modalBody');
+    body.innerHTML = `
+        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+            <div style="width:70px; height:70px; border-radius:16px; background:${service.iconBg}; display:flex; align-items:center; justify-content:center; font-size:2rem; flex-shrink:0;">${service.icon}</div>
+            <div>
+                <h2 style="margin:0;">${service.name}</h2>
+                <p style="color:var(--text-secondary); margin:0;">${service.tagline}</p>
+            </div>
+        </div>
+
+        <div class="modal-section">
+            <h4>📖 What is it?</h4>
+            <p>${service.desc}</p>
+        </div>
+
+        <div class="modal-section">
+            <h4>🔴 Problem it Solves</h4>
+            <p>${service.problem}</p>
+        </div>
+
+        <div class="modal-section">
+            <h4>✅ When to Use</h4>
+            <p>${service.useWhen}</p>
+        </div>
+
+        <div class="modal-section">
+            <h4>⭐ Key Features</h4>
+            <ul>${service.features.map(f => `<li>${f}</li>`).join('')}</ul>
+        </div>
+
+        <div class="modal-section">
+            <h4>💰 Pricing</h4>
+            <div class="pricing-box">
+                <p>${service.pricing}</p>
+            </div>
+        </div>
+
+        <div class="modal-section">
+            <h4>🔒 Security Features</h4>
+            <div class="security-box">
+                <p>${service.security}</p>
+            </div>
+        </div>
+
+        <div class="modal-section">
+            <h4>🎯 Fun Fact</h4>
+            <div class="fun-fact" style="font-size:0.9rem; margin:0;">${service.funFact}</div>
+        </div>
+    `;
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(event) {
+    if (!event || event.target === document.getElementById('modalOverlay') || event.target.className === 'modal-close') {
+        document.getElementById('modalOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+function filterServices() {
+    renderServices();
+}
+
+function setFilter(cat, btn) {
+    currentFilter = cat;
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    renderServices();
+}
+
+function renderTimeline() {
+    const container = document.getElementById('timelineContainer');
+    container.innerHTML = roadmapData.map(item => `
+        <div class="timeline-item fade-in">
+            <div class="timeline-dot" style="background:${item.color};box-shadow:0 0 0 3px ${item.color}33;"></div>
+            <div class="timeline-content">
+                <div class="timeline-year" style="background:${item.color}22; color:${item.color};">⏱️ ${item.period}</div>
+                <h3>${item.title}</h3>
+                <div style="display:flex; gap:1rem; margin-bottom:0.8rem; flex-wrap:wrap;">
+                    <span style="color:${item.color}; font-weight:700; font-size:0.95rem;">💼 ${item.role}</span>
+                    <span style="color:var(--aws-green); font-weight:700; font-size:0.95rem;">💰 ${item.salary}</span>
+                </div>
+                <p>${item.desc}</p>
+                <div class="timeline-skills">
+                    ${item.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderCostTools() {
+    const grid = document.getElementById('costToolsGrid');
+    grid.innerHTML = costTools.map(tool => `
+        <div class="tool-card">
+            <div class="tool-icon">${tool.icon}</div>
+            <h3>${tool.name}</h3>
+            <p>${tool.desc}</p>
+            <div class="cost-tip">💡 ${tool.tip}</div>
+        </div>
+    `).join('');
+}
+
+function renderSecurityTools() {
+    const grid = document.getElementById('securityToolsGrid');
+    grid.innerHTML = securityTools.map(tool => `
+        <div class="tool-card">
+            <div class="tool-icon">${tool.icon}</div>
+            <h3>${tool.name}</h3>
+            <p>${tool.desc}</p>
+            <div class="security-tip">🛡️ ${tool.tip}</div>
+        </div>
+    `).join('');
+}
+
+function renderCertifications() {
+    const grid = document.getElementById('certGrid');
+    grid.innerHTML = certifications.map(cert => `
+        <div class="cert-card" style="border-color: ${cert.levelColor}22; background: linear-gradient(135deg, ${cert.levelColor}08, transparent);">
+            <div class="cert-badge">${cert.badge}</div>
+            <div class="cert-level" style="color:${cert.levelColor}">● ${cert.level}</div>
+            <div class="cert-name">${cert.name}</div>
+            <div class="cert-desc">${cert.desc}</div>
+            <div style="margin-top:1rem; display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap;">
+                <span style="background:rgba(255,153,0,0.1); color:var(--aws-orange); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem;">📝 ${cert.exam}</span>
+                <span style="background:rgba(30,203,139,0.1); color:var(--aws-green); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem;">💰 ${cert.cost}</span>
+                <span style="background:rgba(0,168,225,0.1); color:var(--aws-light-blue); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem;">⏱️ ${cert.studyTime}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderArchitectures() {
+    const grid = document.getElementById('archGrid');
+    grid.innerHTML = architecturePatterns.map(arch => `
+        <div class="arch-card">
+            <div class="arch-icon">${arch.icon}</div>
+            <h3>${arch.title}</h3>
+            <p style="color:var(--text-secondary); font-size:0.9rem; line-height:1.6;">${arch.desc}</p>
+            <div class="arch-services">
+                ${arch.services.map(s => `<span class="arch-service-tag">${s}</span>`).join('')}
+            </div>
+            <p style="color:var(--text-secondary); font-size:0.8rem; margin-top:0.8rem;">👥 Used by: ${arch.usedBy}</p>
+        </div>
+    `).join('');
+}
+
+function renderQuiz() {
+    const container = document.getElementById('quizContainer');
+    const q = quizQuestions[currentQuizIndex];
+    quizAnswered = false;
+    
+    container.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+            <span class="quiz-progress">Question ${currentQuizIndex + 1} of ${quizQuestions.length}</span>
+            <div style="display:flex; gap:0.3rem;">
+                ${quizQuestions.map((_, i) => `
+                    <div style="width:8px; height:8px; border-radius:50%; background:${i === currentQuizIndex ? 'var(--aws-orange)' : i < currentQuizIndex ? 'var(--aws-green)' : 'var(--border)'}"></div>
+                `).join('')}
+            </div>
+        </div>
+        <div class="quiz-question">${q.q}</div>
+        <div class="quiz-options">
+            ${q.options.map((opt, idx) => `
+                <div class="quiz-option" id="opt-${idx}" onclick="answerQuiz(${idx})">${String.fromCharCode(65+idx)}. ${opt}</div>
+            `).join('')}
+        </div>
+        <div id="quiz-explanation" style="display:none; margin-top:1rem; padding:1rem; background:rgba(30,203,139,0.08); border:1px solid rgba(30,203,139,0.2); border-radius:12px; font-size:0.9rem; line-height:1.7; color:var(--text-primary);">
+            <strong style="color:var(--aws-green);">✅ Explanation: </strong>${q.explanation}
+        </div>
+        <div class="quiz-nav">
+            <button class="btn btn-secondary" onclick="prevQuiz()" style="padding:0.6rem 1.2rem; font-size:0.9rem;" ${currentQuizIndex === 0 ? 'disabled' : ''}>← Previous</button>
+            <button class="btn btn-primary" onclick="nextQuiz()" style="padding:0.6rem 1.2rem; font-size:0.9rem;" id="nextBtn">${currentQuizIndex === quizQuestions.length - 1 ? '🏆 Finish' : 'Next →'}</button>
+        </div>
+    `;
+}
+
+function answerQuiz(idx) {
+    if (quizAnswered) return;
+    quizAnswered = true;
+    
+    const q = quizQuestions[currentQuizIndex];
+    const opts = document.querySelectorAll('.quiz-option');
+    
+    opts.forEach((opt, i) => {
+        opt.style.pointerEvents = 'none';
+        if (i === q.correct) opt.classList.add('correct');
+        else if (i === idx && i !== q.correct) opt.classList.add('wrong');
+    });
+    
+    document.getElementById('quiz-explanation').style.display = 'block';
+}
+
+function nextQuiz() {
+    if (currentQuizIndex < quizQuestions.length - 1) {
+        currentQuizIndex++;
+        renderQuiz();
+    } else {
+        document.getElementById('quizContainer').innerHTML = `
+            <div style="text-align:center; padding:2rem;">
+                <div style="font-size:4rem; margin-bottom:1rem;">🏆</div>
+                <h3 style="font-size:1.8rem; margin-bottom:1rem;">Quiz Complete!</h3>
+                <p style="color:var(--text-secondary); margin-bottom:2rem;">You've completed the AWS knowledge quiz! Review any questions you missed and keep learning.</p>
+                <button class="btn btn-primary" onclick="currentQuizIndex=0; renderQuiz();">🔄 Restart Quiz</button>
+            </div>
+        `;
+    }
+}
+
+function prevQuiz() {
+    if (currentQuizIndex > 0) {
+        currentQuizIndex--;
+        renderQuiz();
+    }
+}
+
+function renderBestPractices() {
+    const grid = document.getElementById('practicesGrid');
+    grid.innerHTML = bestPractices.map(p => `
+        <div class="practice-card">
+            <div class="practice-number">${p.num}</div>
+            <div class="practice-title">${p.title}</div>
+            <div style="display:inline-block; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; background:rgba(255,153,0,0.1); color:var(--aws-orange); margin-bottom:0.8rem;">${p.category}</div>
+            <div class="practice-desc">${p.desc}</div>
+        </div>
+    `).join('');
+}
+
+// ===== SCROLL ANIMATIONS =====
+function initScrollAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+
+// ===== PROGRESS BAR =====
+window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+});
+
+// ===== SHARE =====
+function setShareUrl() {
+    const url = window.location.href.split('#')[0];
+    document.getElementById('shareUrlText').textContent = url;
+}
+
+function copyUrl() {
+    const url = window.location.href.split('#')[0];
+    navigator.clipboard.writeText(url).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    });
+}
+
+function shareTwitter() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent('🚀 Complete AWS Zero to Hero Mastery Plan! All services, certifications, architectures, security & cost optimization. Free resource:');
+    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+}
+
+function shareLinkedIn() {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function shareWhatsApp() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent('Check out this complete AWS Zero to Hero guide! 🚀☁️');
+    window.open(`https://wa.me/?text=${text} ${url}`, '_blank');
+}
+
+// ===== SCROLL TO SECTION =====
+function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+    renderFloatingIcons();
+    renderPhases();
+    renderServices();
+    renderTimeline();
+    renderCostTools();
+    renderSecurityTools();
+    renderCertifications();
+    renderArchitectures();
+    renderQuiz();
+    renderBestPractices();
+    setShareUrl();
+    
+    setTimeout(initScrollAnimations, 100);
+    
+    // Keyboard shortcut for modal
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeModal({ target: document.getElementById('modalOverlay') });
+    });
+});
+</script>
+</body>
+</html>
